@@ -57,15 +57,17 @@
             </div>
 
             <!-- Main Heading -->
-            <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-8 text-gray-900 dark:text-white tracking-tight">
-                <span>{{ __('site.hero.title_prefix') }}</span> <br />
-                <span class="text-brand-500">{{ __('site.hero.title_highlight') }}</span>
+            <!-- Main Heading -->
+            <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-8 text-gray-900 dark:text-white tracking-tight min-h-[160px] md:min-h-[180px] flex items-center justify-center relative px-2">
+                <span class="hero-message absolute transition-all duration-1000 opacity-100 scale-100">
+                    <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Big</span> Brands Start <br> with <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Believe</span>
+                </span>
+                <span class="hero-message absolute transition-all duration-1000 opacity-0 scale-95">
+                    <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Creative</span> & Innovative <br> Digital <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Solution</span>
+                </span>
             </h1>
 
             <!-- Subheading -->
-            <p class="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-                {{ __('site.hero.subtitle') }}
-            </p>
 
             <!-- Buttons -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -673,39 +675,60 @@
 @push('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Filter Logic
         const filterBtns = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
 
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const filter = btn.getAttribute('data-filter');
+        if(filterBtns.length > 0) {
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filter = btn.getAttribute('data-filter');
 
-                // Update button styles
-                filterBtns.forEach(b => {
-                    b.classList.remove('bg-brand-500', 'text-white', 'shadow-md');
-                    b.classList.add('glass', 'bg-white/50', 'dark:bg-white/5', 'text-gray-600', 'dark:text-gray-300');
-                });
-                btn.classList.add('bg-brand-500', 'text-white', 'shadow-md');
-                btn.classList.remove('glass', 'bg-white/50', 'dark:bg-white/5', 'text-gray-600', 'dark:text-gray-300');
+                    // Update button styles
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-brand-500', 'text-white', 'shadow-md');
+                        b.classList.add('glass', 'bg-white/50', 'dark:bg-white/5', 'text-gray-600', 'dark:text-gray-300');
+                    });
+                    btn.classList.add('bg-brand-500', 'text-white', 'shadow-md');
+                    btn.classList.remove('glass', 'bg-white/50', 'dark:bg-white/5', 'text-gray-600', 'dark:text-gray-300');
 
-                // Filter projects
-                projectCards.forEach(card => {
-                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                        card.style.display = 'block';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'scale(1)';
-                        }, 10);
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'scale(0.95)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
-                    }
+                    // Filter projects
+                    projectCards.forEach(card => {
+                        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.style.opacity = '1';
+                                card.style.transform = 'scale(1)';
+                            }, 10);
+                        } else {
+                            card.style.opacity = '0';
+                            card.style.transform = 'scale(0.95)';
+                            setTimeout(() => {
+                                card.style.display = 'none';
+                            }, 300);
+                        }
+                    });
                 });
             });
-        });
+        }
+
+        // Hero Text Switcher
+        const messages = document.querySelectorAll('.hero-message');
+        if (messages.length > 0) {
+            let currentMsg = 0;
+            setInterval(() => {
+                // Hide current
+                messages[currentMsg].classList.remove('opacity-100', 'scale-100');
+                messages[currentMsg].classList.add('opacity-0', 'scale-95');
+
+                // Calculate next
+                currentMsg = (currentMsg + 1) % messages.length;
+
+                // Show next
+                messages[currentMsg].classList.remove('opacity-0', 'scale-95');
+                messages[currentMsg].classList.add('opacity-100', 'scale-100');
+            }, 4000);
+        }
     });
 </script>
 @endpush
