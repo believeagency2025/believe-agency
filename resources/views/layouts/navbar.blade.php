@@ -119,17 +119,58 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div class="md:hidden hidden glass border-t border-gray-200 dark:border-gray-700 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl" id="mobile-menu">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="{{ url('/') }}" class="text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">{{ __('site.nav.home') }}</a>
-            <a href="{{ url('/about') }}" class="text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">{{ __('site.nav.about') }}</a>
-            <a href="{{ url('/services') }}" class="text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">{{ __('site.nav.services') }}</a>
-            <a href="{{ url('/projects') }}" class="text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">{{ __('site.nav.projects') }}</a>
-            <a href="{{ url('/clients') }}" class="text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">{{ __('site.nav.clients') }}</a>
-            <a href="{{ url('/contact') }}" class="text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">{{ __('site.nav.contact') }}</a>
-            <a href="{{ route('lang.switch', app()->getLocale() == 'ar' ? 'en' : 'ar') }}" class="text-left w-full text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white block px-3 py-2 rounded-md text-base font-medium">
-                {{ app()->getLocale() == 'ar' ? 'English' : 'العربية' }}
+    <div class="md:hidden hidden glass border-t border-gray-200 dark:border-white/5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl transition-all duration-300 transform origin-top" id="mobile-menu">
+        <div class="px-4 pt-4 pb-8 space-y-2">
+            <a href="{{ url('/') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+                <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
+                    <i class="fas fa-home"></i>
+                </div>
+                <span>{{ __('site.nav.home') }}</span>
             </a>
+
+            <a href="{{ url('/about') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+                <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <span>{{ __('site.nav.about') }}</span>
+            </a>
+
+            <a href="{{ url('/services') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+                <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <span>{{ __('site.nav.services') }}</span>
+            </a>
+
+            <a href="{{ url('/projects') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+                <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <span>{{ __('site.nav.projects') }}</span>
+            </a>
+
+            <a href="{{ url('/clients') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+                <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
+                    <i class="fas fa-users"></i>
+                </div>
+                <span>{{ __('site.nav.clients') }}</span>
+            </a>
+
+            <div class="pt-4 mt-4 border-t border-gray-100 dark:border-white/5 space-y-4">
+                <a href="{{ route('lang.switch', app()->getLocale() == 'ar' ? 'en' : 'ar') }}" class="flex items-center justify-between text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-gray-50/50 dark:hover:bg-white/5 transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <span>{{ app()->getLocale() == 'ar' ? 'English' : 'العربية' }}</span>
+                    </div>
+                </a>
+
+                <a href="{{ url('/contact') }}" class="flex items-center justify-center gap-3 w-full bg-brand-500 hover:bg-brand-600 text-white px-6 py-4 rounded-2xl text-base font-bold transition-all shadow-lg shadow-brand-500/25 active:scale-95">
+                    <i class="fas fa-comments"></i>
+                    <span>{{ __('site.nav.lets_talk') }}</span>
+                </a>
+            </div>
         </div>
     </div>
 </nav>
