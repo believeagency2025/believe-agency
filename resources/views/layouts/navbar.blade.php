@@ -4,7 +4,8 @@
             <!-- Logo -->
             <div class="flex-shrink-0 flex items-center gap-2">
                 <a href="{{ url('/') }}" class="flex items-center gap-2">
-                    <img src="{{ asset('img/logo100.webp') }}" alt="Believe Agency" class="h-12 md:h-20 w-auto transition-all duration-300 hover:scale-105">
+                    <img src="{{ asset('img/dark.png') }}" alt="Believe Agency" class="h-12 md:h-20 w-auto transition-all duration-300 hover:scale-105 block dark:hidden">
+                    <img src="{{ asset('img/light.png') }}" alt="Believe Agency" class="h-12 md:h-20 w-auto transition-all duration-300 hover:scale-105 hidden dark:block">
                 </a>
             </div>
 

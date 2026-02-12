@@ -3,8 +3,8 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div class="col-span-1 md:col-span-1">
                 <div class="flex items-center gap-2 mb-6">
-                    <img src="{{ asset('img/logo100.webp') }}" alt="Believe Agency"
-                        class="h-16 md:h-20 w-auto transition-all duration-300 hover:scale-105">
+                    <img src="{{ asset('img/dark.png') }}" alt="Believe Agency" class="h-16 md:h-20 w-auto transition-all duration-300 hover:scale-105 block dark:hidden">
+                    <img src="{{ asset('img/light.png') }}" alt="Believe Agency" class="h-16 md:h-20 w-auto transition-all duration-300 hover:scale-105 hidden dark:block">
                 </div>
                 <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                     {{ __('site.footer.desc') }}
