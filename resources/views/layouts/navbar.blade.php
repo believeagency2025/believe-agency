@@ -3,7 +3,7 @@
         <div class="flex items-center justify-between h-20">
             <!-- Logo -->
             <div class="flex-shrink-0 flex items-center gap-2">
-                <a href="{{ url('/') }}" class="flex items-center gap-2">
+                <a href="{{ route('home') }}" class="flex items-center gap-2">
                     <img src="{{ asset('img/dark.png') }}" alt="Believe Agency" class="h-12 md:h-20 w-auto transition-all duration-300 hover:scale-105 block dark:hidden">
                     <img src="{{ asset('img/light.png') }}" alt="Believe Agency" class="h-12 md:h-20 w-auto transition-all duration-300 hover:scale-105 hidden dark:block">
                 </a>
@@ -12,10 +12,10 @@
             <!-- Desktop Menu -->
             <div class="hidden md:flex items-center space-x-8">
                 <div class="flex items-baseline space-x-6">
-                    <a href="{{ url('/') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.home') }}</a>
-                    <a href="{{ url('/about') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.about') }}</a>
+                    <a href="{{ route('home') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.home') }}</a>
+                    <a href="{{ route('about') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.about') }}</a>
                     <div class="relative group h-full flex items-center">
-                        <a href="{{ url('/services') }}" class="flex items-center gap-1 text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors group-hover:text-brand-600 dark:group-hover:text-brand-400">
+                        <a href="{{ route('services') }}" class="flex items-center gap-1 text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors group-hover:text-brand-600 dark:group-hover:text-brand-400">
                             <span>{{ __('site.nav.services') }}</span>
                             <i class="fas fa-chevron-down text-[10px] transition-transform duration-200 group-hover:rotate-180 opacity-70"></i>
                         </a>
@@ -23,7 +23,7 @@
                         <!-- Dropdown Menu -->
                         <div class="absolute top-full left-0 pt-2 w-72 transform origin-top-left transition-all duration-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 z-50">
                             <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl ring-1 ring-black/5 dark:ring-white/10 overflow-hidden backdrop-blur-xl p-2">
-                                <a href="{{ url('/web-design') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors">
+                                <a href="{{ route('web-design') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors">
                                     <div class="w-10 h-10 rounded-lg bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center text-brand-600 dark:text-brand-400 group-hover/item:bg-brand-200 dark:group-hover/item:bg-brand-800/50 transition-colors">
                                         <i class="fas fa-laptop-code"></i>
                                     </div>
@@ -33,7 +33,7 @@
                                     </div>
                                 </a>
 
-                                <a href="{{ url('/apps-development') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-accent-50 dark:hover:bg-accent-900/20 transition-colors">
+                                <a href="{{ route('apps-development') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-accent-50 dark:hover:bg-accent-900/20 transition-colors">
                                     <div class="w-10 h-10 rounded-lg bg-accent-100 dark:bg-accent-900/50 flex items-center justify-center text-accent-600 dark:text-accent-400 group-hover/item:bg-accent-200 dark:group-hover/item:bg-accent-800/50 transition-colors">
                                         <i class="fas fa-mobile-alt"></i>
                                     </div>
@@ -43,7 +43,7 @@
                                     </div>
                                 </a>
 
-                                <a href="{{ url('/branding') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-pink-50 dark:hover:bg-pink-900/20 transition-colors">
+                                <a href="{{ route('branding') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-pink-50 dark:hover:bg-pink-900/20 transition-colors">
                                     <div class="w-10 h-10 rounded-lg bg-pink-100 dark:bg-pink-900/50 flex items-center justify-center text-pink-600 dark:text-pink-400 group-hover/item:bg-pink-200 dark:group-hover/item:bg-pink-800/50 transition-colors">
                                         <i class="fas fa-paint-brush"></i>
                                     </div>
@@ -53,7 +53,7 @@
                                     </div>
                                 </a>
 
-                                <a href="{{ url('/marketing') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
+                                <a href="{{ route('marketing') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
                                     <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover/item:bg-blue-200 dark:group-hover/item:bg-blue-800/50 transition-colors">
                                         <i class="fas fa-bullhorn"></i>
                                     </div>
@@ -63,7 +63,7 @@
                                     </div>
                                 </a>
 
-                                <a href="{{ url('/ecommerce') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors">
+                                <a href="{{ route('ecommerce') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors">
                                     <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center text-green-600 dark:text-green-400 group-hover/item:bg-green-200 dark:group-hover/item:bg-green-800/50 transition-colors">
                                         <i class="fas fa-shopping-cart"></i>
                                     </div>
@@ -73,7 +73,7 @@
                                     </div>
                                 </a>
 
-                                <a href="{{ url('/software-tools') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
+                                <a href="{{ route('software-tools') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
                                     <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover/item:bg-purple-200 dark:group-hover/item:bg-purple-800/50 transition-colors">
                                         <i class="fas fa-tools"></i>
                                     </div>
@@ -85,9 +85,9 @@
                             </div>
                         </div>
                     </div>
-                    <a href="{{ url('/projects') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.projects') }}</a>
-                    <a href="{{ url('/clients') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.clients') }}</a>
-                    <a href="{{ url('/contact') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.contact') }}</a>
+                    <a href="{{ route('projects') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.projects') }}</a>
+                    <a href="{{ route('clients') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.clients') }}</a>
+                    <a href="{{ route('contact') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.contact') }}</a>
                 </div>
 
                 <div class="flex items-center gap-4">
@@ -101,7 +101,7 @@
                         <i id="theme-toggle-light-icon" class="fas fa-sun hidden"></i>
                     </button>
 
-                    <a href="{{ url('/contact') }}" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transform hover:-translate-y-0.5">{{ __('site.nav.lets_talk') }}</a>
+                    <a href="{{ route('contact') }}" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transform hover:-translate-y-0.5">{{ __('site.nav.lets_talk') }}</a>
                 </div>
             </div>
 
@@ -122,35 +122,35 @@
     <!-- Mobile Menu -->
     <div class="md:hidden hidden glass border-t border-gray-200 dark:border-white/5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl transition-all duration-300 transform origin-top" id="mobile-menu">
         <div class="px-4 pt-4 pb-8 space-y-2">
-            <a href="{{ url('/') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+            <a href="{{ route('home') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
                 <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
                     <i class="fas fa-home"></i>
                 </div>
                 <span>{{ __('site.nav.home') }}</span>
             </a>
 
-            <a href="{{ url('/about') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+            <a href="{{ route('about') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
                 <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
                     <i class="fas fa-info-circle"></i>
                 </div>
                 <span>{{ __('site.nav.about') }}</span>
             </a>
 
-            <a href="{{ url('/services') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+            <a href="{{ route('services') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
                 <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
                     <i class="fas fa-briefcase"></i>
                 </div>
                 <span>{{ __('site.nav.services') }}</span>
             </a>
 
-            <a href="{{ url('/projects') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+            <a href="{{ route('projects') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
                 <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
                     <i class="fas fa-folder-open"></i>
                 </div>
                 <span>{{ __('site.nav.projects') }}</span>
             </a>
 
-            <a href="{{ url('/clients') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+            <a href="{{ route('clients') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
                 <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
                     <i class="fas fa-users"></i>
                 </div>
@@ -167,7 +167,7 @@
                     </div>
                 </a>
 
-                <a href="{{ url('/contact') }}" class="flex items-center justify-center gap-3 w-full bg-brand-500 hover:bg-brand-600 text-white px-6 py-4 rounded-2xl text-base font-bold transition-all shadow-lg shadow-brand-500/25 active:scale-95">
+                <a href="{{ route('contact') }}" class="flex items-center justify-center gap-3 w-full bg-brand-500 hover:bg-brand-600 text-white px-6 py-4 rounded-2xl text-base font-bold transition-all shadow-lg shadow-brand-500/25 active:scale-95">
                     <i class="fas fa-comments"></i>
                     <span>{{ __('site.nav.lets_talk') }}</span>
                 </a>
