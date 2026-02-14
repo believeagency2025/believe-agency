@@ -29,9 +29,9 @@
     <meta property="twitter:image" content="{{ asset('img/dark.png') }}">
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('img/light.png') }}" type="image/png">
-    <link rel="favicon" href="{{ asset('img/light.png') }}" type="image/png">
-    <link rel="shortcut icon" href="{{ asset('img/light.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('img/favicon.png') }}" type="image/png">
+    <link rel="favicon" href="{{ asset('img/favicon.png') }}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" type="image/png">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
