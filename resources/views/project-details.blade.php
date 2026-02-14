@@ -1,6 +1,6 @@
 @extends('layouts.web')
 
-@section('title', 'Project Details')
+@section('title', isset($project['title_key']) ? __($project['title_key']) : 'Project Details')
 
 @push('styles')
     <!-- Swiper CSS -->
@@ -76,11 +76,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <span id="project-category"
                 class="inline-block px-4 py-1.5 rounded-full bg-brand-100 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 text-sm font-semibold mb-4"
-                data-aos="fade-up">{{ __('site.project_details.category_placeholder') }}</span>
+                data-aos="fade-up">{{ __($project['category_key']) }}</span>
             <h1 id="project-title" class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6"
-                data-aos="fade-up" data-aos-delay="100">{{ __('site.project_details.title_placeholder') }}</h1>
+                data-aos="fade-up" data-aos-delay="100">{{ __($project['title_key']) }}</h1>
             <p id="project-desc" class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8"
-                data-aos="fade-up" data-aos-delay="200">{{ __('site.project_details.desc_placeholder') }}</p>
+                data-aos="fade-up" data-aos-delay="200">{{ __($project['desc_key']) }}</p>
         </div>
     </section>
 
@@ -96,7 +96,13 @@
                     <div class="w-full relative group" data-aos="fade-up">
                         <div class="swiper mySwiper aspect-video" id="gallery-swiper">
                             <div class="swiper-wrapper" id="gallery-wrapper">
-                                <!-- Slides injected via JS -->
+                                @foreach ($project['images'] as $image)
+                                    <div class="swiper-slide">
+                                        <a href="{{ asset($image) }}" class="glightbox" data-gallery="project-gallery">
+                                            <img src="{{ asset($image) }}" alt="Project Image" loading="lazy">
+                                        </a>
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
@@ -107,31 +113,67 @@
                     <!-- Project Overview -->
                     <div class="prose dark:prose-invert max-w-none" data-aos="fade-up">
                         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                            {{ __('site.project_details.overview') }}</h2>
+                            {{ isset($project['overview_title_key']) ? __($project['overview_title_key']) : __('site.project_details.overview') }}
+                        </h2>
                         <div id="project-long-desc" class="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
+                            {{ isset($project['overview_desc_key']) ? __($project['overview_desc_key']) : '' }}
                         </div>
                     </div>
 
                     <!-- Features Grid -->
-                    <div id="features-section" class="hidden">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6" id="features-title">
-                            {{ __('site.project_details.key_features') }}</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="features-grid">
-                            <!-- Features injected via JS -->
+                    @if (isset($project['features']) && count($project['features']) > 0)
+                        <div id="features-section">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6" id="features-title">
+                                {{ isset($project['features_title_key']) ? __($project['features_title_key']) : __('site.project_details.key_features') }}
+                            </h3>
+
+                            @php
+                                $isComplex = is_array($project['features'][0]);
+                                $gridClass = $isComplex ? 'grid grid-cols-1 md:grid-cols-3 gap-6' : 'grid grid-cols-1 md:grid-cols-2 gap-4';
+                            @endphp
+
+                            <div class="{{ $gridClass }}">
+                                @foreach ($project['features'] as $feature)
+                                    @if (is_array($feature))
+                                        <!-- Complex Feature Card -->
+                                        <div class="bg-gray-50 dark:bg-slate-700/50 p-6 rounded-xl border border-gray-100 dark:border-white/5 hover:border-brand-200 dark:hover:border-brand-500/30 transition-colors">
+                                            <div class="w-12 h-12 bg-white dark:bg-slate-600 rounded-lg flex items-center justify-center text-brand-500 mb-4 shadow-sm">
+                                                <i class="{{ $feature['icon'] }} text-xl"></i>
+                                            </div>
+                                            <h4 class="font-bold text-gray-900 dark:text-white mb-2">{{ __($feature['title_key']) }}</h4>
+                                            <p class="text-sm text-gray-600 dark:text-gray-400">{{ __($feature['desc_key']) }}</p>
+                                        </div>
+                                    @else
+                                        <!-- Simple Feature List Item -->
+                                        <div class="flex items-start gap-3">
+                                            <i class="fas fa-check-circle text-brand-500 mt-1"></i>
+                                            <span class="text-gray-700 dark:text-gray-300">{{ __($feature) }}</span>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     <!-- Testimonial -->
-                    <div id="testimonial-section"
-                        class="hidden bg-gray-50 dark:bg-slate-700/30 rounded-2xl p-8 border-l-4 border-brand-500"
-                        data-aos="fade-up">
-                        <i class="fas fa-quote-left text-3xl text-brand-500 mb-4 opacity-50"></i>
-                        <p id="testimonial-text" class="text-xl italic text-gray-700 dark:text-gray-300 mb-6"></p>
-                        <div>
-                            <h4 id="testimonial-name" class="font-bold text-gray-900 dark:text-white"></h4>
-                            <span id="testimonial-role" class="text-sm text-gray-500 dark:text-gray-400"></span>
+                    @if (isset($project['testimonial']))
+                        <div id="testimonial-section"
+                            class="bg-gray-50 dark:bg-slate-700/30 rounded-2xl p-8 border-l-4 border-brand-500"
+                            data-aos="fade-up">
+                            <i class="fas fa-quote-left text-3xl text-brand-500 mb-4 opacity-50"></i>
+                            <p id="testimonial-text" class="text-xl italic text-gray-700 dark:text-gray-300 mb-6">
+                                {{ __($project['testimonial']['text_key']) }}
+                            </p>
+                            <div>
+                                <h4 id="testimonial-name" class="font-bold text-gray-900 dark:text-white">
+                                    {{ __($project['testimonial']['name_key']) }}
+                                </h4>
+                                <span id="testimonial-role" class="text-sm text-gray-500 dark:text-gray-400">
+                                    {{ __($project['testimonial']['role_key']) }}
+                                </span>
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                 </div>
 
@@ -142,57 +184,62 @@
                         <!-- Project Info Card -->
                         <div class="bg-gray-50 dark:bg-slate-700/30 rounded-2xl p-6 border border-gray-100 dark:border-white/5"
                             data-aos="fade-left">
-                                {{ __('site.project_details.info_title') }}</h3>
+                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-200 dark:border-gray-700 pb-4">
+                                {{ __('site.project_details.info_title') }}
+                            </h3>
 
                             <dl class="space-y-4">
                                 <div>
                                     <dt class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ __('site.project_details.client') }}</dt>
-                                    <dd
-                                        class="text-base font-medium text-gray-900 dark:text-white flex items-center gap-2">
-                                        <i class="far fa-user text-brand-500"></i> <span id="info-client">-</span>
+                                    <dd class="text-base font-medium text-gray-900 dark:text-white flex items-center gap-2">
+                                        <i class="far fa-user text-brand-500"></i>
+                                        <span>
+                                            {{ isset($project['client_key']) ? __($project['client_key']) : ($project['client_name'] ?? '-') }}
+                                        </span>
                                     </dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ __('site.project_details.category') }}</dt>
-                                    <dd
-                                        class="text-base font-medium text-gray-900 dark:text-white flex items-center gap-2">
-                                        <i class="far fa-folder text-brand-500"></i> <span id="info-category">-</span>
+                                    <dd class="text-base font-medium text-gray-900 dark:text-white flex items-center gap-2">
+                                        <i class="far fa-folder text-brand-500"></i>
+                                        <span>{{ __($project['category_key']) }}</span>
                                     </dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ __('site.project_details.duration') }}</dt>
-                                    <dd
-                                        class="text-base font-medium text-gray-900 dark:text-white flex items-center gap-2">
-                                        <i class="far fa-clock text-brand-500"></i> <span id="info-duration">-</span>
+                                    <dd class="text-base font-medium text-gray-900 dark:text-white flex items-center gap-2">
+                                        <i class="far fa-clock text-brand-500"></i>
+                                        <span>
+                                            {{ isset($project['duration_key']) ? __($project['duration_key']) : ($project['duration'] ?? '-') }}
+                                        </span>
                                     </dd>
                                 </div>
                             </dl>
 
+                            @if(isset($project['website_url']) && $project['website_url'] != '#')
                             <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                                <a href="#" id="info-website-btn" target="_blank"
+                                <a href="{{ $project['website_url'] }}" target="_blank"
                                     class="w-full flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-medium py-3 px-4 rounded-xl transition-all shadow-lg hover:shadow-brand-500/30">
                                     <span>{{ __('site.project_details.visit_website') }}</span> <i
                                         class="fas fa-external-link-alt text-sm"></i>
                                 </a>
                             </div>
+                            @endif
                         </div>
 
                         <!-- Tech Stack (Sidebar) -->
-                        <div id="tech-section-sidebar" class="hidden" data-aos="fade-left" data-aos-delay="100">
+                        @if(isset($project['tech_stack']))
+                        <div id="tech-section-sidebar" data-aos="fade-left" data-aos-delay="100">
                             <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">{{ __('site.project_details.technologies') }}</h3>
-                            <div class="flex flex-wrap gap-2" id="tech-tags">
-                                <!-- Tech tags injected here -->
+                            <div class="flex flex-wrap gap-2">
+                                @foreach($project['tech_stack'] as $tech)
+                                <span class="px-3 py-1 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-sm text-gray-600 dark:text-gray-300 flex items-center gap-2">
+                                    <i class="{{ $tech['icon'] }} text-brand-500"></i> {{ $tech['name'] }}
+                                </span>
+                                @endforeach
                             </div>
                         </div>
-
-                        <!-- Stats (Sidebar) -->
-                        <div id="results-section-sidebar" class="hidden" data-aos="fade-left" data-aos-delay="200">
-                            <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">{{ __('site.project_details.results') }}</h3>
-                            <div class="space-y-4" id="results-list">
-                                <!-- Results injected here -->
-                            </div>
-                        </div>
-
+                        @endif
                     </div>
                 </div>
 
@@ -206,6 +253,34 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- GLightbox JS -->
     <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
-    <!-- Custom Project Details JS -->
-    <script src="{{ asset('js/project-details.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Swiper
+            var swiper = new Swiper(".mySwiper", {
+                spaceBetween: 30,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+                loop: true
+            });
+
+            // Initialize GLightbox
+            const lightbox = GLightbox({
+                selector: '.glightbox',
+                touchNavigation: true,
+                loop: true,
+                autoplayVideos: true
+            });
+        });
+    </script>
 @endpush

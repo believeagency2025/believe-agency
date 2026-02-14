@@ -49,56 +49,56 @@
                     data-aos="fade-up">
                     <img src="{{ asset('img/logo100.webp') }}" alt="Client 1"
                         class="h-20 w-auto mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200">Mazzawi Contracting</h3>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ __('site.clients_list.mazzawi') }}</h3>
                 </div>
                 <!-- Client 2 -->
                 <div class="group flex flex-col items-center justify-center p-8 glass-card rounded-2xl grayscale hover:grayscale-0 transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="100">
                     <img src="{{ asset('img/logo100.webp') }}" alt="Client 2"
                         class="h-20 w-auto mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200">Noor Al Sham</h3>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ __('site.clients_list.noor_al_sham') }}</h3>
                 </div>
                 <!-- Client 3 -->
                 <div class="group flex flex-col items-center justify-center p-8 glass-card rounded-2xl grayscale hover:grayscale-0 transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="200">
                     <img src="{{ asset('img/logo100.webp') }}" alt="Client 3"
                         class="h-20 w-auto mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200">Abby Physics</h3>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ __('site.clients_list.abby_physics') }}</h3>
                 </div>
                 <!-- Client 4 -->
                 <div class="group flex flex-col items-center justify-center p-8 glass-card rounded-2xl grayscale hover:grayscale-0 transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="300">
                     <img src="{{ asset('img/logo100.webp') }}" alt="Client 4"
                         class="h-20 w-auto mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200">Al Mohandis Group</h3>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ __('site.clients_list.al_mohandis') }}</h3>
                 </div>
                 <!-- Client 5 -->
                 <div class="group flex flex-col items-center justify-center p-8 glass-card rounded-2xl grayscale hover:grayscale-0 transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="400">
                     <img src="{{ asset('img/logo100.webp') }}" alt="Client 5"
                         class="h-20 w-auto mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200">Waterfull Company</h3>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ __('site.clients_list.waterfall') }}</h3>
                 </div>
                 <!-- Client 6 -->
                 <div class="group flex flex-col items-center justify-center p-8 glass-card rounded-2xl grayscale hover:grayscale-0 transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="500">
                     <img src="{{ asset('img/logo100.webp') }}" alt="Client 6"
                         class="h-20 w-auto mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200">Mehan App</h3>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ __('site.clients_list.mehan') }}</h3>
                 </div>
                 <!-- Client 7 -->
                 <div class="group flex flex-col items-center justify-center p-8 glass-card rounded-2xl grayscale hover:grayscale-0 transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="600">
                     <img src="{{ asset('img/logo100.webp') }}" alt="Client 7"
                         class="h-20 w-auto mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200">Mas ALRiyadh</h3>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ __('site.clients_list.mas_alriyadh') }}</h3>
                 </div>
                 <!-- Client 8 -->
                 <div class="group flex flex-col items-center justify-center p-8 glass-card rounded-2xl grayscale hover:grayscale-0 transition-all duration-300"
                     data-aos="fade-up" data-aos-delay="700">
                     <img src="{{ asset('img/logo100.webp') }}" alt="Client 8"
                         class="h-20 w-auto mb-4 opacity-70 group-hover:opacity-100 transition-opacity">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200">Kenze Capital</h3>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ __('site.clients_list.kenze') }}</h3>
                 </div>
             </div>
         </div>

@@ -13,7 +13,8 @@ class PageController extends Controller
 
     public function about()
     {
-        return view('about');
+        $team = config('team');
+        return view('about', compact('team'));
     }
 
     public function services()
@@ -26,9 +27,17 @@ class PageController extends Controller
         return view('projects');
     }
 
-    public function projectDetails()
+    public function projectDetails(Request $request)
     {
-        return view('project-details');
+        $id = $request->query('id');
+        $projects = config('projects');
+
+        if (!$id || !isset($projects[$id])) {
+            return redirect()->route('projects');
+        }
+
+        $project = $projects[$id];
+        return view('project-details', compact('project'));
     }
 
     public function clients()
@@ -43,7 +52,8 @@ class PageController extends Controller
 
     public function team()
     {
-        return view('team');
+        $team = config('team');
+        return view('team', compact('team'));
     }
 
     public function branding()

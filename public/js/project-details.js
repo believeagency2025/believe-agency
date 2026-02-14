@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Apply translations
-    const currentLang = localStorage.getItem('lang') || 'en';
+    const currentLang = document.documentElement.lang || 'en';
     if (window.setLanguage) {
         setLanguage(currentLang);
     }

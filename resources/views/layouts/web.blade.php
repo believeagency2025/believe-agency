@@ -19,14 +19,14 @@
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:title" content="Believe Agency | @yield('title', 'Digital & Marketing Solutions')">
     <meta property="og:description" content="Believe Agency is a leading digital solutions and marketing agency. We specialize in web development, app development, branding, digital marketing, and e-commerce solutions.">
-    <meta property="og:image" content="{{ asset('img/logo100.webp') }}">
+    <meta property="og:image" content="{{ asset('img/dark.png') }}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="{{ url()->current() }}">
     <meta property="twitter:title" content="Believe Agency | @yield('title', 'Digital & Marketing Solutions')">
     <meta property="twitter:description" content="Believe Agency is a leading digital solutions and marketing agency. We specialize in web development, app development, branding, digital marketing, and e-commerce solutions.">
-    <meta property="twitter:image" content="{{ asset('img/logo100.webp') }}">
+    <meta property="twitter:image" content="{{ asset('img/dark.png') }}">
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('img/light.png') }}" type="image/png">
@@ -189,7 +189,7 @@
 <body class="bg-gray-50 text-gray-900 dark:bg-slate-900 dark:text-white font-sans overflow-x-hidden transition-colors duration-300">
 
     <!-- Professional Loader -->
-    <div id="page-loader" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-2xl transition-all duration-700 ease-in-out">
+    <div id="page-loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gray-50/95 dark:bg-slate-900/95 backdrop-blur-2xl transition-all duration-700 ease-in-out">
         <div class="relative mb-8">
             <!-- Glow Effect -->
             <div class="absolute inset-0 bg-brand-500/20 rounded-full blur-xl animate-pulse"></div>
@@ -208,7 +208,7 @@
                 Believe <span class="text-brand-500">Agency</span>
             </h2>
             <p class="text-gray-500 dark:text-gray-400 text-sm font-medium tracking-widest uppercase animate-pulse">
-                Loading Experience
+                {{ __('site.loading', ['default' => 'Loading Experience']) }}
             </p>
         </div>
     </div>
@@ -221,6 +221,21 @@
     <!-- Footer -->
     @include('layouts.footer')
 
+    <!-- Floating Action Buttons -->
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+        <!-- Back to Top -->
+        <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+            class="w-12 h-12 bg-brand-500 hover:bg-brand-600 text-white rounded-full shadow-lg shadow-brand-500/30 flex items-center justify-center transform translate-y-20 opacity-0 transition-all duration-300 hover:-translate-y-1 focus:outline-none">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+
+        <!-- WhatsApp -->
+        <a href="https://wa.me/201505294544" target="_blank"
+            class="w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg shadow-green-500/30 flex items-center justify-center transform hover:-translate-y-1 transition-all duration-300 hover:rotate-12">
+            <i class="fab fa-whatsapp text-2xl"></i>
+        </a>
+    </div>
+
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -231,8 +246,16 @@
             duration: 800,
         });
 
-        // Sticky Navbar Glass Effect
+        // Back to Top Visibility
         window.addEventListener('scroll', () => {
+            const backToTop = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('translate-y-20', 'opacity-0');
+            } else {
+                backToTop.classList.add('translate-y-20', 'opacity-0');
+            }
+
+            // Sticky Navbar Glass Effect
             const nav = document.getElementById('navbar');
             if (nav) {
                 if (window.scrollY > 20) {
@@ -299,7 +322,7 @@
             }
         });
     </script>
-    {{-- <script src="{{ asset('js/language.js') }}"></script> --}}
+
     @stack('scripts')
 </body>
 </html>

@@ -15,22 +15,21 @@
         </div>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6" data-aos="fade-up"
-                data-i18n="nav.projects">{{ __('site.nav.projects') }}</h1>
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6" data-aos="fade-up">
+                {{ __('site.nav.projects') }}</h1>
             <nav class="flex justify-center" aria-label="Breadcrumb" data-aos="fade-up" data-aos-delay="100">
                 <ol class="inline-flex items-center space-x-1 md:space-x-3">
                     <li class="inline-flex items-center">
                         <a href="{{ url('/') }}"
-                            class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-brand-600 dark:text-gray-400 dark:hover:text-white"
-                            data-i18n="nav.home">
+                            class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-brand-600 dark:text-gray-400 dark:hover:text-white">
                             {{ __('site.nav.home') }}
                         </a>
                     </li>
                     <li>
                         <div class="flex items-center">
                             <i class="fas fa-chevron-right text-gray-400 mx-2 text-xs"></i>
-                            <span class="text-sm font-medium text-gray-500 dark:text-gray-400"
-                                data-i18n="nav.projects">{{ __('site.nav.projects') }}</span>
+                            <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                                {{ __('site.nav.projects') }}</span>
                         </div>
                     </li>
                 </ol>
@@ -42,26 +41,26 @@
     <section class="py-20 bg-gray-50 dark:bg-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12" data-aos="fade-up">
-                <span class="text-brand-600 dark:text-brand-400 font-semibold tracking-wider text-sm uppercase"
-                    data-i18n="projects.subtitle">{{ __('site.projects.subtitle') }}</span>
-                <h2 class="text-3xl md:text-5xl font-bold mt-2 mb-4 text-gray-900 dark:text-white"
-                    data-i18n="projects.title">{!! __('site.projects.title') !!}</h2>
-                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto" data-i18n="projects.description">{{ __('site.projects.description') }}</p>
+                <span class="text-brand-600 dark:text-brand-400 font-semibold tracking-wider text-sm uppercase">
+                    {{ __('site.projects.subtitle') }}</span>
+                <h2 class="text-3xl md:text-5xl font-bold mt-2 mb-4 text-gray-900 dark:text-white">
+                    {!! __('site.projects.title') !!}</h2>
+                <p class="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">{{ __('site.projects.description') }}</p>
             </div>
 
             <!-- Filters -->
             <div class="flex flex-wrap justify-center gap-2 mb-12" data-aos="fade-up" data-aos-delay="100">
-                <button class="projects-filter-btn px-6 py-2.5 rounded-full bg-brand-500 text-white text-sm font-medium shadow-lg shadow-brand-500/20 transition-all" data-filter="all" data-i18n="projects.filter_all">{{ __('site.projects.filter_all') }}</button>
+                <button class="projects-filter-btn px-6 py-2.5 rounded-full bg-brand-500 text-white text-sm font-medium shadow-lg shadow-brand-500/20 transition-all hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white" data-filter="all">{{ __('site.projects.filter_all') }}</button>
                 <button
-                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 text-sm font-medium transition-all" data-filter="web" data-i18n="projects.filter_web">{{ __('site.projects.filter_web') }}</button>
+                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="web">{{ __('site.projects.filter_web') }}</button>
                 <button
-                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 text-sm font-medium transition-all" data-filter="app" data-i18n="projects.filter_app">{{ __('site.projects.filter_app') }}</button>
+                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="app">{{ __('site.projects.filter_app') }}</button>
                 <button
-                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 text-sm font-medium transition-all" data-filter="branding" data-i18n="projects.filter_branding">{{ __('site.projects.filter_branding') }}</button>
+                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="branding">{{ __('site.projects.filter_branding') }}</button>
                 <button
-                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 text-sm font-medium transition-all" data-filter="marketing" data-i18n="projects.filter_marketing">{{ __('site.projects.filter_marketing') }}</button>
+                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="marketing">{{ __('site.projects.filter_marketing') }}</button>
                 <button
-                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-gray-100 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 text-sm font-medium transition-all" data-filter="ecommerce" data-i18n="projects.filter_ecommerce">{{ __('site.projects.filter_ecommerce') }}</button>
+                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="ecommerce">{{ __('site.projects.filter_ecommerce') }}</button>
             </div>
 
             <!-- Grid -->
@@ -78,21 +77,21 @@
                         <div
                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <a href="{{ route('project-details', ['id' => 'mazzawi']) }}"
-                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300"
-                                data-i18n="projects.view_project">{{ __('site.projects.view_project') }}</a>
+                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                {{ __('site.projects.view_project') }}</a>
                         </div>
                     </div>
                     <div class="p-6">
                         <span
-                            class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2"
-                            data-i18n="projects.category_web">{{ __('site.projects.category_web') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
-                            data-i18n="projects.project1_title">{{ __('site.projects.project1_title') }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2"
-                            data-i18n="projects.project1_description">{{ __('site.projects.project1_description') }}</p>
+                            class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2">
+                            {{ __('site.projects.category_web') }}</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {{ __('site.projects.project1_title') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                            {{ __('site.projects.project1_description') }}</p>
                         <a href="{{ route('project-details', ['id' => 'mazzawi']) }}"
                             class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span data-i18n="projects.view_details">{{ __('site.projects.view_details') }}</span> <i
+                            <span>{{ __('site.projects.view_details') }}</span> <i
                                 class="fas fa-arrow-right ml-2 text-sm"></i>
                         </a>
                     </div>
@@ -108,21 +107,21 @@
                         <div
                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <a href="{{ route('project-details', ['id' => 'noor-alsham']) }}"
-                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300"
-                                data-i18n="projects.view_project">{{ __('site.projects.view_project') }}</a>
+                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                {{ __('site.projects.view_project') }}</a>
                         </div>
                     </div>
                     <div class="p-6">
                         <span
-                            class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2"
-                            data-i18n="projects.category_web">{{ __('site.projects.category_web') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
-                            data-i18n="projects.project2_title">{{ __('site.projects.project2_title') }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2"
-                            data-i18n="projects.project2_description">{{ __('site.projects.project2_description') }}</p>
+                            class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2">
+                            {{ __('site.projects.category_web') }}</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {{ __('site.projects.project2_title') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                            {{ __('site.projects.project2_description') }}</p>
                         <a href="{{ route('project-details', ['id' => 'noor-alsham']) }}"
                             class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span data-i18n="projects.view_details">{{ __('site.projects.view_details') }}</span> <i
+                            <span>{{ __('site.projects.view_details') }}</span> <i
                                 class="fas fa-arrow-right ml-2 text-sm"></i>
                         </a>
                     </div>
@@ -138,21 +137,21 @@
                         <div
                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <a href="{{ route('project-details', ['id' => 'abby-physics']) }}"
-                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300"
-                                data-i18n="projects.view_project">{{ __('site.projects.view_project') }}</a>
+                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                {{ __('site.projects.view_project') }}</a>
                         </div>
                     </div>
                     <div class="p-6">
                         <span
-                            class="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider block mb-2"
-                            data-i18n="projects.category_app">{{ __('site.projects.category_app') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
-                            data-i18n="projects.project3_title">{{ __('site.projects.project3_title') }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2"
-                            data-i18n="projects.project3_description">{{ __('site.projects.project3_description') }}</p>
+                            class="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider block mb-2">
+                            {{ __('site.projects.category_app') }}</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {{ __('site.projects.project3_title') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                            {{ __('site.projects.project3_description') }}</p>
                         <a href="{{ route('project-details', ['id' => 'abby-physics']) }}"
                             class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span data-i18n="projects.view_details">{{ __('site.projects.view_details') }}</span> <i
+                            <span>{{ __('site.projects.view_details') }}</span> <i
                                 class="fas fa-arrow-right ml-2 text-sm"></i>
                         </a>
                     </div>
@@ -168,21 +167,21 @@
                         <div
                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <a href="{{ route('project-details', ['id' => 'almonasib']) }}"
-                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300"
-                                data-i18n="projects.view_project">{{ __('site.projects.view_project') }}</a>
+                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                {{ __('site.projects.view_project') }}</a>
                         </div>
                     </div>
                     <div class="p-6">
                         <span
-                            class="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider block mb-2"
-                            data-i18n="projects.category_app">{{ __('site.projects.category_app') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
-                            data-i18n="projects.project4_title">{{ __('site.projects.project4_title') }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2"
-                            data-i18n="projects.project4_description">{{ __('site.projects.project4_description') }}</p>
+                            class="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider block mb-2">
+                            {{ __('site.projects.category_app') }}</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {{ __('site.projects.project4_title') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                            {{ __('site.projects.project4_description') }}</p>
                         <a href="{{ route('project-details', ['id' => 'almonasib']) }}"
                             class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span data-i18n="projects.view_details">{{ __('site.projects.view_details') }}</span> <i
+                            <span>{{ __('site.projects.view_details') }}</span> <i
                                 class="fas fa-arrow-right ml-2 text-sm"></i>
                         </a>
                     </div>
@@ -199,21 +198,21 @@
                         <div
                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <a href="{{ route('project-details', ['id' => 'media-buying']) }}"
-                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300"
-                                data-i18n="projects.view_project">{{ __('site.projects.view_project') }}</a>
+                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                {{ __('site.projects.view_project') }}</a>
                         </div>
                     </div>
                     <div class="p-6">
                         <span
-                            class="text-xs font-bold text-green-600 dark:text-green-400 uppercase tracking-wider block mb-2"
-                            data-i18n="projects.category_marketing">{{ __('site.projects.category_marketing') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
-                            data-i18n="projects.project5_title">{{ __('site.projects.project5_title') }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2"
-                            data-i18n="projects.project5_description">{{ __('site.projects.project5_description') }}</p>
+                            class="text-xs font-bold text-green-600 dark:text-green-400 uppercase tracking-wider block mb-2">
+                            {{ __('site.projects.category_marketing') }}</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {{ __('site.projects.project5_title') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                            {{ __('site.projects.project5_description') }}</p>
                         <a href="{{ route('project-details', ['id' => 'media-buying']) }}"
                             class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span data-i18n="projects.view_details">{{ __('site.projects.view_details') }}</span> <i
+                            <span>{{ __('site.projects.view_details') }}</span> <i
                                 class="fas fa-arrow-right ml-2 text-sm"></i>
                         </a>
                     </div>
@@ -229,21 +228,21 @@
                         <div
                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <a href="{{ route('project-details', ['id' => 'branding']) }}"
-                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300"
-                                data-i18n="projects.view_project">{{ __('site.projects.view_project') }}</a>
+                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                {{ __('site.projects.view_project') }}</a>
                         </div>
                     </div>
                     <div class="p-6">
                         <span
-                            class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2"
-                            data-i18n="projects.category_branding">{{ __('site.projects.category_branding') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
-                            data-i18n="projects.project6_title">{{ __('site.projects.project6_title') }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2"
-                            data-i18n="projects.project6_description">{{ __('site.projects.project6_description') }}</p>
+                            class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2">
+                            {{ __('site.projects.category_branding') }}</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {{ __('site.projects.project6_title') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                            {{ __('site.projects.project6_description') }}</p>
                         <a href="{{ route('project-details', ['id' => 'branding']) }}"
                             class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span data-i18n="projects.view_details">{{ __('site.projects.view_details') }}</span> <i
+                            <span>{{ __('site.projects.view_details') }}</span> <i
                                 class="fas fa-arrow-right ml-2 text-sm"></i>
                         </a>
                     </div>
@@ -260,21 +259,21 @@
                         <div
                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <a href="{{ route('project-details', ['id' => 'brochure']) }}"
-                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300"
-                                data-i18n="projects.view_project">{{ __('site.projects.view_project') }}</a>
+                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                {{ __('site.projects.view_project') }}</a>
                         </div>
                     </div>
                     <div class="p-6">
                         <span
-                            class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2"
-                            data-i18n="projects.category_branding">{{ __('site.projects.category_branding') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
-                            data-i18n="projects.project7_title">{{ __('site.projects.project7_title') }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2"
-                            data-i18n="projects.project7_description">{{ __('site.projects.project7_description') }}</p>
+                            class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2">
+                            {{ __('site.projects.category_branding') }}</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {{ __('site.projects.project7_title') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                            {{ __('site.projects.project7_description') }}</p>
                         <a href="{{ route('project-details', ['id' => 'brochure']) }}"
                             class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span data-i18n="projects.view_details">{{ __('site.projects.view_details') }}</span> <i
+                            <span>{{ __('site.projects.view_details') }}</span> <i
                                 class="fas fa-arrow-right ml-2 text-sm"></i>
                         </a>
                     </div>
@@ -291,21 +290,21 @@
                         <div
                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <a href="{{ route('project-details', ['id' => 'company-profile']) }}"
-                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300"
-                                data-i18n="projects.view_project">{{ __('site.projects.view_project') }}</a>
+                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                {{ __('site.projects.view_project') }}</a>
                         </div>
                     </div>
                     <div class="p-6">
                         <span
-                            class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2"
-                            data-i18n="projects.category_branding">{{ __('site.projects.category_branding') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
-                            data-i18n="projects.project8_title">{{ __('site.projects.project8_title') }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2"
-                            data-i18n="projects.project8_description">{{ __('site.projects.project8_description') }}</p>
+                            class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2">
+                            {{ __('site.projects.category_branding') }}</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {{ __('site.projects.project8_title') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                            {{ __('site.projects.project8_description') }}</p>
                         <a href="{{ route('project-details', ['id' => 'company-profile']) }}"
                             class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span data-i18n="projects.view_details">{{ __('site.projects.view_details') }}</span> <i
+                            <span>{{ __('site.projects.view_details') }}</span> <i
                                 class="fas fa-arrow-right ml-2 text-sm"></i>
                         </a>
                     </div>
@@ -321,21 +320,21 @@
                         <div
                             class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <a href="{{ route('project-details', ['id' => 'ecommerce']) }}"
-                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300"
-                                data-i18n="projects.view_project">{{ __('site.projects.view_project') }}</a>
+                                class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">
+                                {{ __('site.projects.view_project') }}</a>
                         </div>
                     </div>
                     <div class="p-6">
                         <span
-                            class="text-xs font-bold text-yellow-600 dark:text-yellow-400 uppercase tracking-wider block mb-2"
-                            data-i18n="projects.category_ecommerce">{{ __('site.projects.category_ecommerce') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2"
-                            data-i18n="projects.project9_title">{{ __('site.projects.project9_title') }}</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2"
-                            data-i18n="projects.project9_description">{{ __('site.projects.project9_description') }}</p>
+                            class="text-xs font-bold text-yellow-600 dark:text-yellow-400 uppercase tracking-wider block mb-2">
+                            {{ __('site.projects.category_ecommerce') }}</span>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {{ __('site.projects.project9_title') }}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                            {{ __('site.projects.project9_description') }}</p>
                         <a href="{{ route('project-details', ['id' => 'ecommerce']) }}"
                             class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span data-i18n="projects.view_details">{{ __('site.projects.view_details') }}</span> <i
+                            <span>{{ __('site.projects.view_details') }}</span> <i
                                 class="fas fa-arrow-right ml-2 text-sm"></i>
                         </a>
                     </div>

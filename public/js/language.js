@@ -1042,7 +1042,7 @@ const translations = {
         "clients.section_subtitle": "شركاء النجاح",
         "clients.section_title": "محل ثقة رواد الصناعة",
         "clients.view_all": "مشاهدة جميع العملاء",
-         "pharma_status": "مكتمل",
+        "pharma_status": "مكتمل",
         "pharma_visit_btn": "زيارة الموقع",
         "pharma_start_btn": "ابدأ مشروعك",
         "pharma_testimonial_title": "رأي العميل",
@@ -1351,6 +1351,13 @@ function setLanguage(lang) {
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', () => {
-    const savedLang = localStorage.getItem('lang') || 'en';
-    setLanguage(savedLang);
+    // Sync with server-rendered language
+    const serverLang = document.documentElement.lang || 'en';
+    // Update local storage to match server
+    if (localStorage.getItem('lang') !== serverLang) {
+        localStorage.setItem('lang', serverLang);
+    }
+
+    // Apply translations (this ensures dynamic content like project-details works)
+    setLanguage(serverLang);
 });

@@ -1,4 +1,4 @@
-<nav class="fixed w-full z-50 transition-all duration-300 glass border-b border-gray-200 dark:border-white/5" id="navbar">
+<nav class="fixed w-full z-50 transition-all duration-300 glass border-b border-gray-200 dark:border-white/5" id="navbar" style="border-radius: 0px 0px 30px 30px;">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
             <!-- Logo -->
@@ -92,16 +92,18 @@
 
                 <div class="flex items-center gap-4">
                     <!-- Language Switcher -->
-                    <a href="{{ route('lang.switch', app()->getLocale() == 'ar' ? 'en' : 'ar') }}" class="text-gray-500 dark:text-gray-400 hover:text-brand-600 dark:hover:text-white font-medium text-sm transition-colors">
-                        {{ app()->getLocale() == 'ar' ? 'En' : 'ع' }}
+                    <a href="{{ route('lang.switch', app()->getLocale() == 'ar' ? 'en' : 'ar') }}" class="group flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-brand-600 dark:hover:text-white font-medium text-sm transition-colors p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/5">
+                         <i class="fas fa-globe text-lg"></i>
+                        <span class="hidden lg:block">{{ __('site.nav.language') }}</span>
                     </a>
+
                     <!-- Dark Mode Toggle -->
                     <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700/50 focus:outline-none rounded-lg text-sm p-2.5 transition-colors">
                         <i id="theme-toggle-dark-icon" class="fas fa-moon hidden"></i>
                         <i id="theme-toggle-light-icon" class="fas fa-sun hidden"></i>
                     </button>
 
-                    <a href="{{ route('contact') }}" class="bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transform hover:-translate-y-0.5">{{ __('site.nav.lets_talk') }}</a>
+                    <a href="{{ route('contact') }}" class="hidden sm:inline-block bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 transform hover:-translate-y-0.5">{{ __('site.nav.lets_talk') }}</a>
                 </div>
             </div>
 
@@ -120,7 +122,7 @@
     </div>
 
     <!-- Mobile Menu -->
-    <div class="md:hidden hidden glass border-t border-gray-200 dark:border-white/5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl transition-all duration-300 transform origin-top" id="mobile-menu">
+    <div class="md:hidden hidden glass border-t border-gray-200 dark:border-white/5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl transition-all duration-300 transform origin-top" style="border-radius: 0px 0px 30px 30px;" id="mobile-menu">
         <div class="px-4 pt-4 pb-8 space-y-2">
             <a href="{{ route('home') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
                 <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
@@ -177,7 +179,6 @@
 </nav>
 
 <script>
-    // Just in case these listeners need to be re-attached or are simpler here
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
 
