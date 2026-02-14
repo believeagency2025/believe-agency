@@ -26,7 +26,7 @@ return [
         'badge' => 'وكالة حلول رقمية وتسويقية',
         'title_prefix' => 'نطور علامتك التجارية بـ',
         'title_highlight' => 'التميز الرقمي',
-        'subtitle' => 'نصمم تجارب رقمية مميزة لتعزيز نمو أعمالك، ونساعد الشركات الطموحة على التميز والمنافسة بقوة.',
+        'subtitle' => 'نصمم تجارب رقمية مميزة لتعزيز نمو أعمالك، <br> ونساعد الشركات الطموحة على التميز والمنافسة بقوة.',
         'btn_work' => 'شاهد أعمالنا',
         'btn_contact' => 'تواصل معنا',
         'stats_clients' => 'عملاء سعداء',
@@ -40,7 +40,7 @@ return [
         'testimonials' => 'آراء العملاء',
         'testimonials_title' => 'آراء العملاء',
         'message1' => 'العلامات الكبرى تبدأ <br> مع <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Believe</span>',
-        'message2' => 'حلول <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">رقمية</span> <br> مبتكرة <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">وإبداعية</span>',
+        'message2' => '<span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">حلول </span> رقمية <br> مبتكرة <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">وإبداعية</span>',
     ],
     'floater' => [
         'philosophy' => '"كل فكرة تستحق الفرصة لتكبر، دون خوف أو قلق."',
@@ -614,6 +614,11 @@ return [
         'category_placeholder' => 'التصنيف',
         'title_placeholder' => 'اسم المشروع',
         'desc_placeholder' => 'وصف قصير للمشروع يظهر هنا.',
+    ],
+
+    'bubbles' => [
+        'software' => ['ويب', 'تطبيق', 'برمجة', 'ERP', 'CRM', 'لوحات التحكم', 'جودة', 'أمان'],
+        'marketing' => ['SEO', 'رقمي', 'سوشيال', 'إعلانات', 'استراتيجية', 'هوية', 'تحليل', 'نمو'],
     ],
 
     // Project: Mazzawi Contracting

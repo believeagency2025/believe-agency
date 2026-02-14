@@ -616,6 +616,11 @@ return [
         'desc_placeholder' => 'Short description goes here.',
     ],
 
+    'bubbles' => [
+        'software' => ['Web', 'App', 'Code', 'ERP', 'CRM', 'Dashboard', 'Quality', 'Security'],
+        'marketing' => ['SEO', 'Digital', 'Social', 'Ads', 'Strategy', 'Branding', 'Analytics', 'Growth'],
+    ],
+
     // Project: Mazzawi Contracting
     'webdesign_title' => 'Professional Web Design for Construction Company',
     'webdesign_desc' => 'We created a modern, responsive website for Mazzawi Contracting LLC that showcases their construction services, project portfolio, and company expertise in the UAE market.',

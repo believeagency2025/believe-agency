@@ -37,7 +37,7 @@
                     </li>
                     <li>
                         <div class="flex items-center">
-                            <i class="fas fa-chevron-right mx-2 text-xs opacity-75"></i>
+                            <i class="fas fa-chevron-right ltr:mx-2 rtl:mx-2 rtl:rotate-180 text-xs opacity-75"></i>
                             <span class="text-sm font-medium text-white opacity-90">{{ __('site.nav.contact') }}</span>
                         </div>
                     </li>

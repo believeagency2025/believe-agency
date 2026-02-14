@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <!-- Floater (Kept from original about page but styled like home) -->
-                    <div class="absolute -bottom-8 -right-8 glass-card p-6 rounded-2xl max-w-xs hidden md:block animate-float"
+                    <div class="relative mt-8 md:absolute md:-bottom-8 md:-right-8 glass-card p-6 rounded-2xl max-w-xs mx-auto md:mx-0 animate-float"
                         style="animation-delay: 2s;">
                         <p class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
                             {{ __('site.floater.philosophy') }}</p>

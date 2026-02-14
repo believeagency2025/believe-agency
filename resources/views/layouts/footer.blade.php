@@ -13,10 +13,9 @@
                     <a href="https://www.facebook.com/BelieveAgency2025" target="_blank"
                         class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white transition-colors"><i
                             class="fab fa-facebook-f"></i></a>
-
-                    <a href="https://wa.me/201505294544" target="_blank"
+                    <a href="https://www.behance.net/believeagency" target="_blank"
                         class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white transition-colors"><i
-                            class="fab fa-whatsapp"></i></a>
+                            class="fab fa-behance"></i></a>
                     <a href="https://www.instagram.com/believe_agency_?igsh=MWhyaHQxNmg1Mm45Zg%3D%3D&utm_source=qr"
                         class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white transition-colors"><i
                             class="fab fa-instagram"></i></a>

@@ -49,18 +49,18 @@
             </div>
 
             <!-- Filters -->
-            <div class="flex flex-wrap justify-center gap-2 mb-12" data-aos="fade-up" data-aos-delay="100">
-                <button class="projects-filter-btn px-6 py-2.5 rounded-full bg-brand-500 text-white text-sm font-medium shadow-lg shadow-brand-500/20 transition-all hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white" data-filter="all">{{ __('site.projects.filter_all') }}</button>
+            <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-12" data-aos="fade-up" data-aos-delay="100">
                 <button
-                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="web">{{ __('site.projects.filter_web') }}</button>
+                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="web">{{ __('site.projects.filter_web') }}</button>
                 <button
-                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="app">{{ __('site.projects.filter_app') }}</button>
+                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="app">{{ __('site.projects.filter_app') }}</button>
                 <button
-                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="branding">{{ __('site.projects.filter_branding') }}</button>
+                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20"  style="font-size:10px !important;" data-filter="branding">{{ __('site.projects.filter_branding') }}</button>
                 <button
-                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="marketing">{{ __('site.projects.filter_marketing') }}</button>
+                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="marketing">{{ __('site.projects.filter_marketing') }}</button>
                 <button
-                    class="projects-filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="ecommerce">{{ __('site.projects.filter_ecommerce') }}</button>
+                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="ecommerce">{{ __('site.projects.filter_ecommerce') }}</button>
+                <button class="projects-filter-btn w-full px-4 py-2.5 rounded-xl bg-brand-500 text-white text-sm font-semibold shadow-lg shadow-brand-500/20 transition-all hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white" style="font-size:10px !important;" data-filter="all">{{ __('site.services.software.title') }}</button>
             </div>
 
             <!-- Grid -->

@@ -174,6 +174,26 @@
                 radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
                 radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
         }
+
+        /* RTL Icon Mirroring */
+        [dir="rtl"] .fa-arrow-right,
+        [dir="rtl"] .fa-chevron-right,
+        [dir="rtl"] .fa-arrow-left,
+        [dir="rtl"] .fa-chevron-left,
+        [dir="rtl"] .fa-paper-plane {
+            transform: scaleX(-1);
+            display: inline-block;
+        }
+
+        /* Adjust margins for mirrored icons if they use ml-2/mr-2 */
+        [dir="rtl"] .fas.ml-2, [dir="rtl"] .fab.ml-2 {
+            margin-left: 0;
+            margin-right: 0.5rem;
+        }
+        [dir="rtl"] .fas.mr-2, [dir="rtl"] .fab.mr-2 {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
     </style>
     <script>
         // Check local storage or system preference on load
@@ -222,7 +242,7 @@
     @include('layouts.footer')
 
     <!-- Floating Action Buttons -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col gap-4">
+    <div class="fixed bottom-6 ltr:left-6 rtl:right-6 z-50 flex flex-col gap-4">
         <!-- Back to Top -->
         <button id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
             class="w-12 h-12 bg-brand-500 hover:bg-brand-600 text-white rounded-full shadow-lg shadow-brand-500/30 flex items-center justify-center transform translate-y-20 opacity-0 transition-all duration-300 hover:-translate-y-1 focus:outline-none">
@@ -231,7 +251,7 @@
 
         <!-- WhatsApp -->
         <a href="https://wa.me/201505294544" target="_blank"
-            class="w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg shadow-green-500/30 flex items-center justify-center transform hover:-translate-y-1 transition-all duration-300 hover:rotate-12">
+            class="w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg shadow-green-500/30 flex items-center justify-center transform hover:-translate-y-1 transition-all duration-300 ltr:hover:-rotate-12 rtl:hover:rotate-12">
             <i class="fab fa-whatsapp text-2xl"></i>
         </a>
     </div>

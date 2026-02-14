@@ -26,6 +26,31 @@
         .animation-delay-4000 {
             animation-delay: 4s;
         }
+
+        @keyframes rise-bubble {
+            0% {
+                transform: translateY(110vh) translateX(var(--drift-start)) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: var(--max-opacity); }
+            90% { opacity: var(--max-opacity); }
+            100% {
+                transform: translateY(-20vh) translateX(var(--drift-end)) rotate(var(--rotation));
+                opacity: 0;
+            }
+        }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 10px;
+            pointer-events: none;
+            user-select: none;
+            animation: rise-bubble var(--duration) linear infinite;
+        }
     </style>
 @endpush
 
@@ -44,6 +69,38 @@
             <div class="absolute top-0 right-[-10%] w-[50%] h-[50%] bg-brand-300/20 dark:bg-brand-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
             <div class="absolute -bottom-8 left-[20%] w-[50%] h-[50%] bg-pink-300/20 dark:bg-pink-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
             <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-accent-300/20 dark:bg-accent-900/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+
+            <!-- Bubble Word Cloud Background -->
+            @php
+                $softwareWords = __('site.bubbles.software');
+                $marketingWords = __('site.bubbles.marketing');
+                $allWords = is_array($softwareWords) && is_array($marketingWords) ? array_merge($softwareWords, $marketingWords) : [];
+                // Duplicate words to have more bubbles rising for a fuller effect
+                $displayWords = !empty($allWords) ? array_merge($allWords, $allWords) : [];
+                if (!empty($displayWords)) shuffle($displayWords);
+            @endphp
+
+            @foreach($displayWords as $index => $word)
+                @php
+                    $size = rand(60, 110);
+                    $left = rand(0, 95);
+                    $delay = rand(0, 30);
+                    $duration = rand(15, 30);
+                    $maxOpacity = rand(15, 40) / 100;
+                    $blur = rand(1, 4);
+                    $driftStart = rand(-50, 50) . 'px';
+                    $driftEnd = rand(-150, 150) . 'px';
+                    $rotation = rand(-30, 30) . 'deg';
+                @endphp
+                <div class="bubble bg-brand-50/60 dark:bg-white/5 border border-brand-200/50 dark:border-white/10 text-[10px] sm:text-xs font-bold text-brand-700/80 dark:text-brand-400/60 shadow-md shadow-brand-500/5"
+                     style="width: {{ $size }}px; height: {{ $size }}px; left: {{ $left }}%;
+                            --duration: {{ $duration }}s; --delay: {{ $delay }}s; --max-opacity: {{ $maxOpacity }};
+                            --drift-start: {{ $driftStart }}; --drift-end: {{ $driftEnd }}; --rotation: {{ $rotation }};
+                            animation-delay: -{{ $delay }}s;
+                            backdrop-filter: blur({{ $blur }}px); -webkit-backdrop-filter: blur({{ $blur }}px);">
+                    {{ $word }}
+                </div>
+            @endforeach
         </div>
 
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center" data-aos="fade-up"
@@ -69,13 +126,13 @@
 
             <!-- Subheading -->
             <p class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 font-medium animate-fade-in-up" data-aos="fade-up" data-aos-delay="200">
-                {{ __('site.hero.subtitle') }}
+                {!!  __('site.hero.subtitle') !!}
             </p>
 
             <!-- Social Icons -->
             <div class="flex items-center justify-center gap-4 mb-8" data-aos="fade-up" data-aos-delay="300">
                 <a href="https://www.facebook.com/BelieveAgency2025" target="_blank" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-1"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://wa.me/201505294544" target="_blank" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-1"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.behance.net/believeagency" target="_blank" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-1"><i class="fab fa-behance"></i></a>
                 <a href="https://www.instagram.com/believe_agency_?igsh=MWhyaHQxNmg1Mm45Zg%3D%3D&utm_source=qr" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-1"><i class="fab fa-instagram"></i></a>
                 <a href="https://www.linkedin.com/company/believeagency2025/" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-1"><i class="fab fa-linkedin-in"></i></a>
                 <a href="https://www.tiktok.com/@believe.agency4?_r=1&_t=ZS-92W8PwecCMz" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-1"><i class="fab fa-tiktok"></i></a>
