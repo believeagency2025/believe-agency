@@ -3,63 +3,83 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ImageUploadTrait;
+
     public function index()
     {
-        return view('admin.clients.index');
+        $clients = Client::orderBy('order')->get();
+        return view('admin.clients.index', compact('clients'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.clients.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'logo' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'website_url' => 'nullable|url',
+            'order' => 'required|integer',
+            'is_active' => 'boolean',
+        ]);
+
+        if ($request->hasFile('logo')) {
+            $data['logo'] = $this->uploadImageWebp($request->file('logo'), 'clients');
+        }
+
+        $data['is_active'] = $request->has('is_active');
+
+        Client::create($data);
+
+        return redirect()->route('admin.clients.index')->with('success', __('admin.success_add'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(Client $client)
     {
-        //
+        return view('admin.clients.edit', compact('client'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, Client $client)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required|string|max:255',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'website_url' => 'nullable|url',
+            'order' => 'required|integer',
+            'is_active' => 'boolean',
+        ]);
+
+        if ($request->hasFile('logo')) {
+            if ($client->logo) {
+                Storage::disk('public')->delete($client->logo);
+            }
+            $data['logo'] = $this->uploadImageWebp($request->file('logo'), 'clients');
+        }
+
+        $data['is_active'] = $request->has('is_active');
+
+        $client->update($data);
+
+        return redirect()->route('admin.clients.index')->with('success', __('admin.success_update'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(Client $client)
     {
-        //
-    }
+        if ($client->logo) {
+            Storage::disk('public')->delete($client->logo);
+        }
+        $client->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('admin.clients.index')->with('success', __('admin.success_delete'));
     }
 }

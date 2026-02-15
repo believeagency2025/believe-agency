@@ -8,12 +8,14 @@ class PageController extends Controller
 {
     public function index()
     {
-        return view('home');
+        $clients = \App\Models\Client::where('is_active', true)->orderBy('order')->limit(6)->get();
+        $testimonials = \App\Models\Testimonial::where('is_active', true)->limit(3)->get();
+        return view('home', compact('clients', 'testimonials'));
     }
 
     public function about()
     {
-        $team = config('team');
+        $team = \App\Models\TeamMember::where('is_active', true)->orderBy('order')->get();
         return view('about', compact('team'));
     }
 
@@ -42,7 +44,8 @@ class PageController extends Controller
 
     public function clients()
     {
-        return view('clients');
+        $clients = \App\Models\Client::where('is_active', true)->orderBy('order')->get();
+        return view('clients', compact('clients'));
     }
 
     public function contact()
@@ -52,39 +55,11 @@ class PageController extends Controller
 
     public function team()
     {
-        $team = config('team');
-        return view('team', compact('team'));
+        $team = \App\Models\TeamMember::where('is_active', true)->orderBy('order')->get();
+        $testimonials = \App\Models\Testimonial::where('is_active', true)->limit(3)->get();
+        return view('team', compact('team', 'testimonials'));
     }
 
-    public function branding()
-    {
-        return view('branding');
-    }
-
-    public function marketing()
-    {
-        return view('marketing');
-    }
-
-    public function webDesign()
-    {
-        return view('web-design');
-    }
-
-    public function appDevelopment()
-    {
-        return view('apps-development');
-    }
-
-    public function ecommerce()
-    {
-        return view('ecommerce');
-    }
-
-    public function softwareTools()
-    {
-        return view('software-tools');
-    }
 
     public function privacyPolicy()
     {
@@ -94,5 +69,11 @@ class PageController extends Controller
     public function terms()
     {
         return view('terms');
+    }
+
+    public function serviceDetail($slug)
+    {
+        $service = \App\Models\Service::where('slug', $slug)->where('is_active', true)->firstOrFail();
+        return view('service-detail', compact('service'));
     }
 }

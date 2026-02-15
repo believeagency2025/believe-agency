@@ -1,65 +1,89 @@
 @extends('layouts.admin')
 
-@section('header_title', 'Projects')
-@section('header_subtitle', 'Manage your portfolio projects')
+@section('title', __('admin.projects') . ' ' . __('admin.management'))
+@section('page_title', __('admin.projects'))
 
 @section('content')
-<div class="glass-card rounded-3xl overflow-hidden p-8">
-    <div class="flex items-center justify-between mb-8">
+<div class="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+    <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex flex-wrap items-center justify-between gap-4">
         <div>
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white">All Projects</h3>
-            <p class="text-sm text-gray-500">Manage, edit, or delete projects</p>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">{{ __('admin.view_all') }} {{ __('admin.projects') }}</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">{{ __('admin.management') }}</p>
         </div>
-        <button class="bg-brand-500 hover:bg-brand-600 text-white px-6 py-2 rounded-xl font-bold transition-all flex items-center gap-2">
-            <i class="fas fa-plus"></i> Add New Project
-        </button>
+        <a href="{{ route('admin.projects.create') }}" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white rounded-xl font-bold transition-all shadow-lg shadow-brand-500/20 flex items-center gap-2">
+            <i class="fas fa-plus text-xs"></i>
+            {{ __('admin.add') }}
+        </a>
     </div>
 
     <div class="overflow-x-auto">
-        <table class="w-full text-left">
-            <thead class="bg-gray-50/50 dark:bg-white/5">
-                <tr>
-                    <th class="px-8 py-4 text-xs font-bold text-gray-400 uppercase">Image</th>
-                    <th class="px-8 py-4 text-xs font-bold text-gray-400 uppercase">Project Name</th>
-                    <th class="px-8 py-4 text-xs font-bold text-gray-400 uppercase">Category</th>
-                    <th class="px-8 py-4 text-xs font-bold text-gray-400 uppercase">Client</th>
-                    <th class="px-8 py-4 text-xs font-bold text-gray-400 uppercase text-right">Actions</th>
+        <table class="w-full text-start border-collapse">
+            <thead>
+                <tr class="bg-slate-50 dark:bg-slate-900/50">
+                    <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{{ __('admin.projects') }}</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{{ __('admin.services') }}</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{{ __('admin.featured') }}</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{{ __('admin.order') }}</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-end">{{ __('admin.actions') }}</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200 dark:divide-white/5">
-                <!-- Static Example Data -->
-                <tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-                    <td class="px-8 py-4">
-                        <div class="w-12 h-12 rounded-lg bg-gray-200 dark:bg-slate-700 overflow-hidden">
-                            <img src="https://via.placeholder.com/150" alt="Project" class="w-full h-full object-cover">
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                @forelse($projects as $project)
+                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/25 transition-colors">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden shrink-0">
+                                @if($project->main_image)
+                                    <img src="{{ asset('storage/' . $project->main_image) }}" alt="" class="w-full h-full object-cover">
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center text-slate-400 text-xs">No Img</div>
+                                @endif
+                            </div>
+                            <div>
+                                <p class="font-bold text-slate-900 dark:text-white">{{ $project->title['en'] ?? 'Untitled' }}</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">{{ $project->title['ar'] ?? '' }}</p>
+                            </div>
                         </div>
                     </td>
-                    <td class="px-8 py-4 font-bold text-sm">Mazzawi Contracting Website</td>
-                    <td class="px-8 py-4 text-sm text-gray-500">Web Design</td>
-                    <td class="px-8 py-4 text-sm font-medium">Ahmed Almohandis</td>
-                    <td class="px-8 py-4 text-right">
+                    <td class="px-6 py-4">
+                        <span class="px-2.5 py-1 rounded-lg bg-brand-50 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-bold">
+                            {{ $project->service->title[app()->getLocale()] ?? $project->service->title['en'] ?? 'No Service' }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        @if($project->is_featured)
+                            <span class="text-amber-500" title="Featured"><i class="fas fa-star text-sm"></i></span>
+                        @else
+                            <span class="text-slate-300 dark:text-slate-600"><i class="far fa-star text-sm"></i></span>
+                        @endif
+                    </td>
+                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                        {{ $project->order }}
+                    </td>
+                    <td class="px-6 py-4 text-end">
                         <div class="flex items-center justify-end gap-2">
-                            <button class="p-2 text-gray-400 hover:text-brand-500 transition-colors"><i class="fas fa-edit"></i></button>
-                            <button class="p-2 text-gray-400 hover:text-red-500 transition-colors"><i class="fas fa-trash"></i></button>
+                            <a href="{{ route('admin.projects.edit', $project) }}" class="w-8 h-8 rounded-lg flex items-center justify-center text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 transition-all" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
+                                @csrf @method('DELETE')
+                                <button type="submit" class="w-8 h-8 rounded-lg flex items-center justify-center text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all" title="{{ __('admin.delete') }}">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
                         </div>
                     </td>
                 </tr>
-                <tr class="hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-                    <td class="px-8 py-4">
-                        <div class="w-12 h-12 rounded-lg bg-gray-200 dark:bg-slate-700 overflow-hidden">
-                            <img src="https://via.placeholder.com/150" alt="Project" class="w-full h-full object-cover">
-                        </div>
-                    </td>
-                    <td class="px-8 py-4 font-bold text-sm">Noor Al Sham Mobile App</td>
-                    <td class="px-8 py-4 text-sm text-gray-500">App Dev</td>
-                    <td class="px-8 py-4 text-sm font-medium">Mohamed Hassan</td>
-                    <td class="px-8 py-4 text-right">
-                        <div class="flex items-center justify-end gap-2">
-                            <button class="p-2 text-gray-400 hover:text-brand-500 transition-colors"><i class="fas fa-edit"></i></button>
-                            <button class="p-2 text-gray-400 hover:text-red-500 transition-colors"><i class="fas fa-trash"></i></button>
+                @empty
+                <tr>
+                    <td colspan="5" class="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
+                        <div class="flex flex-col items-center gap-3">
+                            <i class="fas fa-folder-open text-4xl opacity-20"></i>
+                            <p class="font-medium">{{ __('admin.no_data') }}</p>
                         </div>
                     </td>
                 </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

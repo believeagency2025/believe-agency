@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}" class="scroll-smooth">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Believe Agency | لوحة التحكم</title>
-
-    <!-- Google Fonts -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>@yield('title') | Believe Admin</title>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -18,303 +20,295 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Tajawal', 'sans-serif'],
-                        arabic: ['Tajawal', 'sans-serif'],
-                    },
                     colors: {
                         brand: {
                             50: '#f0f9ff',
                             100: '#e0f2fe',
-                            400: '#5dc9e0',
-                            500: '#1792ad',
-                            600: '#004a5c',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
                         },
-                        slate: {
-                            800: '#112240',
-                            900: '#0a1929',
-                            950: '#020617',
-                        }
-                    }
+                    },
+                    fontFamily: {
+                        outfit: ['Outfit', 'Tajawal', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    },
                 }
             }
         }
     </script>
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        /* Glassmorphism Styles */
+        body { font-family: 'Outfit', 'Tajawal', sans-serif; }
         .glass {
             background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         }
-
         .dark .glass {
-            background: rgba(10, 25, 41, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(15, 23, 42, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .sidebar-link.active {
+            background-color: #0ea5e9;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(14, 165, 233, 0.3);
         }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+        /* Custom Sidebar Scrollbar */
+        nav.overflow-y-auto {
+            scrollbar-width: thin;
+            scrollbar-color: #e2e8f0 transparent;
+        }
+        .dark nav.overflow-y-auto {
+            scrollbar-color: #334155 transparent;
         }
 
-        .dark .glass-card {
-            background: rgba(17, 34, 64, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        nav.overflow-y-auto::-webkit-scrollbar {
+            width: 5px;
         }
-
-        /* Sidebar Item Styling */
-        .sidebar-item.active {
-            background: linear-gradient(to right, rgba(23, 146, 173, 0.2), transparent);
-            border-left: 4px solid #1792ad;
-            color: #1792ad;
-        }
-
-        [dir="rtl"] .sidebar-item.active {
-            background: linear-gradient(to left, rgba(23, 146, 173, 0.2), transparent);
-            border-right: 4px solid #1792ad;
-            border-left: none;
-        }
-
-        /* Sidebar Visibility Logic */
-        #sidebar {
-            transform: translateX(-100%);
-        }
-        [dir="rtl"] #sidebar {
-            transform: translateX(100%);
-        }
-        #sidebar.show {
-            transform: translateX(0) !important;
-        }
-        @media (min-width: 768px) {
-            #sidebar {
-                transform: translateX(0) !important;
-            }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
+        nav.overflow-y-auto::-webkit-scrollbar-track {
             background: transparent;
         }
-
-        ::-webkit-scrollbar-thumb {
-            background: #1792ad;
-            border-radius: 10px;
+        nav.overflow-y-auto::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 20px;
+        }
+        .dark nav.overflow-y-auto::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+        nav.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
         }
     </style>
+    @stack('styles')
 </head>
+<body class="bg-slate-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
 
-<body class="bg-gray-50 text-gray-900 dark:bg-slate-950 dark:text-white font-sans transition-colors duration-300">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="fixed inset-y-0 start-0 z-50 w-64 bg-white dark:bg-slate-800 border-e border-slate-200 dark:border-slate-700 transition-transform duration-300 transform -translate-x-full lg:translate-x-0 rtl:translate-x-full lg:rtl:translate-x-0">
+        <div class="flex flex-col h-full">
+            <div class="p-6">
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2">
+                    <img src="{{ asset('img/dark.png') }}" alt="Believe Agency" class="h-10 w-auto block dark:hidden">
+                    <img src="{{ asset('img/light.png') }}" alt="Believe Agency" class="h-10 w-auto hidden dark:block">
+                </a>
+            </div>
 
-    <div class="flex min-h-screen overflow-hidden">
+            <nav class="flex-1 px-4 space-y-1 overflow-y-auto pb-6">
+                <a href="{{ route('admin.dashboard') }}" class="sidebar-link {{ request()->routeIs('admin.dashboard') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
+                    <i class="fas fa-chart-pie w-5"></i>
+                    {{ __('admin.dashboard') }}
+                </a>
 
-        <!-- Sidebar -->
-        <aside id="sidebar"
-            class="fixed inset-y-0 start-0 z-50 w-64 transition-transform duration-300 glass border-e border-gray-200 dark:border-white/5">
-            <div class="flex flex-col h-full">
-                <!-- Logo -->
-                <div class="p-6 flex items-center gap-3 justify-center">
-                    <img src="https://believe-agency.net/img/logo100.webp" alt="Logo" class="h-10 w-auto"
-                        onerror="this.src='https://via.placeholder.com/40x40?text=B'">
-                    <span class="text-xl font-bold tracking-tight">Believe <span
-                            class="text-brand-500">Admin</span></span>
+                <div class="pt-4 pb-2 px-4 uppercase text-[10px] font-bold text-slate-400 tracking-wider">{{ __('admin.management') }}</div>
+
+                <a href="{{ route('admin.services.index') }}" class="sidebar-link {{ request()->routeIs('admin.services.*') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
+                    <i class="fas fa-concierge-bell w-5"></i>
+                    {{ __('admin.services') }}
+                </a>
+
+
+                <a href="{{ route('admin.projects.index') }}" class="sidebar-link {{ request()->routeIs('admin.projects.*') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
+                    <i class="fas fa-briefcase w-5"></i>
+                    <span class="flex-1">{{ __('admin.projects') }}</span>
+                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-yellow-100 dark:bg-yellow-500/20 text-yellow-700 dark:text-yellow-400">{{ __('admin.dev') }}</span>
+                </a>
+
+                <a href="{{ route('admin.team.index') }}" class="sidebar-link {{ request()->routeIs('admin.team.*') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
+                    <i class="fas fa-users w-5"></i>
+                    {{ __('admin.team') }}
+                </a>
+
+                <a href="{{ route('admin.clients.index') }}" class="sidebar-link {{ request()->routeIs('admin.clients.*') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
+                    <i class="fas fa-handshake w-5"></i>
+                    {{ __('admin.clients') }}
+                </a>
+
+                <a href="{{ route('admin.testimonials.index') }}" class="sidebar-link {{ request()->routeIs('admin.testimonials.*') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
+                    <i class="fas fa-quote-right w-5"></i>
+                    {{ __('admin.testimonials') }}
+                </a>
+
+                <a href="{{ route('admin.messages.index') }}" class="sidebar-link {{ request()->routeIs('admin.messages.*') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
+                    <i class="fas fa-envelope-open-text w-5"></i>
+                    <span class="flex-1">{{ __('admin.inquiries') }}</span>
+                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-yellow-100 dark:bg-yellow-500/20 text-yellow-700 dark:text-yellow-400">{{ __('admin.dev') }}</span>
+                </a>
+
+                <div class="pt-4 pb-2 px-4 uppercase text-[10px] font-bold text-slate-400 tracking-wider">{{ __('admin.system') }}</div>
+
+                <a href="{{ route('admin.settings') }}" class="sidebar-link {{ request()->routeIs('admin.settings') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
+                    <i class="fas fa-cog w-5"></i>
+                    {{ __('admin.settings') }}
+                </a>
+
+                <!-- Logout Button -->
+                <div class="pt-6">
+                    <form action="{{ route('admin.logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="w-full text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
+                            <i class="fas fa-right-from-bracket w-5"></i>
+                            {{ __('admin.logout') }}
+                        </button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="lg:ms-64 min-h-screen">
+        <!-- Topbar -->
+        <header class="glass sticky top-0 z-40 w-full px-6 py-4 flex items-center justify-between">
+            <button id="mobileMenuBtn" class="lg:hidden text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+
+            <div class="flex items-center gap-4 ms-auto">
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="w-10 h-10 rounded-xl flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:block"></i>
+                </button>
+
+                <!-- Language Selector -->
+                <div class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+                    <a href="{{ route('lang.switch', 'en') }}" class="px-2 py-1 rounded-lg text-xs font-bold transition-all {{ app()->getLocale() == 'en' ? 'bg-white dark:bg-slate-700 text-brand-500 shadow-sm' : 'text-slate-500' }}">EN</a>
+                    <a href="{{ route('lang.switch', 'ar') }}" class="px-2 py-1 rounded-lg text-xs font-bold transition-all {{ app()->getLocale() == 'ar' ? 'bg-white dark:bg-slate-700 text-brand-500 shadow-sm' : 'text-slate-500' }}">AR</a>
                 </div>
 
-                <!-- Navigation -->
-                <nav class="flex-1 px-4 space-y-2 mt-4 overflow-y-auto">
-                    <a href="{{ route('admin.dashboard') }}"
-                        class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }} flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/5 text-gray-500 dark:text-gray-400 hover:text-brand-500 transition-all">
-                        <i class="fas fa-th-large w-5 text-center"></i>
-                        <span class="font-medium">{{ __('admin.dashboard') }}</span>
-                    </a>
-
-                    <div class="pt-4 pb-2">
-                        <span class="px-4 text-xs font-bold text-gray-400 uppercase tracking-widest">{{ __('admin.management') }}</span>
+                <!-- Profile Dropdown -->
+                <div class="flex items-center gap-3 ps-4 border-s border-slate-200 dark:border-slate-700">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-sm font-bold text-slate-900 dark:text-white">{{ Auth::user()->name }}</p>
+                        <p class="text-[10px] text-slate-500 font-medium">{{ __('admin.administrator') }}</p>
                     </div>
-
-                    <a href="{{ route('admin.projects.index') }}"
-                        class="sidebar-item {{ request()->routeIs('admin.projects.*') ? 'active' : '' }} flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/5 text-gray-500 dark:text-gray-400 hover:text-brand-500 transition-all">
-                        <i class="fas fa-project-diagram w-5 text-center"></i>
-                        <span class="font-medium">{{ __('admin.projects') }}</span>
-                    </a>
-
-                    <a href="{{ route('admin.services.index') }}"
-                        class="sidebar-item {{ request()->routeIs('admin.services.*') ? 'active' : '' }} flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/5 text-gray-500 dark:text-gray-400 hover:text-brand-500 transition-all">
-                        <i class="fas fa-cogs w-5 text-center"></i>
-                        <span class="font-medium">{{ __('admin.services') }}</span>
-                    </a>
-
-                    <a href="{{ route('admin.clients.index') }}"
-                        class="sidebar-item {{ request()->routeIs('admin.clients.*') ? 'active' : '' }} flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/5 text-gray-500 dark:text-gray-400 hover:text-brand-500 transition-all">
-                        <i class="fas fa-users w-5 text-center"></i>
-                        <span class="font-medium">{{ __('admin.clients') }}</span>
-                    </a>
-
-                    <a href="{{ route('admin.team.index') }}"
-                        class="sidebar-item {{ request()->routeIs('admin.team.*') ? 'active' : '' }} flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/5 text-gray-500 dark:text-gray-400 hover:text-brand-500 transition-all">
-                        <i class="fas fa-user-friends w-5 text-center"></i>
-                        <span class="font-medium">{{ __('admin.team') }}</span>
-                    </a>
-
-                    <!-- <a href="#"
-                        class="sidebar-item flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 text-gray-500 dark:text-gray-400 hover:text-brand-500 transition-all">
-                        <i class="fas fa-envelope w-5 text-center"></i>
-                        <span class="font-medium">Messages</span>
-                        <span class="ml-auto bg-brand-500 text-white text-[10px] px-2 py-0.5 rounded-full">5</span>
-                    </a> -->
-
-                    <div class="pt-4 pb-2">
-                        <span class="px-4 text-xs font-bold text-gray-400 uppercase tracking-widest">{{ __('admin.system') }}</span>
-                    </div>
-
-                    <a href="{{ route('admin.settings') }}"
-                        class="sidebar-item {{ request()->routeIs('admin.settings') ? 'active' : '' }} flex items-center gap-3 px-4 py-3 rounded-2xl hover:bg-gray-100 dark:hover:bg-white/5 text-gray-500 dark:text-gray-400 hover:text-brand-500 transition-all">
-                        <i class="fas fa-cog w-5 text-center"></i>
-                        <span class="font-medium">{{ __('admin.settings') }}</span>
-                    </a>
-                </nav>
-
-                <!-- Profile Bottom -->
-                <div class="p-4 border-t border-gray-200 dark:border-white/5">
-                    <div class="flex items-center gap-3 p-2 rounded-2xl bg-gray-100 dark:bg-white/5">
-                        <button class="ms-auto text-gray-400 hover:text-red-500 transition-colors">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </button>
-                         <div class="overflow-hidden">
-                            <p class="text-sm font-bold truncate">{{ __('admin.admin_user') }}</p>
-                            <p class="text-xs text-gray-500 truncate">{{ __('admin.administrator') }}</p>
-                        </div>
-                        <div
-                            class="w-10 h-10 rounded-lg bg-brand-500 flex items-center justify-center text-white font-bold shrink-0">
-                            AD</div>
+                    <div class="w-10 h-10 rounded-xl bg-brand-100 dark:bg-brand-500/20 text-brand-600 dark:text-brand-400 flex items-center justify-center font-bold">
+                        {{ substr(Auth::user()->name, 0, 1) }}
                     </div>
                 </div>
             </div>
-        </aside>
+        </header>
 
-        <!-- Main Content -->
-        <main class="flex-1 md:ps-[18rem] min-h-screen p-4 md:p-8 pt-24 md:pt-8 transition-all duration-300">
+        <!-- Page Content -->
+        <div class="p-6">
+            <div class="mb-8">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white">@yield('page_title')</h2>
+                <div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mt-1">
+                    <a href="{{ route('admin.dashboard') }}" class="hover:text-brand-500 transition-colors">{{ __('admin.dashboard') }}</a>
+                    <i class="fas fa-chevron-right text-[10px] rtl:rotate-180"></i>
+                    <span class="font-medium text-slate-900 dark:text-slate-200">@yield('page_title')</span>
+                </div>
+            </div>
 
-            <!-- Top Header (Clean - No sharp div) -->
-            <header
-                class="fixed md:static top-0 inset-x-0 z-40 md:z-auto h-16 md:h-auto flex items-center justify-between px-4 md:px-0 mb-8 bg-gray-50/80 dark:bg-slate-950/80 md:bg-transparent backdrop-blur-md md:backdrop-blur-none">
-                <div class="flex items-center gap-4">
-                    <button id="mobile-toggle" class="md:hidden text-gray-500 p-2">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
+            @if($errors->any())
+                <div class="mb-6 p-4 bg-red-500 text-white rounded-2xl shadow-lg shadow-red-500/20 flex items-start gap-3">
+                    <i class="fas fa-exclamation-circle mt-1"></i>
                     <div>
-                        <h1 class="text-xl md:text-3xl font-bold text-gray-900 dark:text-white">@yield('header_title', __('admin.overview'))</h1>
-                        <p class="hidden md:block text-sm text-gray-500 dark:text-gray-400">@yield('header_subtitle', __('admin.welcome_back'))</p>
+                        <p class="font-bold underline mb-1">{{ __('admin.validation_errors') ?? 'Please correct the following errors:' }}</p>
+                        <ul class="text-sm space-y-1">
+                            @foreach($errors->all() as $error)
+                                <li>• {{ $error }}</li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
-
-                <div class="flex items-center gap-3">
-                    <!-- Search -->
-                   <!--  <div class="hidden lg:flex items-center relative">
-                        <i class="fas fa-search absolute left-3 text-gray-400 text-sm"></i>
-                        <input type="text" placeholder="Search anything..."
-                            class="bg-white dark:bg-slate-900 border border-gray-200 dark:border-white/5 rounded-xl pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/50 w-64 transition-all">
-                    </div> -->
-
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle"
-                        class="w-10 h-10 flex items-center justify-center rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-white/5 text-gray-500 hover:text-brand-500 transition-all shadow-sm hover:shadow-md">
-                        <i id="theme-icon" class="fas fa-moon"></i>
-                    </button>
-
-                    <!-- Notifications -->
-                    <button
-                        class="relative w-10 h-10 flex items-center justify-center rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-white/5 text-gray-500 hover:text-brand-500 transition-all shadow-sm hover:shadow-md">
-                        <i class="fas fa-bell"></i>
-                        <span
-                            class="absolute top-2 start-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
-                    </button>
-
-                    <!-- Language Toggle -->
-                    <a href="{{ route('admin.lang.switch', app()->getLocale() == 'ar' ? 'en' : 'ar') }}"
-                        class="w-10 h-10 flex items-center justify-center rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-white/5 text-gray-500 hover:text-brand-500 transition-all shadow-sm hover:shadow-md font-bold text-xs uppercase"
-                        id="lang-btn">
-                        {{ app()->getLocale() == 'ar' ? 'EN' : 'AR' }}
-                    </a>
-                </div>
-            </header>
+            @endif
 
             @yield('content')
-
-        </main>
-    </div>
-
-    <!-- Backdrop for mobile -->
-    <div id="sidebar-backdrop" class="fixed inset-0 bg-black/50 z-40 hidden transition-opacity opacity-0"></div>
+        </div>
+    </main>
 
     <script>
-        // Init properties
-        const html = document.documentElement;
-        const themeBtn = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
+        // Sidebar Mobile Toggle
         const sidebar = document.getElementById('sidebar');
-        const backdrop = document.getElementById('sidebar-backdrop');
-        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        mobileMenuBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('-translate-x-full');
+        });
 
-        // --- Theme Logic ---
-        function updateTheme() {
-            if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                html.classList.add('dark');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            } else {
-                html.classList.remove('dark');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
+        // Theme Management
+        const themeToggle = document.getElementById('themeToggle');
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
         }
 
-        themeBtn.addEventListener('click', () => {
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
+        themeToggle.addEventListener('click', () => {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.theme = 'light';
             } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
+                document.documentElement.classList.add('dark');
+                localStorage.theme = 'dark';
             }
         });
 
-        // --- Mobile Sidebar Logic ---
-        function toggleSidebar() {
-            const isShown = sidebar.classList.contains('show');
-            if (!isShown) {
-                sidebar.classList.add('show');
-                backdrop.classList.remove('hidden');
-                setTimeout(() => backdrop.classList.add('opacity-100'), 10);
-            } else {
-                sidebar.classList.remove('show');
-                backdrop.classList.remove('opacity-100');
-                setTimeout(() => backdrop.classList.add('hidden'), 300);
+        // Global Delete Confirmation
+        document.addEventListener('submit', function(e) {
+            if (e.target.matches('form') && (e.target.querySelector('button[type="submit"].text-red-500') || e.target.classList.contains('delete-form'))) {
+                if (e.target.dataset.confirmed) return;
+
+                e.preventDefault();
+                const form = e.target;
+
+                Swal.fire({
+                    title: "{{ __('admin.delete_confirm') }}",
+                    text: "{{ __('admin.delete_warning_text') ?? 'This action cannot be undone!' }}",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#ef4444',
+                    cancelButtonColor: '#64748b',
+                    confirmButtonText: "{{ __('admin.delete') }}",
+                    cancelButtonText: "{{ __('admin.cancel') }}",
+                    background: document.documentElement.classList.contains('dark') ? '#1e293b' : '#fff',
+                    color: document.documentElement.classList.contains('dark') ? '#fff' : '#1e293b',
+                    borderRadius: '1.5rem',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        form.dataset.confirmed = true;
+                        form.submit();
+                    }
+                });
             }
-        }
+        });
 
-        mobileToggle.addEventListener('click', toggleSidebar);
-        backdrop.addEventListener('click', toggleSidebar);
+        // Toast Notification Function
+        const toast = (message, icon = 'success') => {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                },
+                background: document.documentElement.classList.contains('dark') ? '#1e293b' : '#fff',
+                color: document.documentElement.classList.contains('dark') ? '#fff' : '#1e293b',
+            });
+            Toast.fire({
+                icon: icon,
+                title: message
+            });
+        };
 
-        // Initialize
-        updateTheme();
+        @if(session('success'))
+            toast("{{ session('success') }}", 'success');
+        @endif
+
+        @if(session('error'))
+            toast("{{ session('error') }}", 'error');
+        @endif
     </script>
+    @stack('scripts')
 </body>
-
 </html>

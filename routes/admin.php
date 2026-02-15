@@ -10,17 +10,33 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\LocaleController;
 
 // Admin Routes
+use App\Http\Controllers\Admin\AuthController;
+
+use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\ContactMessageController;
+
+// Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('lang/{locale}', [LocaleController::class, 'switch'])->name('lang.switch');
+    // Auth Routes
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    // Resource Routes
-    Route::resource('projects', ProjectController::class);
-    Route::resource('services', ServiceController::class);
-    Route::resource('clients', ClientController::class);
-    Route::resource('team', TeamController::class);
+    // Protected Routes
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('lang/{locale}', [LocaleController::class, 'switch'])->name('lang.switch');
 
-    // Settings
-    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
-    Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+        // Resource Routes
+        Route::resource('projects', ProjectController::class);
+        Route::resource('services', ServiceController::class);
+        Route::resource('clients', ClientController::class);
+        Route::resource('team', TeamController::class);
+        Route::resource('testimonials', TestimonialController::class);
+        Route::resource('messages', ContactMessageController::class)->only(['index', 'show', 'destroy']);
+
+        // Settings
+        Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+        Route::post('/settings', [SettingController::class, 'update'])->name('settings.update');
+    });
 });

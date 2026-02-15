@@ -232,23 +232,25 @@
                     <div class="team-card glass-card rounded-[40px] overflow-hidden group border border-gray-100 dark:border-white/5 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
                         data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                         <div class="relative overflow-hidden">
-                            <img src="{{ asset($member['image']) }}" alt="{{ $member['name'] }}"
+                            <img src="{{ asset('storage/' . $member->image) }}" alt="{{ $member->name[app()->getLocale()] ?? $member->name['en'] }}"
                                 class="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-110">
 
                             <!-- Overlay/Social Links -->
                             <div class="social-links bg-white/90 dark:bg-slate-900/90 backdrop-blur-md p-4 flex justify-center gap-3 absolute -bottom-full left-0 right-0 transition-all duration-300 group-hover:bottom-0 border-t border-gray-100 dark:border-white/10">
-                                @if(isset($member['social']))
-                                    @foreach($member['social'] as $platform => $link)
+                                @if($member->social_links)
+                                    @foreach($member->social_links as $platform => $link)
+                                        @if($link)
                                         <a href="{{ $link }}" target="_blank"
                                             class="w-10 h-10 rounded-full bg-brand-50 text-brand-600 hover:bg-brand-600 hover:text-white dark:bg-white/10 dark:text-white dark:hover:bg-brand-600 flex items-center justify-center transition-all shadow-sm">
                                             <i class="fab fa-{{ $platform }}"></i>
                                         </a>
+                                        @endif
                                     @endforeach
                                 @endif
 
                                 {{-- CV Icon --}}
-                                @if(isset($member['cv_link']) && $member['cv_link'])
-                                    <a href="{{ $member['cv_link'] }}" target="_blank" title="View CV"
+                                @if($member->cv_link)
+                                    <a href="{{ $member->cv_link }}" target="_blank" title="View CV"
                                        class="w-10 h-10 rounded-full bg-brand-50 text-brand-600 hover:bg-brand-600 hover:text-white dark:bg-white/10 dark:text-white dark:hover:bg-brand-600 flex items-center justify-center transition-all shadow-sm">
                                         <i class="fas fa-file-alt"></i>
                                     </a>
@@ -257,10 +259,10 @@
                         </div>
                         <div class="p-6 text-center bg-white dark:bg-white/5">
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-brand-600 transition-colors">
-                                {{ $member['name'] }}
+                                {{ $member->name[app()->getLocale()] ?? $member->name['en'] }}
                             </h3>
                             <p class="text-brand-600 dark:text-brand-400 text-sm font-medium">
-                                {{ __($member['role_key']) }}
+                                {{ $member->role[app()->getLocale()] ?? $member->role['en'] }}
                             </p>
                         </div>
                     </div>

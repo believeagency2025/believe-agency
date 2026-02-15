@@ -739,4 +739,12 @@ return [
     'profile_intro' => 'We created a comprehensive company profile design for Kenze-Capital, a financial services company. The profile showcases their corporate identity, business capabilities, services, and achievements in a professional and visually appealing format that builds trust and credibility with potential clients and partners.',
     'profile_gallery' => 'Company Profile Gallery',
     'profile_breadcrumb_title' => 'Company Profile',
+
+    'clients' => [
+        'page_title' => 'Our Clients',
+        'title' => 'Our Clients',
+        'subtitle' => 'Trusted by companies across the region for our digital expertise',
+        'breadcrumb' => 'Clients',
+        'view_all' => 'View All Clients',
+    ],
 ];

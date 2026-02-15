@@ -1,65 +1,90 @@
 @extends('layouts.admin')
 
-@section('header_title', 'Team Members')
-@section('header_subtitle', 'Manage your team')
+@section('title', __('admin.team') . ' ' . __('admin.management'))
+@section('page_title', __('admin.team'))
 
 @section('content')
-<div class="glass-card rounded-3xl overflow-hidden p-8">
-    <div class="flex items-center justify-between mb-8">
+<div class="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
+    <div class="p-6 border-b border-slate-200 dark:border-slate-700 flex flex-wrap items-center justify-between gap-4">
         <div>
-            <h3 class="text-lg font-bold text-gray-900 dark:text-white">Our Team</h3>
-            <p class="text-sm text-gray-500">Manage team members and roles</p>
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">{{ __('admin.all_members') }}</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">{{ __('admin.management') }}</p>
         </div>
-        <button class="bg-brand-500 hover:bg-brand-600 text-white px-6 py-2 rounded-xl font-bold transition-all flex items-center gap-2">
-            <i class="fas fa-plus"></i> Add Team Member
-        </button>
+        <a href="{{ route('admin.team.create') }}" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white rounded-xl font-bold transition-all shadow-lg shadow-brand-500/20 flex items-center gap-2">
+            <i class="fas fa-plus text-xs"></i>
+            {{ __('admin.add') }}
+        </a>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Team Member Card -->
-        <div class="glass border border-gray-200 dark:border-white/5 rounded-2xl p-6 relative group overflow-hidden">
-            <div class="absolute inset-0 bg-brand-500/0 group-hover:bg-brand-500/5 transition-colors"></div>
-            <div class="flex flex-col items-center text-center relative z-10">
-                <div class="w-24 h-24 rounded-full bg-gray-200 dark:bg-slate-700 mb-4 overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl">
-                    <img src="https://via.placeholder.com/150" alt="Team Member" class="w-full h-full object-cover">
-                </div>
-                <h3 class="text-lg font-bold">John Doe</h3>
-                <p class="text-brand-500 text-sm font-medium mb-4">CEO & Founder</p>
-                <div class="flex gap-3">
-                    <button class="p-2 bg-gray-100 dark:bg-white/10 rounded-full text-gray-500 dark:text-gray-400 hover:bg-brand-500 hover:text-white transition-all">
-                        <i class="fab fa-linkedin-in text-sm"></i>
-                    </button>
-                    <button class="p-2 bg-gray-100 dark:bg-white/10 rounded-full text-gray-500 dark:text-gray-400 hover:bg-brand-500 hover:text-white transition-all">
-                        <i class="fab fa-twitter text-sm"></i>
-                    </button>
-                    <button class="p-2 bg-gray-100 dark:bg-white/10 rounded-full text-gray-500 dark:text-gray-400 hover:bg-red-500 hover:text-white transition-all">
-                        <i class="fas fa-trash text-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="glass border border-gray-200 dark:border-white/5 rounded-2xl p-6 relative group overflow-hidden">
-             <div class="absolute inset-0 bg-brand-500/0 group-hover:bg-brand-500/5 transition-colors"></div>
-            <div class="flex flex-col items-center text-center relative z-10">
-                <div class="w-24 h-24 rounded-full bg-gray-200 dark:bg-slate-700 mb-4 overflow-hidden border-4 border-white dark:border-slate-800 shadow-xl">
-                     <img src="https://via.placeholder.com/150" alt="Team Member" class="w-full h-full object-cover">
-                </div>
-                <h3 class="text-lg font-bold">Jane Smith</h3>
-                <p class="text-brand-500 text-sm font-medium mb-4">Lead Designer</p>
-                 <div class="flex gap-3">
-                    <button class="p-2 bg-gray-100 dark:bg-white/10 rounded-full text-gray-500 dark:text-gray-400 hover:bg-brand-500 hover:text-white transition-all">
-                        <i class="fab fa-linkedin-in text-sm"></i>
-                    </button>
-                    <button class="p-2 bg-gray-100 dark:bg-white/10 rounded-full text-gray-500 dark:text-gray-400 hover:bg-brand-500 hover:text-white transition-all">
-                        <i class="fab fa-dribbble text-sm"></i>
-                    </button>
-                    <button class="p-2 bg-gray-100 dark:bg-white/10 rounded-full text-gray-500 dark:text-gray-400 hover:bg-red-500 hover:text-white transition-all">
-                        <i class="fas fa-trash text-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+    <div class="overflow-x-auto">
+        <table class="w-full text-start border-collapse">
+            <thead>
+                <tr class="bg-slate-50 dark:bg-slate-900/50">
+                    <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{{ __('admin.team') }}</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{{ __('admin.role') }}</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{{ __('admin.status') }}</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">{{ __('admin.order') }}</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider text-end">{{ __('admin.actions') }}</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-200 dark:divide-slate-700">
+                @forelse($members as $member)
+                <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/25 transition-colors">
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-slate-100 dark:bg-slate-900 rounded-xl overflow-hidden shrink-0 border border-slate-200 dark:border-slate-700">
+                                @if($member->image)
+                                    <img src="{{ asset('storage/' . $member->image) }}" alt="" class="w-full h-full object-cover">
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center text-slate-400 text-[10px]">No Img</div>
+                                @endif
+                            </div>
+                            <div>
+                                <p class="font-bold text-slate-900 dark:text-white text-sm">{{ $member->name[app()->getLocale()] ?? $member->name['en'] }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="text-sm font-medium text-slate-600 dark:text-slate-400">
+                            {{ $member->role[app()->getLocale()] ?? $member->role['en'] }}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4">
+                        @if($member->is_active)
+                            <span class="px-2 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase tracking-wider">{{ __('admin.active') }}</span>
+@else
+                            <span class="px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-500 text-[10px] font-bold uppercase tracking-wider">{{ __('admin.inactive') }}</span>
+                        @endif
+                    </td>
+                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400">
+                        {{ $member->order }}
+                    </td>
+                    <td class="px-6 py-4 text-end">
+                        <div class="flex items-center justify-end gap-2">
+                            <a href="{{ route('admin.team.edit', $member) }}" class="w-8 h-8 rounded-lg flex items-center justify-center text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-500/10 transition-all">
+                                <i class="fas fa-edit text-sm"></i>
+                            </a>
+                            <form action="{{ route('admin.team.destroy', $member) }}" method="POST">
+                                @csrf @method('DELETE')
+                                <button type="submit" class="w-8 h-8 rounded-lg flex items-center justify-center text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 transition-all">
+                                    <i class="fas fa-trash-alt text-sm"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="5" class="px-6 py-12 text-center text-slate-500 dark:text-slate-400">
+                        <div class="flex flex-col items-center gap-3 text-slate-300 dark:text-slate-600">
+                            <i class="fas fa-users text-4xl"></i>
+                            <p class="font-medium text-sm text-slate-500">{{ __('admin.no_data') }}</p>
+                        </div>
+                    </td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
 </div>
 @endsection

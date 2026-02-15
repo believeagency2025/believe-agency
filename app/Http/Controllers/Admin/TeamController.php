@@ -3,63 +3,93 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\TeamMember;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class TeamController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use ImageUploadTrait;
+
     public function index()
     {
-        return view('admin.team.index');
+        $members = TeamMember::orderBy('order')->get();
+        return view('admin.team.index', compact('members'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('admin.team.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name.en' => 'required|string|max:255',
+            'name.ar' => 'required|string|max:255',
+            'role.en' => 'required|string|max:255',
+            'role.ar' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'bio.en' => 'nullable|string',
+            'bio.ar' => 'nullable|string',
+            'social_links' => 'nullable|array',
+            'order' => 'required|integer',
+            'is_active' => 'boolean',
+        ]);
+
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadImageWebp($request->file('image'), 'team');
+        }
+
+        $data['is_active'] = $request->has('is_active');
+
+        TeamMember::create($data);
+
+        return redirect()->route('admin.team.index')->with('success', __('admin.success_add'));
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(TeamMember $team)
     {
-        //
+        return view('admin.team.edit', compact('team'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, TeamMember $team)
     {
-        //
+        $data = $request->validate([
+            'name.en' => 'required|string|max:255',
+            'name.ar' => 'required|string|max:255',
+            'role.en' => 'required|string|max:255',
+            'role.ar' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048',
+            'bio.en' => 'nullable|string',
+            'bio.ar' => 'nullable|string',
+            'social_links' => 'nullable|array',
+            'order' => 'required|integer',
+            'is_active' => 'boolean',
+        ]);
+
+        if ($request->hasFile('image')) {
+            if ($team->image) {
+                Storage::disk('public')->delete($team->image);
+            }
+            $data['image'] = $this->uploadImageWebp($request->file('image'), 'team');
+        }
+
+        $data['is_active'] = $request->has('is_active');
+
+        $team->update($data);
+
+        return redirect()->route('admin.team.index')->with('success', __('admin.success_update'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(TeamMember $team)
     {
-        //
-    }
+        if ($team->image) {
+            Storage::disk('public')->delete($team->image);
+        }
+        $team->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('admin.team.index')->with('success', __('admin.success_delete'));
     }
 }

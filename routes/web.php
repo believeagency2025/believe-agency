@@ -20,18 +20,7 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/team', 'team')->name('team');
     // Services specific pages
-    Route::get('/branding', 'branding')->name('branding');
-    Route::get('/marketing', 'marketing')->name('marketing');
-    Route::get('/web-design', 'webDesign')->name('web-design');
-    Route::get('/apps-development', 'appDevelopment')->name('apps-development');
-    Route::get('/ecommerce', 'ecommerce')->name('ecommerce');
-    // Tools
-    Route::get('/software-tools', 'softwareTools')->name('software-tools');
-    // Project Details
-    Route::get('/project-details', 'projectDetails')->name('project-details');
-    // Legal
-    Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
-    Route::get('/terms', 'terms')->name('terms');
+    Route::get('/services/{slug}', 'serviceDetail')->name('service.detail');
 });
 Route::get('lang/{locale}', [LocaleController::class, 'switch'])->name('lang.switch');
 

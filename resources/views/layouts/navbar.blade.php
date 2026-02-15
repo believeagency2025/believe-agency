@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
             <!-- Logo -->
-            <div class="flex-shrink-0 flex items-center gap-2">
+            <div class="shrink-0 flex items-center gap-2">
                 <a href="{{ route('home') }}" class="flex items-center gap-2">
                     <img src="{{ asset('img/dark.png') }}" alt="Believe Agency" class="h-12 md:h-20 w-auto transition-all duration-300 hover:scale-105 block dark:hidden">
                     <img src="{{ asset('img/light.png') }}" alt="Believe Agency" class="h-12 md:h-20 w-auto transition-all duration-300 hover:scale-105 hidden dark:block">
@@ -23,65 +23,21 @@
                         <!-- Dropdown Menu -->
                         <div class="absolute top-full left-0 pt-2 w-72 transform origin-top-left transition-all duration-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 z-50">
                             <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl ring-1 ring-black/5 dark:ring-white/10 overflow-hidden backdrop-blur-xl p-2">
-                                <a href="{{ route('web-design') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors">
-                                    <div class="w-10 h-10 rounded-lg bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center text-brand-600 dark:text-brand-400 group-hover/item:bg-brand-200 dark:group-hover/item:bg-brand-800/50 transition-colors">
-                                        <i class="fas fa-laptop-code"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-sm font-semibold text-gray-900 dark:text-white">{{ __('site.nav.web_design') }}</div>
-                                        <div class="text-xs text-gray-500 dark:text-gray-400">Modern & Responsive</div>
-                                    </div>
-                                </a>
-
-                                <a href="{{ route('apps-development') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-accent-50 dark:hover:bg-accent-900/20 transition-colors">
-                                    <div class="w-10 h-10 rounded-lg bg-accent-100 dark:bg-accent-900/50 flex items-center justify-center text-accent-600 dark:text-accent-400 group-hover/item:bg-accent-200 dark:group-hover/item:bg-accent-800/50 transition-colors">
-                                        <i class="fas fa-mobile-alt"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-sm font-semibold text-gray-900 dark:text-white">{{ __('site.nav.apps_development') }}</div>
-                                        <div class="text-xs text-gray-500 dark:text-gray-400">iOS & Android</div>
-                                    </div>
-                                </a>
-
-                                <a href="{{ route('branding') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-pink-50 dark:hover:bg-pink-900/20 transition-colors">
-                                    <div class="w-10 h-10 rounded-lg bg-pink-100 dark:bg-pink-900/50 flex items-center justify-center text-pink-600 dark:text-pink-400 group-hover/item:bg-pink-200 dark:group-hover/item:bg-pink-800/50 transition-colors">
-                                        <i class="fas fa-paint-brush"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-sm font-semibold text-gray-900 dark:text-white">{{ __('site.nav.branding') }}</div>
-                                        <div class="text-xs text-gray-500 dark:text-gray-400">Identity & Design</div>
-                                    </div>
-                                </a>
-
-                                <a href="{{ route('marketing') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors">
-                                    <div class="w-10 h-10 rounded-lg bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-blue-600 dark:text-blue-400 group-hover/item:bg-blue-200 dark:group-hover/item:bg-blue-800/50 transition-colors">
-                                        <i class="fas fa-bullhorn"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-sm font-semibold text-gray-900 dark:text-white">{{ __('site.nav.digital_marketing') }}</div>
-                                        <div class="text-xs text-gray-500 dark:text-gray-400">SEO & Social Media</div>
-                                    </div>
-                                </a>
-
-                                <a href="{{ route('ecommerce') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors">
-                                    <div class="w-10 h-10 rounded-lg bg-green-100 dark:bg-green-900/50 flex items-center justify-center text-green-600 dark:text-green-400 group-hover/item:bg-green-200 dark:group-hover/item:bg-green-800/50 transition-colors">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-sm font-semibold text-gray-900 dark:text-white">{{ __('site.nav.ecommerce') }}</div>
-                                        <div class="text-xs text-gray-500 dark:text-gray-400">Online Stores</div>
-                                    </div>
-                                </a>
-
-                                <a href="{{ route('software-tools') }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors">
-                                    <div class="w-10 h-10 rounded-lg bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center text-purple-600 dark:text-purple-400 group-hover/item:bg-purple-200 dark:group-hover/item:bg-purple-800/50 transition-colors">
-                                        <i class="fas fa-tools"></i>
-                                    </div>
-                                    <div>
-                                        <div class="text-sm font-semibold text-gray-900 dark:text-white">{{ __('site.nav.software_tools') }}</div>
-                                        <div class="text-xs text-gray-500 dark:text-gray-400">ERP & CRM</div>
-                                    </div>
-                                </a>
+                                @foreach($services_nav as $s_nav)
+                                    @php
+                                        $s_title = $s_nav->title[app()->getLocale()] ?? $s_nav->title['en'] ?? '';
+                                        $s_subtitle = $s_nav->subtitle[app()->getLocale()] ?? $s_nav->subtitle['en'] ?? '';
+                                    @endphp
+                                    <a href="{{ route('service.detail', $s_nav->slug) }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors">
+                                        <div class="w-10 h-10 rounded-lg bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center text-brand-600 dark:text-brand-400 group-hover/item:bg-brand-200 dark:group-hover/item:bg-brand-800/50 transition-colors">
+                                            <i class="{{ $s_nav->icon_class ?? 'fas fa-laptop-code' }}"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-semibold text-gray-900 dark:text-white">{{ $s_title }}</div>
+                                            <div class="text-xs text-gray-500 dark:text-gray-400">{{ $s_subtitle }}</div>
+                                        </div>
+                                    </a>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -138,12 +94,25 @@
                 <span>{{ __('site.nav.about') }}</span>
             </a>
 
-            <a href="{{ route('services') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
-                <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
-                    <i class="fas fa-briefcase"></i>
+            <div class="space-y-1">
+                <a href="{{ route('services') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+                    <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <span>{{ __('site.nav.services') }}</span>
+                </a>
+                <div class="grid grid-cols-2 gap-2 px-4 pb-2">
+                    @foreach($services_nav as $s_nav)
+                        @php
+                            $s_title = $s_nav->title[app()->getLocale()] ?? $s_nav->title['en'] ?? '';
+                        @endphp
+                        <a href="{{ route('service.detail', $s_nav->slug) }}" class="flex items-center gap-2 p-2 rounded-xl bg-gray-50/50 dark:bg-white/5 text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-white transition-colors">
+                            <i class="{{ $s_nav->icon_class ?? 'fas fa-chevron-right' }} w-4 text-brand-500"></i>
+                            <span class="truncate">{{ $s_title }}</span>
+                        </a>
+                    @endforeach
                 </div>
-                <span>{{ __('site.nav.services') }}</span>
-            </a>
+            </div>
 
             <a href="{{ route('projects') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
                 <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">

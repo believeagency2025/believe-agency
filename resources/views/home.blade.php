@@ -257,114 +257,29 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Service 1 -->
-                <div class="group glass-card bg-white dark:bg-slate-800 p-8 rounded-3xl hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
-                    data-aos="fade-up" data-aos-delay="100">
-                    <div
-                        class="w-14 h-14 bg-brand-100 dark:bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-600 dark:text-brand-400 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-palette"></i>
+                @foreach($services_nav as $index => $s)
+                    @php
+                        $s_title = $s->title[app()->getLocale()] ?? $s->title['en'] ?? '';
+                        $s_desc = $s->description[app()->getLocale()] ?? $s->description['en'] ?? '';
+                    @endphp
+                    <div class="group glass-card bg-white dark:bg-slate-800 p-8 rounded-3xl hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
+                        data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
+                        <div class="w-14 h-14 bg-brand-100 dark:bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-600 dark:text-brand-400 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="{{ $s->icon_class ?? 'fas fa-briefcase' }}"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-300 transition-colors">
+                            {{ $s_title }}
+                        </h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
+                            {{ Str::limit($s_desc, 120) }}
+                        </p>
+                        <a href="{{ route('service.detail', $s->slug) }}"
+                            class="text-sm font-semibold text-brand-600 dark:text-white flex items-center gap-2 group-hover:gap-3 transition-all">
+                            <span>{{ __('site.services.learn_more') }}</span>
+                            <i class="fas fa-arrow-right text-brand-600 dark:text-brand-500"></i>
+                        </a>
                     </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-300 transition-colors">
-                        {{ __('site.services.branding.title') }}</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
-                        {{ __('site.services.branding.desc') }}</p>
-                    <a href="{{ url('branding') }}"
-                        class="text-sm font-semibold text-brand-600 dark:text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                        <span>{{ __('site.services.learn_more') }}</span> <i
-                            class="fas fa-arrow-right text-brand-600 dark:text-brand-500"></i>
-                    </a>
-                </div>
-
-                <!-- Service 2 -->
-                <div class="group glass-card bg-white dark:bg-slate-800 p-8 rounded-3xl hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
-                    data-aos="fade-up" data-aos-delay="200">
-                    <div
-                        class="w-14 h-14 bg-accent-100 dark:bg-accent-500/10 rounded-2xl flex items-center justify-center text-accent-600 dark:text-accent-400 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-accent-600 dark:group-hover:text-accent-300 transition-colors">
-                        {{ __('site.services.web.title') }}</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
-                        {{ __('site.services.web.desc') }}</p>
-                    <a href="{{ url('web-design') }}"
-                        class="text-sm font-semibold text-accent-600 dark:text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                        <span>{{ __('site.services.learn_more') }}</span> <i
-                            class="fas fa-arrow-right text-accent-600 dark:text-accent-500"></i>
-                    </a>
-                </div>
-
-                <!-- Service 3 -->
-                <div class="group glass-card bg-white dark:bg-slate-800 p-8 rounded-3xl hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
-                    data-aos="fade-up" data-aos-delay="300">
-                    <div
-                        class="w-14 h-14 bg-pink-100 dark:bg-pink-500/10 rounded-2xl flex items-center justify-center text-pink-600 dark:text-pink-400 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-pink-600 dark:group-hover:text-pink-300 transition-colors">
-                        {{ __('site.services.app.title') }}</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
-                        {{ __('site.services.app.desc') }}
-                    </p>
-                    <a href="{{ url('apps-development') }}"
-                        class="text-sm font-semibold text-pink-600 dark:text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                        <span>{{ __('site.services.learn_more') }}</span> <i
-                            class="fas fa-arrow-right text-pink-600 dark:text-pink-500"></i>
-                    </a>
-                </div>
-
-                <!-- Service 4 -->
-                <div class="group glass-card bg-white dark:bg-slate-800 p-8 rounded-3xl hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
-                    data-aos="fade-up" data-aos-delay="400">
-                    <div
-                        class="w-14 h-14 bg-green-100 dark:bg-green-500/10 rounded-2xl flex items-center justify-center text-green-600 dark:text-green-400 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-bullhorn"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-green-600 dark:group-hover:text-green-300 transition-colors">
-                        {{ __('site.services.marketing.title') }}</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
-                        {{ __('site.services.marketing.desc') }}</p>
-                    <a href="{{ url('marketing') }}"
-                        class="text-sm font-semibold text-green-600 dark:text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                        <span>{{ __('site.services.learn_more') }}</span> <i
-                            class="fas fa-arrow-right text-green-600 dark:text-green-500"></i>
-                    </a>
-                </div>
-
-                <!-- Service 5 -->
-                <div class="group glass-card bg-white dark:bg-slate-800 p-8 rounded-3xl hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
-                    data-aos="fade-up" data-aos-delay="500">
-                    <div
-                        class="w-14 h-14 bg-yellow-100 dark:bg-yellow-500/10 rounded-2xl flex items-center justify-center text-yellow-600 dark:text-yellow-400 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-yellow-600 dark:group-hover:text-yellow-300 transition-colors">
-                        {{ __('site.services.ecommerce.title') }}</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
-                        {{ __('site.services.ecommerce.desc') }}</p>
-                    <a href="{{ url('ecommerce') }}"
-                        class="text-sm font-semibold text-yellow-600 dark:text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                        <span>{{ __('site.services.learn_more') }}</span> <i
-                            class="fas fa-arrow-right text-yellow-600 dark:text-yellow-500"></i>
-                    </a>
-                </div>
-
-                <!-- Service 6 -->
-                <div class="group glass-card bg-white dark:bg-slate-800 p-8 rounded-3xl hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
-                    data-aos="fade-up" data-aos-delay="600">
-                    <div
-                        class="w-14 h-14 bg-teal-100 dark:bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-600 dark:text-teal-400 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-teal-600 dark:group-hover:text-teal-300 transition-colors">
-                        {{ __('site.services.software.title') }}</h3>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
-                        {{ __('site.services.software.desc') }}</p>
-                    <a href="{{ url('software-tools') }}"
-                        class="text-sm font-semibold text-teal-600 dark:text-white flex items-center gap-2 group-hover:gap-3 transition-all">
-                        <span>{{ __('site.services.learn_more') }}</span> <i
-                            class="fas fa-arrow-right text-teal-500"></i>
-                    </a>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -379,20 +294,20 @@
                     {!! __('site.projects.title') !!}
                 </h2>
 
-                <!-- Filter Buttons -->
-                <div class="flex flex-wrap justify-center gap-2 mt-8">
-                    <button class="filter-btn px-6 py-2.5 rounded-full bg-brand-500 text-white text-sm font-medium shadow-lg shadow-brand-500/20 transition-all hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white" data-filter="all">{{ __('site.projects.filter_all') }}</button>
-                    <button
-                        class="filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="web">{{ __('site.projects.filter_web') }}</button>
-                    <button
-                        class="filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="app">{{ __('site.projects.filter_app') }}</button>
-                    <button
-                        class="filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="branding">{{ __('site.projects.filter_branding') }}</button>
-                    <button
-                        class="filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="marketing">{{ __('site.projects.filter_marketing') }}</button>
-                    <button
-                        class="filter-btn px-6 py-2.5 rounded-full glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-medium transition-all shadow-sm hover:shadow-brand-500/20" data-filter="ecommerce">{{ __('site.projects.filter_ecommerce') }}</button>
-                </div>
+            <!-- Filters -->
+            <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-12 mt-12" data-aos="fade-up" data-aos-delay="100">
+                <button
+                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="web">{{ __('site.projects.filter_web') }}</button>
+                <button
+                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="app">{{ __('site.projects.filter_app') }}</button>
+                <button
+                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20"  style="font-size:10px !important;" data-filter="branding">{{ __('site.projects.filter_branding') }}</button>
+                <button
+                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="marketing">{{ __('site.projects.filter_marketing') }}</button>
+                <button
+                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="ecommerce">{{ __('site.projects.filter_ecommerce') }}</button>
+                <button class="projects-filter-btn w-full px-4 py-2.5 rounded-xl bg-brand-500 text-white text-sm font-semibold shadow-lg shadow-brand-500/20 transition-all hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white" style="font-size:10px !important;" data-filter="all">{{ __('site.services.software.title') }}</button>
+            </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -576,67 +491,26 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Testimonial 1 -->
+                @foreach($testimonials as $index => $testimonial)
                 <div class="glass-card bg-white dark:bg-white/5 p-8 rounded-3xl relative border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
-                    data-aos="fade-up" data-aos-delay="100">
+                    data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                     <i class="fas fa-quote-right absolute top-8 right-8 text-4xl text-gray-200 dark:text-white/5"></i>
                     <div class="flex text-yellow-500 text-sm mb-6">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
+                        @for($j=0; $j < $testimonial->rating; $j++) <i class="fas fa-star"></i> @endfor
                     </div>
                     <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                        {{ __('site.testimonials.testimonial1.text') }}</p>
+                        {{ $testimonial->content[app()->getLocale()] ?? $testimonial->content['en'] }}</p>
                     <div class="flex items-center gap-4">
-                        <img src="{{ asset('img/testimonial-1.webp') }}" alt="Client"
+                        <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->client_name[app()->getLocale()] ?? $testimonial->client_name['en'] }}"
                             class="w-12 h-12 rounded-full object-cover ring-2 ring-brand-500/50">
                         <div>
                              <h4 class="font-bold text-gray-900 dark:text-white text-sm">
-                                {{ __('site.testimonials.testimonial1.name') }}</h4>
-                            <p class="text-xs text-brand-600 dark:text-brand-400">{{ __('site.testimonials.testimonial1.role') }}</p>
+                                {{ $testimonial->client_name[app()->getLocale()] ?? $testimonial->client_name['en'] }}</h4>
+                            <p class="text-xs text-brand-600 dark:text-brand-400">{{ $testimonial->client_role[app()->getLocale()] ?? $testimonial->client_role['en'] }}</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- Testimonial 2 -->
-                <div class="glass-card bg-white dark:bg-white/5 p-8 rounded-3xl relative border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
-                    data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-quote-right absolute top-8 right-8 text-4xl text-gray-200 dark:text-white/5"></i>
-                    <div class="flex text-yellow-500 text-sm mb-6">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                        {{ __('site.testimonials.testimonial2.text') }}</p>
-                    <div class="flex items-center gap-4">
-                        <img src="{{ asset('img/testimonial-2.webp') }}" alt="Client"
-                            class="w-12 h-12 rounded-full object-cover ring-2 ring-brand-500/50">
-                        <div>
-                            <h4 class="font-bold text-gray-900 dark:text-white text-sm">
-                                {{ __('site.testimonials.testimonial2.name') }}</h4>
-                            <p class="text-xs text-brand-600 dark:text-brand-400">{{ __('site.testimonials.testimonial2.role') }}</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial 3 -->
-                <div class="glass-card bg-white dark:bg-white/5 p-8 rounded-3xl relative border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
-                    data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-quote-right absolute top-8 right-8 text-4xl text-gray-200 dark:text-white/5"></i>
-                    <div class="flex text-yellow-500 text-sm mb-6">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                            class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">{{ __('site.testimonials.testimonial3.text') }}</p>
-                    <div class="flex items-center gap-4">
-                        <img src="{{ asset('img/testimonial-3.webp') }}" alt="Client"
-                            class="w-12 h-12 rounded-full object-cover ring-2 ring-brand-500/50">
-                        <div>
-                            <h4 class="font-bold text-gray-900 dark:text-white text-sm">
-                                {{ __('site.testimonials.testimonial3.name') }}</h4>
-                            <p class="text-xs text-brand-600 dark:text-brand-400">{{ __('site.testimonials.testimonial3.role') }}</p>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -652,36 +526,12 @@
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center opacity-60 dark:opacity-40">
-                <!-- Client 1 -->
+                @foreach($clients as $index => $client)
                 <div class="flex justify-center p-4 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="100">
-                    <img src="{{ asset('img/logo100.webp') }}" alt="Client 1" class="h-12 w-auto object-contain">
+                    data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
+                    <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}" class="h-12 w-auto object-contain">
                 </div>
-                <!-- Client 2 -->
-                <div class="flex justify-center p-4 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="200">
-                    <img src="{{ asset('img/logo100.webp') }}" alt="Client 2" class="h-12 w-auto object-contain">
-                </div>
-                <!-- Client 3 -->
-                <div class="flex justify-center p-4 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="300">
-                    <img src="{{ asset('img/logo100.webp') }}" alt="Client 3" class="h-12 w-auto object-contain">
-                </div>
-                <!-- Client 4 -->
-                <div class="flex justify-center p-4 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="400">
-                    <img src="{{ asset('img/logo100.webp') }}" alt="Client 4" class="h-12 w-auto object-contain">
-                </div>
-                <!-- Client 5 -->
-                <div class="flex justify-center p-4 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="500">
-                    <img src="{{ asset('img/logo100.webp') }}" alt="Client 5" class="h-12 w-auto object-contain">
-                </div>
-                <!-- Client 6 -->
-                <div class="flex justify-center p-4 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                    data-aos="fade-up" data-aos-delay="600">
-                    <img src="{{ asset('img/logo100.webp') }}" alt="Client 6" class="h-12 w-auto object-contain">
-                </div>
+                @endforeach
             </div>
 
             <div class="mt-16 text-center" data-aos="fade-up">
@@ -801,7 +651,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Filter Logic
-        const filterBtns = document.querySelectorAll('.filter-btn');
+        const filterBtns = document.querySelectorAll('.projects-filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
 
         if(filterBtns.length > 0) {
@@ -811,10 +661,10 @@
 
                     // Update button styles
                     filterBtns.forEach(b => {
-                        b.classList.remove('bg-brand-500', 'text-white', 'shadow-md');
+                        b.classList.remove('bg-brand-500', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
                         b.classList.add('glass', 'bg-white/50', 'dark:bg-white/5', 'text-gray-600', 'dark:text-gray-300');
                     });
-                    btn.classList.add('bg-brand-500', 'text-white', 'shadow-md');
+                    btn.classList.add('bg-brand-500', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
                     btn.classList.remove('glass', 'bg-white/50', 'dark:bg-white/5', 'text-gray-600', 'dark:text-gray-300');
 
                     // Filter projects

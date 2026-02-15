@@ -31,16 +31,16 @@
             <div>
                 <h4 class="text-gray-900 dark:text-white font-bold mb-6">{{ __('site.footer.services') }}</h4>
                 <ul class="space-y-3 text-gray-600 dark:text-gray-400 text-sm">
-                    <li><a href="{{ url('/web-design') }}"
-                            class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">{{ __('site.footer.links.web') }}</a></li>
-                    <li><a href="{{ url('/apps-development') }}"
-                            class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">{{ __('site.footer.links.app') }}</a></li>
-                    <li><a href="{{ url('/branding') }}"
-                            class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">{{ __('site.footer.links.branding') }}</a></li>
-                    <li><a href="{{ url('/marketing') }}"
-                            class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">{{ __('site.footer.links.marketing') }}</a></li>
-                    <li><a href="{{ url('/ecommerce') }}" class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">{{ __('site.nav.ecommerce') }}</a></li>
-                    <li><a href="{{ url('/software-tools') }}" class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">{{ __('site.nav.software_tools') }}</a></li>
+                    @foreach($services_nav as $s_nav)
+                        @php
+                            $s_title = $s_nav->title[app()->getLocale()] ?? $s_nav->title['en'] ?? '';
+                        @endphp
+                        <li>
+                            <a href="{{ route('service.detail', $s_nav->slug) }}" class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">
+                                {{ $s_title }}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
 
