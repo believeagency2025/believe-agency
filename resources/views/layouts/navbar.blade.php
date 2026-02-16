@@ -108,7 +108,7 @@
                     </div>
                     <span>{{ __('site.nav.services') }}</span>
                 </a>
-                <div class="grid grid-cols-2 gap-2 px-4 pb-2">
+                <div class="grid grid-cols-1 gap-2 px-4 pb-2">
                     @foreach($services_nav as $s_nav)
                         <a href="{{ route('service.detail', $s_nav->slug) }}" class="flex items-center gap-2 p-2 rounded-xl bg-gray-50/50 dark:bg-white/5 text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-white transition-colors">
                             <i class="{{ $s_nav->icon_class ?? 'fas fa-chevron-right' }} w-4 text-brand-500"></i>

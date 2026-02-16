@@ -7,7 +7,7 @@
                     <img src="{{ asset('img/light.png') }}" alt="Believe Agency" class="h-16 md:h-20 w-auto transition-all duration-300 hover:scale-105 hidden dark:block">
                 </div>
                 <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
-                    {{ $settings['agency_name'] ?? 'Believe' }} <span class="text-brand-500">Agency</span>
+                    Believe <span class="text-brand-500">Agency</span>
                 </h3>
                 <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 font-medium">
                     {{ __('site.footer.desc') }}
