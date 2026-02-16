@@ -21,7 +21,10 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/team', 'team')->name('team');
     // Services specific pages
     Route::get('/services/{slug}', 'serviceDetail')->name('service.detail');
+    Route::get('/project/{slug}', 'projectDetails')->name('project-details');
 });
+
+Route::post('/contact/submit', [\App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
 Route::get('lang/{locale}', [LocaleController::class, 'switch'])->name('lang.switch');
 
 

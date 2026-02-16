@@ -17,6 +17,7 @@
             <thead>
                 <tr class="bg-slate-50 dark:bg-slate-900/50">
                     <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-start">{{ __('admin.sender') }}</th>
+                    <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-start">{{ __('admin.phone_number') }}</th>
                     <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-start">{{ __('admin.subject') }}</th>
                     <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-start">{{ __('admin.date') }}</th>
                     <th class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider text-start">{{ __('admin.status') }}</th>
@@ -31,6 +32,9 @@
                             <p class="font-bold text-slate-900 dark:text-white text-sm whitespace-nowrap">{{ $message->name }}</p>
                             <p class="text-[10px] text-slate-500 whitespace-nowrap">{{ $message->email }}</p>
                         </div>
+                    </td>
+                    <td class="px-6 py-4 text-start">
+                        <p class="text-sm text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap">{{ $message->phone }}</p>
                     </td>
                     <td class="px-6 py-4 text-start">
                         <p class="text-sm text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap">{{ $message->subject }}</p>

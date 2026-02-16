@@ -28,6 +28,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('lang/{locale}', [LocaleController::class, 'switch'])->name('lang.switch');
 
         // Resource Routes
+        Route::delete('projects/images/{image}', [ProjectController::class, 'deleteImage'])->name('projects.images.destroy');
         Route::resource('projects', ProjectController::class);
         Route::resource('services', ServiceController::class);
         Route::resource('clients', ClientController::class);

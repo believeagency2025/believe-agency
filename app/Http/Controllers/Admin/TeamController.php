@@ -34,6 +34,7 @@ class TeamController extends Controller
             'bio.en' => 'nullable|string',
             'bio.ar' => 'nullable|string',
             'social_links' => 'nullable|array',
+            'cv_link' => 'nullable|url',
             'order' => 'required|integer',
             'is_active' => 'boolean',
         ]);
@@ -65,6 +66,7 @@ class TeamController extends Controller
             'bio.en' => 'nullable|string',
             'bio.ar' => 'nullable|string',
             'social_links' => 'nullable|array',
+            'cv_link' => 'nullable|url',
             'order' => 'required|integer',
             'is_active' => 'boolean',
         ]);

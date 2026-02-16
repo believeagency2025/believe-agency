@@ -2,37 +2,32 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 use App\Traits\Translatable;
 
-class Service extends Model
+class ProjectFeature extends Model
 {
-    use Translatable;
+    use HasFactory, Translatable;
+
     protected $fillable = [
+        'project_id',
+        'icon',
         'title',
-        'slug',
-        'subtitle',
-        'icon_class',
         'description',
-        'content',
-        'features',
-        'process',
-        'why_choose_us',
-        'image',
         'order',
-        'is_active',
     ];
 
     protected $casts = [
-        'title' => 'json',
-        'subtitle' => 'json',
-        'description' => 'json',
-        'content' => 'json',
-        'features' => 'json',
-        'process' => 'json',
-        'why_choose_us' => 'json',
-        'is_active' => 'boolean',
+        'title' => 'array',
+        'description' => 'array',
     ];
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
 
     // Accessors for current locale
     public function getTitleAttribute($value)
@@ -41,14 +36,6 @@ class Service extends Model
         if (!is_array($titles)) return '';
         $locale = app()->getLocale();
         return $titles[$locale] ?? $titles['en'] ?? '';
-    }
-
-    public function getSubtitleAttribute($value)
-    {
-        $subtitles = is_array($value) ? $value : json_decode($value, true);
-        if (!is_array($subtitles)) return '';
-        $locale = app()->getLocale();
-        return $subtitles[$locale] ?? $subtitles['en'] ?? '';
     }
 
     public function getDescriptionAttribute($value)

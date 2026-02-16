@@ -40,14 +40,14 @@
                                 @endif
                             </div>
                             <div>
-                                <p class="font-bold text-slate-900 dark:text-white text-sm">{{ $testimonial->client_name[app()->getLocale()] ?? $testimonial->client_name['en'] }}</p>
-                                <p class="text-[10px] text-slate-500">{{ $testimonial->client_role[app()->getLocale()] ?? $testimonial->client_role['en'] }}</p>
+                                <p class="font-bold text-slate-900 dark:text-white text-sm">{{ $testimonial->client_name }}</p>
+                                <p class="text-[10px] text-slate-500">{{ $testimonial->client_role }}</p>
                             </div>
                         </div>
                     </td>
                     <td class="px-6 py-4 text-start max-w-xs">
                         <p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
-                            {{ $testimonial->content[app()->getLocale()] ?? $testimonial->content['en'] }}
+                            {{ $testimonial->content }}
                         </p>
                     </td>
                     <td class="px-6 py-4 text-start">

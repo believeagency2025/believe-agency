@@ -330,17 +330,31 @@
         if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
         if (themeToggleMobileBtn) themeToggleMobileBtn.addEventListener('click', toggleTheme);
 
-        // Loader Logic
-        window.addEventListener('load', () => {
+        // Loader Logic - Hide on page load
+        const hideLoader = () => {
             const loader = document.getElementById('page-loader');
-            if (loader) {
+            if (loader && loader.style.display !== 'none') {
                 loader.classList.add('opacity-0', 'invisible');
                 // Remove from DOM after transition
                 setTimeout(() => {
                     loader.style.display = 'none';
                 }, 700);
             }
-        });
+        };
+
+        // Try to hide on DOMContentLoaded (faster)
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', hideLoader);
+        } else {
+            // DOM already loaded
+            hideLoader();
+        }
+
+        // Also hide on window load (as backup)
+        window.addEventListener('load', hideLoader);
+
+        // Failsafe: Force hide after 3 seconds maximum
+        setTimeout(hideLoader, 3000);
     </script>
 
     @stack('scripts')

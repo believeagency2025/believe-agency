@@ -24,17 +24,24 @@
                         <div class="absolute top-full left-0 pt-2 w-72 transform origin-top-left transition-all duration-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-2 group-hover:translate-y-0 z-50">
                             <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-xl ring-1 ring-black/5 dark:ring-white/10 overflow-hidden backdrop-blur-xl p-2">
                                 @foreach($services_nav as $s_nav)
-                                    @php
-                                        $s_title = $s_nav->title[app()->getLocale()] ?? $s_nav->title['en'] ?? '';
-                                        $s_subtitle = $s_nav->subtitle[app()->getLocale()] ?? $s_nav->subtitle['en'] ?? '';
-                                    @endphp
-                                    <a href="{{ route('service.detail', $s_nav->slug) }}" class="group/item flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-brand-50 dark:hover:bg-brand-900/20 transition-colors">
-                                        <div class="w-10 h-10 rounded-lg bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center text-brand-600 dark:text-brand-400 group-hover/item:bg-brand-200 dark:group-hover/item:bg-brand-800/50 transition-colors">
-                                            <i class="{{ $s_nav->icon_class ?? 'fas fa-laptop-code' }}"></i>
+                                    <a href="{{ route('service.detail', $s_nav->slug) }}"
+                                    class="group flex items-start gap-4 p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all duration-300">
+
+                                        {{-- صندوق الأيقونة --}}
+                                        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400 group-hover:bg-brand-600 group-hover:text-white transition-colors duration-300">
+                                            <i class="{{ $s_nav->icon_class ?? 'fas fa-laptop-code' }} text-lg"></i>
                                         </div>
-                                        <div>
-                                            <div class="text-sm font-semibold text-gray-900 dark:text-white">{{ $s_title }}</div>
-                                            <div class="text-xs text-gray-500 dark:text-gray-400">{{ $s_subtitle }}</div>
+
+                                        {{-- النصوص --}}
+                                        <div class="flex-1">
+                                            <h6 class="block font-semibold text-gray-900 dark:text-white text-sm leading-tight group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+                                                {{ $s_nav->title }}
+                                            </h6>
+                                            @if($s_nav->subtitle)
+                                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-400 line-clamp-1">
+                                                    {{ $s_nav->subtitle }}
+                                                </p>
+                                            @endif
                                         </div>
                                     </a>
                                 @endforeach
@@ -103,12 +110,9 @@
                 </a>
                 <div class="grid grid-cols-2 gap-2 px-4 pb-2">
                     @foreach($services_nav as $s_nav)
-                        @php
-                            $s_title = $s_nav->title[app()->getLocale()] ?? $s_nav->title['en'] ?? '';
-                        @endphp
                         <a href="{{ route('service.detail', $s_nav->slug) }}" class="flex items-center gap-2 p-2 rounded-xl bg-gray-50/50 dark:bg-white/5 text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-white transition-colors">
                             <i class="{{ $s_nav->icon_class ?? 'fas fa-chevron-right' }} w-4 text-brand-500"></i>
-                            <span class="truncate">{{ $s_title }}</span>
+                            <span class="truncate">{{ $s_nav->title }}</span>
                         </a>
                     @endforeach
                 </div>

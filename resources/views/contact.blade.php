@@ -111,6 +111,7 @@
                     <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
                         {{ __('site.contact.form_title') }}</h2>
                     <form id="contactForm" class="space-y-6">
+                        @csrf
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 {{ __('site.contact.form_name') }} <span class="text-red-500">*</span></label>
@@ -191,12 +192,72 @@
 @endsection
 
 @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // Contact Form Handler
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert("{{ __('site.contact.success_message') }}");
-            this.reset();
+
+            // Check robot verification
+            const robotCheck = document.getElementById('robot_check_contact');
+            if (!robotCheck.checked) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: '{{ __('site.contact.robot_check_required', ['default' => 'Please verify you are not a robot']) }}',
+                    confirmButtonColor: '#6366f1'
+                });
+                return;
+            }
+
+            const form = this;
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.innerHTML;
+
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> {{ __('site.contact.sending', ['default' => 'Sending...']) }}';
+
+            // Prepare form data
+            const formData = new FormData(form);
+
+            // Submit via AJAX
+            fetch('{{ route('contact.submit') }}', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Accept': 'application/json',
+                },
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: '{{ __('site.contact.success_title', ['default' => 'Message Sent!']) }}',
+                        text: data.message,
+                        confirmButtonColor: '#6366f1'
+                    });
+                    form.reset();
+                    robotCheck.checked = false;
+                } else {
+                    throw new Error(data.message || 'An error occurred');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: '{{ __('site.contact.error_title', ['default' => 'Error']) }}',
+                    text: '{{ __('site.contact.error_message', ['default' => 'Failed to send message. Please try again.']) }}',
+                    confirmButtonColor: '#6366f1'
+                });
+            })
+            .finally(() => {
+                // Re-enable button
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalButtonText;
+            });
         });
     </script>
 @endpush

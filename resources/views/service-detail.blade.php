@@ -1,10 +1,9 @@
 @extends('layouts.web')
 
 @php
-    $locale = app()->getLocale();
-    $title = $service->title[$locale] ?? $service->title['en'] ?? '';
-    $subtitle = $service->subtitle[$locale] ?? $service->subtitle['en'] ?? '';
-    $description = $service->description[$locale] ?? $service->description['en'] ?? '';
+    $title = $service->title;
+    $subtitle = $service->subtitle;
+    $description = $service->description;
 @endphp
 
 @section('title', $title)
@@ -80,10 +79,10 @@
                                         </div>
                                         <div>
                                             <h4 class="font-bold text-gray-900 dark:text-white mb-2">
-                                                {{ $feature['title'][$locale] ?? $feature['title']['en'] ?? '' }}
+                                                {{ $feature['title'][app()->getLocale()] ?? $feature['title']['en'] ?? '' }}
                                             </h4>
                                             <p class="text-sm text-gray-600 dark:text-gray-400">
-                                                {{ $feature['desc'][$locale] ?? $feature['desc']['en'] ?? '' }}
+                                                {{ $feature['desc'][app()->getLocale()] ?? $feature['desc']['en'] ?? '' }}
                                             </p>
                                         </div>
                                     </div>
@@ -106,10 +105,10 @@
                                             {{ $step['step'] ?? ($index + 1) }}
                                         </div>
                                         <h4 class="font-bold text-gray-900 dark:text-white mb-2">
-                                            {{ $step['title'][$locale] ?? $step['title']['en'] ?? '' }}
+                                            {{ $step['title'][app()->getLocale()] ?? $step['title']['en'] ?? '' }}
                                         </h4>
                                         <p class="text-sm text-gray-600 dark:text-gray-400">
-                                            {{ $step['desc'][$locale] ?? $step['desc']['en'] ?? '' }}
+                                            {{ $step['desc'][app()->getLocale()] ?? $step['desc']['en'] ?? '' }}
                                         </p>
                                     </div>
                                 @endforeach

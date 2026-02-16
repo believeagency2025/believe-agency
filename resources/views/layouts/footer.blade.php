@@ -32,12 +32,9 @@
                 <h4 class="text-gray-900 dark:text-white font-bold mb-6">{{ __('site.footer.services') }}</h4>
                 <ul class="space-y-3 text-gray-600 dark:text-gray-400 text-sm">
                     @foreach($services_nav as $s_nav)
-                        @php
-                            $s_title = $s_nav->title[app()->getLocale()] ?? $s_nav->title['en'] ?? '';
-                        @endphp
                         <li>
                             <a href="{{ route('service.detail', $s_nav->slug) }}" class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">
-                                {{ $s_title }}
+                                {{ $s_nav->title }}
                             </a>
                         </li>
                     @endforeach

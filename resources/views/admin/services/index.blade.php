@@ -32,12 +32,8 @@
                 <tr class="hover:bg-slate-50/50 dark:hover:bg-slate-700/25 transition-colors">
                     <td class="px-6 py-4">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-slate-100 dark:bg-slate-900 rounded-xl flex items-center justify-center text-brand-500">
-                                <i class="{{ $service->icon ?? 'fas fa-cog' }}"></i>
-                            </div>
                             <div>
-                                <p class="font-bold text-slate-900 dark:text-white">{{ $service->title['en'] ?? __('admin.no_data') }}</p>
-                                <p class="text-xs text-slate-500 dark:text-slate-400">{{ $service->title['ar'] ?? '' }}</p>
+                                <p class="font-bold text-slate-900 dark:text-white">{{ $service->title ?? __('admin.no_data') }}</p>
                             </div>
                         </div>
                     </td>

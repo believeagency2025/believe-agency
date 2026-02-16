@@ -244,6 +244,11 @@ return [
         'location_title' => 'موقعنا',
         'not_robot' => 'أنا لست برنامج روبوت',
         'success_message' => 'شكراً لتواصلك معنا! سنتواصل معك قريباً.',
+        'success_title' => 'تم الإرسال بنجاح!',
+        'error_title' => 'خطأ',
+        'error_message' => 'فشل إرسال الرسالة. يرجى المحاولة مرة أخرى.',
+        'sending' => 'جاري الإرسال...',
+        'robot_check_required' => 'يرجى التحقق من أنك لست روبوت',
     ],
     'clients' => [
         'subtitle' => 'شركاء النجاح',

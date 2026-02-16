@@ -25,10 +25,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($services_nav as $index => $s)
-                    @php
-                        $s_title = $s->title[app()->getLocale()] ?? $s->title['en'] ?? '';
-                        $s_desc = $s->description[app()->getLocale()] ?? $s->description['en'] ?? '';
-                    @endphp
                     <div class="group relative p-8 rounded-3xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/5 shadow-xl shadow-gray-200/50 dark:shadow-none hover:-translate-y-2 transition-all duration-500 overflow-hidden"
                         data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                         <!-- Decorative Background -->
@@ -39,10 +35,10 @@
                                 <i class="{{ $s->icon_class ?? 'fas fa-briefcase' }}"></i>
                             </div>
                             <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white group-hover:text-brand-600 transition-colors">
-                                {{ $s_title }}
+                                {{ $s->title }}
                             </h3>
                             <p class="text-gray-600 dark:text-gray-400 leading-relaxed mb-8">
-                                {{ Str::limit($s_desc, 120) }}
+                                {{ Str::limit($s->description, 120) }}
                             </p>
                             <a href="{{ route('service.detail', $s->slug) }}" class="inline-flex items-center gap-2 text-brand-600 dark:text-brand-400 font-bold hover:gap-3 transition-all group/btn">
                                 {{ __('site.services.learn_more') }}

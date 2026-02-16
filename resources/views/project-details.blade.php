@@ -1,6 +1,6 @@
 @extends('layouts.web')
 
-@section('title', isset($project['title_key']) ? __($project['title_key']) : 'Project Details')
+@section('title', $project->title)
 
 @push('styles')
     <!-- Swiper CSS -->
@@ -20,7 +20,6 @@
             text-align: center;
             font-size: 18px;
             background: rgba(0, 0, 0, 0.02);
-            /* Subtle background for mismatched aspect ratios */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -33,7 +32,6 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            /* Ensures full image is visible */
             border-radius: 1rem;
             cursor: pointer;
         }
@@ -76,11 +74,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <span id="project-category"
                 class="inline-block px-4 py-1.5 rounded-full bg-brand-100 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 text-sm font-semibold mb-4"
-                data-aos="fade-up">{{ __($project['category_key']) }}</span>
+                data-aos="fade-up">
+                {{ $project->service ? $project->service->title : __('site.projects.category_other') }}
+            </span>
             <h1 id="project-title" class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6"
-                data-aos="fade-up" data-aos-delay="100">{{ __($project['title_key']) }}</h1>
+                data-aos="fade-up" data-aos-delay="100">{{ $project->title }}</h1>
             <p id="project-desc" class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto mb-8"
-                data-aos="fade-up" data-aos-delay="200">{{ __($project['desc_key']) }}</p>
+                data-aos="fade-up" data-aos-delay="200">{{ $project->description }}</p>
         </div>
     </section>
 
@@ -96,13 +96,17 @@
                     <div class="w-full relative group" data-aos="fade-up">
                         <div class="swiper mySwiper aspect-video" id="gallery-swiper">
                             <div class="swiper-wrapper" id="gallery-wrapper">
-                                @foreach ($project['images'] as $image)
+                                @forelse ($project->images as $image)
                                     <div class="swiper-slide">
-                                        <a href="{{ asset($image) }}" class="glightbox" data-gallery="project-gallery">
-                                            <img src="{{ asset($image) }}" alt="Project Image" loading="lazy">
+                                        <a href="{{ asset('storage/' . $image->image_path) }}" class="glightbox" data-gallery="project-gallery">
+                                            <img src="{{ asset('storage/' . $image->image_path) }}" alt="{{ $project->title }}" loading="lazy" onerror="this.src='{{ asset($image->image_path) }}'">
                                         </a>
                                     </div>
-                                @endforeach
+                                @empty
+                                    <div class="swiper-slide">
+                                        <img src="{{ asset('img/placeholder.webp') }}" alt="Placeholder" loading="lazy">
+                                    </div>
+                                @endforelse
                             </div>
                             <div class="swiper-button-next"></div>
                             <div class="swiper-button-prev"></div>
@@ -113,63 +117,67 @@
                     <!-- Project Overview -->
                     <div class="prose dark:prose-invert max-w-none" data-aos="fade-up">
                         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                            {{ isset($project['overview_title_key']) ? __($project['overview_title_key']) : __('site.project_details.overview') }}
+                            {{ __('site.project_details.overview') }}
                         </h2>
                         <div id="project-long-desc" class="text-gray-600 dark:text-gray-400 leading-relaxed text-lg">
-                            {{ isset($project['overview_desc_key']) ? __($project['overview_desc_key']) : '' }}
+                            {!! nl2br(e($project->overview)) !!}
                         </div>
                     </div>
 
                     <!-- Features Grid -->
-                    @if (isset($project['features']) && count($project['features']) > 0)
+                    @if ($project->features->count() > 0)
                         <div id="features-section">
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6" id="features-title">
-                                {{ isset($project['features_title_key']) ? __($project['features_title_key']) : __('site.project_details.key_features') }}
+                                {{ __('site.project_details.key_features') }}
                             </h3>
 
-                            @php
-                                $isComplex = is_array($project['features'][0]);
-                                $gridClass = $isComplex ? 'grid grid-cols-1 md:grid-cols-3 gap-6' : 'grid grid-cols-1 md:grid-cols-2 gap-4';
-                            @endphp
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                @foreach ($project->features as $feature)
+                                    <div class="group bg-gray-50 dark:bg-slate-700/50 p-5 rounded-xl border border-gray-100 dark:border-white/5 hover:border-brand-200 dark:hover:border-brand-500/30 hover:bg-white dark:hover:bg-slate-700 transition-all duration-300 shadow-sm hover:shadow-md">
 
-                            <div class="{{ $gridClass }}">
-                                @foreach ($project['features'] as $feature)
-                                    @if (is_array($feature))
-                                        <!-- Complex Feature Card -->
-                                        <div class="bg-gray-50 dark:bg-slate-700/50 p-6 rounded-xl border border-gray-100 dark:border-white/5 hover:border-brand-200 dark:hover:border-brand-500/30 transition-colors">
-                                            <div class="w-12 h-12 bg-white dark:bg-slate-600 rounded-lg flex items-center justify-center text-brand-500 mb-4 shadow-sm">
-                                                <i class="{{ $feature['icon'] }} text-xl"></i>
-                                            </div>
-                                            <h4 class="font-bold text-gray-900 dark:text-white mb-2">{{ __($feature['title_key']) }}</h4>
-                                            <p class="text-sm text-gray-600 dark:text-gray-400">{{ __($feature['desc_key']) }}</p>
-                                        </div>
-                                    @else
-                                        <!-- Simple Feature List Item -->
+                                        {{-- Flex Container لضبط الأيقونة بجانب النص --}}
                                         <div class="flex items-start gap-3">
-                                            <i class="fas fa-check-circle text-brand-500 mt-1"></i>
-                                            <span class="text-gray-700 dark:text-gray-300">{{ __($feature) }}</span>
+
+                                            {{-- الأيقونة --}}
+                                            <div class="flex-shrink-0 mt-1">
+                                                <i class="fas fa-check-circle text-brand-500 dark:text-brand-400 text-lg"></i>
+                                            </div>
+
+                                            {{-- النصوص --}}
+                                            <div>
+                                                <h4 class="font-bold text-gray-900 dark:text-white leading-tight">
+                                                    {{ $feature->title }}
+                                                </h4>
+
+                                                @if($feature->description && $feature->description !== $feature->title)
+                                                    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                                                        {{ $feature->description }}
+                                                    </p>
+                                                @endif
+                                            </div>
                                         </div>
-                                    @endif
+
+                                    </div>
                                 @endforeach
                             </div>
                         </div>
                     @endif
 
                     <!-- Testimonial -->
-                    @if (isset($project['testimonial']))
+                    @if ($project->testimonial_text)
                         <div id="testimonial-section"
                             class="bg-gray-50 dark:bg-slate-700/30 rounded-2xl p-8 border-l-4 border-brand-500"
                             data-aos="fade-up">
                             <i class="fas fa-quote-left text-3xl text-brand-500 mb-4 opacity-50"></i>
                             <p id="testimonial-text" class="text-xl italic text-gray-700 dark:text-gray-300 mb-6">
-                                {{ __($project['testimonial']['text_key']) }}
+                                {{ $project->testimonial_text }}
                             </p>
                             <div>
                                 <h4 id="testimonial-name" class="font-bold text-gray-900 dark:text-white">
-                                    {{ __($project['testimonial']['name_key']) }}
+                                    {{ $project->testimonial_name }}
                                 </h4>
                                 <span id="testimonial-role" class="text-sm text-gray-500 dark:text-gray-400">
-                                    {{ __($project['testimonial']['role_key']) }}
+                                    {{ $project->testimonial_role }}
                                 </span>
                             </div>
                         </div>
@@ -193,32 +201,28 @@
                                     <dt class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ __('site.project_details.client') }}</dt>
                                     <dd class="text-base font-medium text-gray-900 dark:text-white flex items-center gap-2">
                                         <i class="far fa-user text-brand-500"></i>
-                                        <span>
-                                            {{ isset($project['client_key']) ? __($project['client_key']) : ($project['client_name'] ?? '-') }}
-                                        </span>
+                                        <span>{{ $project->client_name ?? '-' }}</span>
                                     </dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ __('site.project_details.category') }}</dt>
                                     <dd class="text-base font-medium text-gray-900 dark:text-white flex items-center gap-2">
                                         <i class="far fa-folder text-brand-500"></i>
-                                        <span>{{ __($project['category_key']) }}</span>
+                                        <span>{{ $project->service ? $project->service->title : __('site.projects.category_other') }}</span>
                                     </dd>
                                 </div>
                                 <div>
                                     <dt class="text-sm text-gray-500 dark:text-gray-400 mb-1">{{ __('site.project_details.duration') }}</dt>
                                     <dd class="text-base font-medium text-gray-900 dark:text-white flex items-center gap-2">
                                         <i class="far fa-clock text-brand-500"></i>
-                                        <span>
-                                            {{ isset($project['duration_key']) ? __($project['duration_key']) : ($project['duration'] ?? '-') }}
-                                        </span>
+                                        <span>{{ $project->duration ?? '-' }}</span>
                                     </dd>
                                 </div>
                             </dl>
 
-                            @if(isset($project['website_url']) && $project['website_url'] != '#')
+                            @if($project->website_url && $project->website_url != '#')
                             <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-                                <a href="{{ $project['website_url'] }}" target="_blank"
+                                <a href="{{ $project->website_url }}" target="_blank"
                                     class="w-full flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-medium py-3 px-4 rounded-xl transition-all shadow-lg hover:shadow-brand-500/30">
                                     <span>{{ __('site.project_details.visit_website') }}</span> <i
                                         class="fas fa-external-link-alt text-sm"></i>
@@ -228,13 +232,13 @@
                         </div>
 
                         <!-- Tech Stack (Sidebar) -->
-                        @if(isset($project['tech_stack']))
+                        @if($project->techStack->count() > 0)
                         <div id="tech-section-sidebar" data-aos="fade-left" data-aos-delay="100">
                             <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-4">{{ __('site.project_details.technologies') }}</h3>
                             <div class="flex flex-wrap gap-2">
-                                @foreach($project['tech_stack'] as $tech)
-                                <span class="px-3 py-1 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-sm text-gray-600 dark:text-gray-300 flex items-center gap-2">
-                                    <i class="{{ $tech['icon'] }} text-brand-500"></i> {{ $tech['name'] }}
+                                @foreach($project->techStack as $tech)
+                                <span class="px-3 py-1 bg-white dark:bg-slate-700 border border-gray-200 dark:border-slate-600 rounded-lg text-sm text-gray-600 dark:text-gray-300">
+                                    {{ $tech->name }}
                                 </span>
                                 @endforeach
                             </div>

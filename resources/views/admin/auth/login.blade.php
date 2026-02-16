@@ -75,9 +75,6 @@
         <!-- Logo/Header -->
         <div class="text-center mb-8">
             <h1 class="text-3xl font-bold text-slate-900 dark:text-white flex items-center justify-center gap-3">
-                <span class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center text-white text-xl">
-                    <i class="fas fa-shield-halved"></i>
-                </span>
                 Believe <span class="text-brand-500">Admin</span>
             </h1>
             <p class="text-slate-500 dark:text-slate-400 mt-2">{{ __('admin.login.subtitle') }}</p>

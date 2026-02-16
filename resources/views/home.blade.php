@@ -114,7 +114,6 @@
             </div>
 
             <!-- Main Heading -->
-            <!-- Main Heading -->
             <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-8 text-gray-900 dark:text-white tracking-tight min-h-[160px] md:min-h-[180px] flex items-center justify-center relative px-2">
                 <span class="hero-message absolute transition-all duration-1000 opacity-100 scale-100">
                     {!! __('site.hero.message1') !!}
@@ -258,20 +257,16 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach($services_nav as $index => $s)
-                    @php
-                        $s_title = $s->title[app()->getLocale()] ?? $s->title['en'] ?? '';
-                        $s_desc = $s->description[app()->getLocale()] ?? $s->description['en'] ?? '';
-                    @endphp
                     <div class="group glass-card bg-white dark:bg-slate-800 p-8 rounded-3xl hover:bg-gray-100 dark:hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 cursor-pointer border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
                         data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                         <div class="w-14 h-14 bg-brand-100 dark:bg-brand-500/10 rounded-2xl flex items-center justify-center text-brand-600 dark:text-brand-400 text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
                             <i class="{{ $s->icon_class ?? 'fas fa-briefcase' }}"></i>
                         </div>
                         <h3 class="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-brand-600 dark:group-hover:text-brand-300 transition-colors">
-                            {{ $s_title }}
+                            {{ $s->title }}
                         </h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6">
-                            {{ Str::limit($s_desc, 120) }}
+                            {{ Str::limit($s->description, 120) }}
                         </p>
                         <a href="{{ route('service.detail', $s->slug) }}"
                             class="text-sm font-semibold text-brand-600 dark:text-white flex items-center gap-2 group-hover:gap-3 transition-all">
@@ -295,172 +290,44 @@
                 </h2>
 
             <!-- Filters -->
-            <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-12 mt-12" data-aos="fade-up" data-aos-delay="100">
+            <div class="flex flex-wrap justify-center gap-3 mb-12 mt-12" data-aos="fade-up" data-aos-delay="100">
+                @foreach($services as $service)
                 <button
-                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="web">{{ __('site.projects.filter_web') }}</button>
-                <button
-                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="app">{{ __('site.projects.filter_app') }}</button>
-                <button
-                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20"  style="font-size:10px !important;" data-filter="branding">{{ __('site.projects.filter_branding') }}</button>
-                <button
-                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="marketing">{{ __('site.projects.filter_marketing') }}</button>
-                <button
-                    class="projects-filter-btn w-full px-4 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20" data-filter="ecommerce">{{ __('site.projects.filter_ecommerce') }}</button>
-                <button class="projects-filter-btn w-full px-4 py-2.5 rounded-xl bg-brand-500 text-white text-sm font-semibold shadow-lg shadow-brand-500/20 transition-all hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white" style="font-size:10px !important;" data-filter="all">{{ __('site.services.software.title') }}</button>
+                    class="projects-filter-btn px-6 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20"
+                    data-filter="{{ $service->slug }}">{{ $service->title }}</button>
+                @endforeach
             </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project 1: Mazzawi (Web) -->
+            <!-- Projects Grid -->
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach($featuredProjects as $index => $project)
+                <!-- Project {{ $index + 1 }}: {{ $project->title }} -->
                 <div class="project-card group glass-card bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                    data-aos="fade-up" data-aos-delay="100" data-category="web"
-                    onclick="window.location.href='{{ url('project-details') }}?id=mazzawi'">
+                    data-aos="fade-up" data-aos-delay="{{ 100 * ($index + 1) }}" data-category="{{ $project->service ? $project->service->slug : 'all' }}"
+                    onclick="window.location.href='{{ route('project-details', $project->slug) }}'">
                     <div class="relative overflow-hidden h-64">
-                        <img src="{{ asset('img/portfolio/Web Design & Development/web1.webp') }}" alt="Mazzawi Contracting"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                        <img src="{{ asset('storage/' . $project->featured_image) }}" alt="{{ $project->title }}"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            onerror="this.src='{{ asset($project->featured_image) }}'">
                         <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                             <span class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">{{ __('site.projects.view_project') }}</span>
                         </div>
                     </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2">{{ __('site.projects.category_web') }}</span>
+                    <div class="p-6 text-start">
+                        <span class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2">{{ $project->service ? $project->service->title : '' }}</span>
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
-                            {{ __('site.projects.project1_title') }}
+                            {{ $project->title }}
                         </h3>
                         <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
-                            {{ __('site.projects.project1_description') }}
+                            {{ $project->description }}
                         </p>
                         <span class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span>{{ __('site.projects.view_details') }}</span> <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                            <span>{{ __('site.projects.view_details') }}</span> <i class="fas fa-arrow-right {{ app()->getLocale() == 'ar' ? 'mr-2 rotate-180' : 'ml-2' }} text-sm"></i>
                         </span>
                     </div>
                 </div>
-
-                <!-- Project 2: Noor Al Sham (Web) -->
-                <div class="project-card group glass-card bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                    data-aos="fade-up" data-aos-delay="200" data-category="web"
-                    onclick="window.location.href='{{ url('project-details') }}?id=noor-alsham'">
-                    <div class="relative overflow-hidden h-64">
-                         <img src="{{ asset('img/portfolio/Web Design & Development/web2.webp') }}" alt="Noor Al Sham"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">{{ __('site.projects.view_project') }}</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2">{{ __('site.projects.category_web') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
-                            {{ __('site.projects.project2_title') }}
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
-                            {{ __('site.projects.project2_description') }}
-                        </p>
-                        <span class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span>{{ __('site.projects.view_details') }}</span> <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Project 3: Abby Physics (App) -->
-                <div class="project-card group glass-card bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                    data-aos="fade-up" data-aos-delay="300" data-category="app"
-                    onclick="window.location.href='{{ url('project-details') }}?id=abby-physics'">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="{{ asset('img/portfolio/Apps Development/app1.webp') }}" alt="Abby Physics"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">{{ __('site.projects.view_project') }}</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-pink-600 dark:text-pink-400 uppercase tracking-wider block mb-2">{{ __('site.projects.category_app') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
-                            {{ __('site.projects.project3_title') }}
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
-                            {{ __('site.projects.project3_description') }}
-                        </p>
-                        <span class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span>{{ __('site.projects.view_details') }}</span> <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Project 4: AB Creates (Branding) -->
-                <div class="project-card group glass-card bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                    data-aos="fade-up" data-aos-delay="400" data-category="branding"
-                    onclick="window.location.href='{{ url('project-details') }}?id=ab-creates'">
-                    <div class="relative overflow-hidden h-64">
-                        <img src="{{ asset('img/portfolio/Branding & Creative Design/branding.webp') }}" alt="AB Creates"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">{{ __('site.projects.view_project') }}</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider block mb-2">{{ __('site.projects.category_branding') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
-                            {{ __('site.projects.project6_title') }}
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
-                            {{ __('site.projects.project6_description') }}
-                        </p>
-                        <span class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span>{{ __('site.projects.view_details') }}</span> <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Project 5: Mas Riyadh (Ecommerce) -->
-                <div class="project-card group glass-card bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                    data-aos="fade-up" data-aos-delay="500" data-category="ecommerce"
-                    onclick="window.location.href='{{ url('project-details') }}?id=mas-riyadh'">
-                   <div class="relative overflow-hidden h-64">
-                        <img src="{{ asset('img/portfolio/E-commerce/e-commerce.webp') }}" alt="E-commerce App"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">{{ __('site.projects.view_project') }}</span>
-                        </div>
-                    </div>
-                     <div class="p-6">
-                        <span class="text-xs font-bold text-yellow-600 dark:text-yellow-400 uppercase tracking-wider block mb-2">{{ __('site.projects.category_ecommerce') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-yellow-600 dark:group-hover:text-yellow-400 transition-colors">
-                            {{ __('site.projects.project9_title') }}
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
-                            {{ __('site.projects.project9_description') }}
-                        </p>
-                        <span class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span>{{ __('site.projects.view_details') }}</span> <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </span>
-                    </div>
-                </div>
-
-                <!-- Project 6: Marketing Campaign (Marketing) -->
-                <div class="project-card group glass-card bg-white dark:bg-slate-800 rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 hover:shadow-2xl transition-all duration-300 cursor-pointer"
-                    data-aos="fade-up" data-aos-delay="600" data-category="marketing"
-                    onclick="window.location.href='{{ url('project-details') }}?id=marketing-campaign'">
-                     <div class="relative overflow-hidden h-64">
-                        <img src="{{ asset('img/portfolio/Digital Marketing/digitalmarketing1.webp') }}"
-                            alt="Marketing Campaign"
-                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <span class="bg-white text-gray-900 px-6 py-2 rounded-full font-semibold hover:bg-brand-500 hover:text-white transition-colors transform translate-y-4 group-hover:translate-y-0 duration-300">{{ __('site.projects.view_project') }}</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <span class="text-xs font-bold text-green-600 dark:text-green-400 uppercase tracking-wider block mb-2">{{ __('site.projects.category_marketing') }}</span>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
-                            {{ __('site.projects.project5_title') }}
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
-                            {{ __('site.projects.project5_description') }}
-                        </p>
-                        <span class="inline-flex items-center text-brand-600 dark:text-brand-400 font-medium hover:text-brand-800 dark:hover:text-brand-300 transition-colors">
-                            <span>{{ __('site.projects.view_details') }}</span> <i class="fas fa-arrow-right ml-2 text-sm"></i>
-                        </span>
-                    </div>
-                </div>
+                @endforeach
             </div>
 
             <div class="mt-16 text-center">
@@ -499,14 +366,14 @@
                         @for($j=0; $j < $testimonial->rating; $j++) <i class="fas fa-star"></i> @endfor
                     </div>
                     <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                        {{ $testimonial->content[app()->getLocale()] ?? $testimonial->content['en'] }}</p>
+                        {{ $testimonial->content }}</p>
                     <div class="flex items-center gap-4">
-                        <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->client_name[app()->getLocale()] ?? $testimonial->client_name['en'] }}"
+                        <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->client_name }}"
                             class="w-12 h-12 rounded-full object-cover ring-2 ring-brand-500/50">
                         <div>
                              <h4 class="font-bold text-gray-900 dark:text-white text-sm">
-                                {{ $testimonial->client_name[app()->getLocale()] ?? $testimonial->client_name['en'] }}</h4>
-                            <p class="text-xs text-brand-600 dark:text-brand-400">{{ $testimonial->client_role[app()->getLocale()] ?? $testimonial->client_role['en'] }}</p>
+                                {{ $testimonial->client_name }}</h4>
+                            <p class="text-xs text-brand-600 dark:text-brand-400">{{ $testimonial->client_role }}</p>
                         </div>
                     </div>
                 </div>
@@ -595,29 +462,30 @@
                 <div class="relative" data-aos="fade-left">
                     <div
                         class="glass-card bg-white dark:bg-slate-800 p-8 md:p-10 rounded-3xl border border-gray-200 dark:border-white/5 relative z-10 shadow-xl dark:shadow-none">
-                        <form class="space-y-6">
+                        <form id="homeContactForm" class="space-y-6">
+                            @csrf
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="space-y-2">
                                     <label class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ __('site.contact.form_name') }} <span class="text-red-500">*</span></label>
-                                    <input type="text" placeholder="{{ __('site.contact.form_name_placeholder') }}" required
+                                    <input type="text" name="name" placeholder="{{ __('site.contact.form_name_placeholder') }}" required
                                         class="w-full bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
                                 </div>
                                 <div class="space-y-2">
                                     <label class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ __('site.contact.form_phone') }} <span class="text-red-500">*</span></label>
-                                    <input type="tel" placeholder="{{ __('site.contact.form_phone_placeholder') }}" required
-                                        class="w-full bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors text-end" dir="ltr">
+                                    <input type="tel" name="phone" placeholder="{{ __('site.contact.form_phone_placeholder') }}" required
+                                        class="w-full bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors {{ app()->getLocale() == 'ar' ? 'text-right' : 'text-left' }}" dir="ltr">
                                 </div>
                             </div>
 
                             <div class="space-y-2">
                                 <label class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ __('site.contact.form_email') }}</label>
-                                <input type="email" placeholder="{{ __('site.contact.form_email_placeholder') }}"
+                                <input type="email" name="email" placeholder="{{ __('site.contact.form_email_placeholder') }}"
                                     class="w-full bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
                             </div>
 
                             <div class="space-y-2">
                                 <label class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ __('site.contact.form_message') }}</label>
-                                <textarea rows="4" placeholder="{{ __('site.contact.form_message_placeholder') }}"
+                                <textarea rows="4" name="message" placeholder="{{ __('site.contact.form_message_placeholder') }}"
                                     class="w-full bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors resize-none"></textarea>
                             </div>
 
@@ -628,7 +496,7 @@
                                 <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA" class="w-8 h-8 opacity-50 ml-2">
                             </div>
 
-                            <button type="button"
+                            <button type="submit"
                                 class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-4 rounded-xl shadow-lg shadow-brand-500/25 transition-all transform hover:-translate-y-1">
                                     <span>{{ __('site.contact.form_submit') }}</span> <i
                                     class="fas fa-paper-plane ml-2"></i>
@@ -648,6 +516,7 @@
         </div>
     </section>
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         // Filter Logic
@@ -703,6 +572,75 @@
                 messages[currentMsg].classList.remove('opacity-0', 'scale-95');
                 messages[currentMsg].classList.add('opacity-100', 'scale-100');
             }, 4000);
+        }
+
+        // Home Contact Form Handler
+        const homeContactForm = document.getElementById('homeContactForm');
+        if (homeContactForm) {
+            homeContactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Check robot verification
+                const robotCheck = document.getElementById('robot_check_home');
+                if (!robotCheck.checked) {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: '{{ __('site.contact.robot_check_required', ['default' => 'Please verify you are not a robot']) }}',
+                        confirmButtonColor: '#6366f1'
+                    });
+                    return;
+                }
+
+                const form = this;
+                const submitButton = form.querySelector('button[type="submit"]');
+                const originalButtonText = submitButton.innerHTML;
+
+                // Disable button and show loading state
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> {{ __('site.contact.sending', ['default' => 'Sending...']) }}';
+
+                // Prepare form data
+                const formData = new FormData(form);
+
+                // Submit via AJAX
+                fetch('{{ route('contact.submit') }}', {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json',
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '{{ __('site.contact.success_title', ['default' => 'Message Sent!']) }}',
+                            text: data.message,
+                            confirmButtonColor: '#6366f1'
+                        });
+                        form.reset();
+                        robotCheck.checked = false;
+                    } else {
+                        throw new Error(data.message || 'An error occurred');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: '{{ __('site.contact.error_title', ['default' => 'Error']) }}',
+                        text: '{{ __('site.contact.error_message', ['default' => 'Failed to send message. Please try again.']) }}',
+                        confirmButtonColor: '#6366f1'
+                    });
+                })
+                .finally(() => {
+                    // Re-enable button
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonText;
+                });
+            });
         }
     });
 </script>

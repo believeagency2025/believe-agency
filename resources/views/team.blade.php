@@ -76,7 +76,7 @@
                     <div class="team-card glass-card rounded-[40px] overflow-hidden group border border-gray-100 dark:border-white/5 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
                         data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                         <div class="relative overflow-hidden">
-                            <img src="{{ asset('storage/' . $member->image) }}" alt="{{ $member->name[app()->getLocale()] ?? $member->name['en'] }}"
+                            <img src="{{ asset('storage/' . $member->image) }}" alt="{{ $member->name }}"
                                 class="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-110">
 
                             <!-- Overlay/Social Links -->
@@ -103,10 +103,10 @@
                         </div>
                         <div class="p-6 text-center bg-white dark:bg-white/5">
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-brand-600 transition-colors">
-                                {{ $member->name[app()->getLocale()] ?? $member->name['en'] }}
+                                {{ $member->name }}
                             </h3>
                             <p class="text-brand-600 dark:text-brand-400 text-sm font-medium">
-                                {{ $member->role[app()->getLocale()] ?? $member->role['en'] }}
+                                {{ $member->role }}
                             </p>
                         </div>
                     </div>
@@ -140,14 +140,14 @@
                         @for($j=0; $j < $testimonial->rating; $j++) <i class="fas fa-star"></i> @endfor
                     </div>
                     <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                        {{ $testimonial->content[app()->getLocale()] ?? $testimonial->content['en'] }}</p>
+                        {{ $testimonial->content }}</p>
                     <div class="flex items-center gap-4">
-                        <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->client_name[app()->getLocale()] ?? $testimonial->client_name['en'] }}"
+                        <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->client_name }}"
                             class="w-12 h-12 rounded-full object-cover ring-2 ring-brand-500/50">
                         <div>
                              <h4 class="font-bold text-gray-900 dark:text-white text-sm">
-                                {{ $testimonial->client_name[app()->getLocale()] ?? $testimonial->client_name['en'] }}</h4>
-                            <p class="text-xs text-brand-600 dark:text-brand-400">{{ $testimonial->client_role[app()->getLocale()] ?? $testimonial->client_role['en'] }}</p>
+                                {{ $testimonial->client_name }}</h4>
+                            <p class="text-xs text-brand-600 dark:text-brand-400">{{ $testimonial->client_role }}</p>
                         </div>
                     </div>
                 </div>

@@ -40,13 +40,13 @@
                                 @endif
                             </div>
                             <div>
-                                <p class="font-bold text-slate-900 dark:text-white text-sm">{{ $member->name[app()->getLocale()] ?? $member->name['en'] }}</p>
+                                <p class="font-bold text-slate-900 dark:text-white text-sm">{{ $member->name }}</p>
                             </div>
                         </div>
                     </td>
                     <td class="px-6 py-4">
                         <span class="text-sm font-medium text-slate-600 dark:text-slate-400">
-                            {{ $member->role[app()->getLocale()] ?? $member->role['en'] }}
+                            {{ $member->role }}
                         </span>
                     </td>
                     <td class="px-6 py-4">

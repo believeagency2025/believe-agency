@@ -117,7 +117,6 @@
                 <a href="{{ route('admin.projects.index') }}" class="sidebar-link {{ request()->routeIs('admin.projects.*') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
                     <i class="fas fa-briefcase w-5"></i>
                     <span class="flex-1">{{ __('admin.projects') }}</span>
-                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-yellow-100 dark:bg-yellow-500/20 text-yellow-700 dark:text-yellow-400">{{ __('admin.dev') }}</span>
                 </a>
 
                 <a href="{{ route('admin.team.index') }}" class="sidebar-link {{ request()->routeIs('admin.team.*') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
@@ -138,7 +137,7 @@
                 <a href="{{ route('admin.messages.index') }}" class="sidebar-link {{ request()->routeIs('admin.messages.*') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
                     <i class="fas fa-envelope-open-text w-5"></i>
                     <span class="flex-1">{{ __('admin.inquiries') }}</span>
-                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-yellow-100 dark:bg-yellow-500/20 text-yellow-700 dark:text-yellow-400">{{ __('admin.dev') }}</span>
+                    <span class="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-green-100 dark:bg-green-500/20 text-green-700 dark:text-green-400">{{ $newMessagesCount }}</span>
                 </a>
 
                 <div class="pt-4 pb-2 px-4 uppercase text-[10px] font-bold text-slate-400 tracking-wider">{{ __('admin.system') }}</div>

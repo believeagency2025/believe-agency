@@ -232,7 +232,7 @@
                     <div class="team-card glass-card rounded-[40px] overflow-hidden group border border-gray-100 dark:border-white/5 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
                         data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                         <div class="relative overflow-hidden">
-                            <img src="{{ asset('storage/' . $member->image) }}" alt="{{ $member->name[app()->getLocale()] ?? $member->name['en'] }}"
+                            <img src="{{ asset('storage/' . $member->image) }}" alt="{{ $member->name }}"
                                 class="w-full aspect-square object-cover transition-transform duration-700 group-hover:scale-110">
 
                             <!-- Overlay/Social Links -->
@@ -259,10 +259,10 @@
                         </div>
                         <div class="p-6 text-center bg-white dark:bg-white/5">
                             <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-brand-600 transition-colors">
-                                {{ $member->name[app()->getLocale()] ?? $member->name['en'] }}
+                                {{ $member->name }}
                             </h3>
                             <p class="text-brand-600 dark:text-brand-400 text-sm font-medium">
-                                {{ $member->role[app()->getLocale()] ?? $member->role['en'] }}
+                                {{ $member->role }}
                             </p>
                         </div>
                     </div>

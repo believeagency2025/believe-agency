@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', __('admin.edit_service') . ': ' . ($service->title[app()->getLocale()] ?? $service->title['en'] ?? 'Untitled'))
+@section('title', __('admin.edit_service') . ': ' . ($service->title ?? 'Untitled'))
 @section('page_title', __('admin.edit_service'))
 
 @section('content')
@@ -21,7 +21,7 @@
                 <div id="content-en" class="space-y-6">
                     <div>
                         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.title') }} ({{ __('admin.en') }})</label>
-                        <input type="text" name="title[en]" value="{{ old('title.en', $service->title['en'] ?? '') }}" required
+                        <input type="text" name="title[en]" value="{{ old('title.en', $service->getTranslations('title')['en'] ?? '') }}" required
                             placeholder="e.g., Web Design & Development"
                             class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('title.en') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">
                         @error('title.en')
@@ -30,7 +30,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.subtitle') }} ({{ __('admin.en') }})</label>
-                        <input type="text" name="subtitle[en]" value="{{ old('subtitle.en', $service->subtitle['en'] ?? '') }}"
+                        <input type="text" name="subtitle[en]" value="{{ old('subtitle.en', $service->getTranslations('subtitle')['en'] ?? '') }}"
                             placeholder="e.g., Innovative Digital Solutions"
                             class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('subtitle.en') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">
                         @error('subtitle.en')
@@ -41,7 +41,7 @@
                         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.description') }} ({{ __('admin.en') }})</label>
                         <textarea name="description[en]" rows="3"
                             placeholder="Brief summary of the service..."
-                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('description.en') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">{{ old('description.en', $service->description['en'] ?? '') }}</textarea>
+                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('description.en') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">{{ old('description.en', $service->getTranslations('description')['en'] ?? '') }}</textarea>
                         @error('description.en')
                             <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
                         @enderror
@@ -50,7 +50,7 @@
                         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.message_content') }} ({{ __('admin.en') }})</label>
                         <textarea name="content[en]" rows="6"
                             placeholder="Explain the service in detail..."
-                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('content.en') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">{{ old('content.en', $service->content['en'] ?? '') }}</textarea>
+                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('content.en') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">{{ old('content.en', $service->getTranslations('content')['en'] ?? '') }}</textarea>
                         @error('content.en')
                             <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
                         @enderror
@@ -61,7 +61,7 @@
                 <div id="content-ar" class="space-y-6 hidden" dir="rtl">
                     <div>
                         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.title') }} ({{ __('admin.ar') }})</label>
-                        <input type="text" name="title[ar]" value="{{ old('title.ar', $service->title['ar'] ?? '') }}"
+                        <input type="text" name="title[ar]" value="{{ old('title.ar', $service->getTranslations('title')['ar'] ?? '') }}"
                             placeholder="مثال: تصميم وتطوير المواقع"
                             class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('title.ar') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">
                         @error('title.ar')
@@ -70,7 +70,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.subtitle') }} ({{ __('admin.ar') }})</label>
-                        <input type="text" name="subtitle[ar]" value="{{ old('subtitle.ar', $service->subtitle['ar'] ?? '') }}"
+                        <input type="text" name="subtitle[ar]" value="{{ old('subtitle.ar', $service->getTranslations('subtitle')['ar'] ?? '') }}"
                             placeholder="مثال: حلول رقمية مبتكرة"
                             class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('subtitle.ar') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">
                         @error('subtitle.ar')
@@ -81,7 +81,7 @@
                         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.description') }} ({{ __('admin.ar') }})</label>
                         <textarea name="description[ar]" rows="3"
                             placeholder="ملخص بسيط عن الخدمة..."
-                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('description.ar') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">{{ old('description.ar', $service->description['ar'] ?? '') }}</textarea>
+                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('description.ar') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">{{ old('description.ar', $service->getTranslations('description')['ar'] ?? '') }}</textarea>
                         @error('description.ar')
                             <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
                         @enderror
@@ -90,7 +90,7 @@
                         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.message_content') }} ({{ __('admin.ar') }})</label>
                         <textarea name="content[ar]" rows="6"
                             placeholder="شرح الخدمة بالتفصيل..."
-                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('content.ar') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">{{ old('content.ar', $service->content['ar'] ?? '') }}</textarea>
+                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('content.ar') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">{{ old('content.ar', $service->getTranslations('content')['ar'] ?? '') }}</textarea>
                         @error('content.ar')
                             <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
                         @enderror

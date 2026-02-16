@@ -22,7 +22,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 text-start">{{ __('admin.client_name') }} (EN)</label>
-                            <input type="text" name="client_name[en]" value="{{ old('client_name.en', $testimonial->client_name['en'] ?? '') }}" required
+                            <input type="text" name="client_name[en]" value="{{ old('client_name.en', $testimonial->getTranslations('client_name')['en'] ?? '') }}" required
                                 class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('client_name.en') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-start">
                             @error('client_name.en')
                                 <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
@@ -30,7 +30,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 text-start">{{ __('admin.client_role') }} (EN)</label>
-                            <input type="text" name="client_role[en]" value="{{ old('client_role.en', $testimonial->client_role['en'] ?? '') }}" required
+                            <input type="text" name="client_role[en]" value="{{ old('client_role.en', $testimonial->getTranslations('client_role')['en'] ?? '') }}" required
                                 class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('client_role.en') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-start">
                             @error('client_role.en')
                                 <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
@@ -40,7 +40,7 @@
                     <div>
                         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 text-start">{{ __('admin.feedback') }} (EN)</label>
                         <textarea name="content[en]" rows="4" required
-                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('content.en') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-start">{{ old('content.en', $testimonial->content['en'] ?? '') }}</textarea>
+                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('content.en') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-start">{{ old('content.en', $testimonial->getTranslations('content')['en'] ?? '') }}</textarea>
                         @error('content.en')
                             <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
                         @enderror
@@ -52,7 +52,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 text-right">{{ __('admin.client_name') }} (AR)</label>
-                            <input type="text" name="client_name[ar]" value="{{ old('client_name.ar', $testimonial->client_name['ar'] ?? '') }}" required
+                            <input type="text" name="client_name[ar]" value="{{ old('client_name.ar', $testimonial->getTranslations('client_name')['ar'] ?? '') }}" required
                                 class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('client_name.ar') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-right">
                             @error('client_name.ar')
                                 <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
@@ -60,7 +60,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 text-right">{{ __('admin.client_role') }} (AR)</label>
-                            <input type="text" name="client_role[ar]" value="{{ old('client_role.ar', $testimonial->client_role['ar'] ?? '') }}" required
+                            <input type="text" name="client_role[ar]" value="{{ old('client_role.ar', $testimonial->getTranslations('client_role')['ar'] ?? '') }}" required
                                 class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('client_role.ar') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-right">
                             @error('client_role.ar')
                                 <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
@@ -70,7 +70,7 @@
                     <div>
                         <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2 text-right">{{ __('admin.feedback') }} (AR)</label>
                         <textarea name="content[ar]" rows="4" required
-                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('content.ar') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-right">{{ old('content.ar', $testimonial->content['ar'] ?? '') }}</textarea>
+                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('content.ar') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-right">{{ old('content.ar', $testimonial->getTranslations('content')['ar'] ?? '') }}</textarea>
                         @error('content.ar')
                             <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
                         @enderror

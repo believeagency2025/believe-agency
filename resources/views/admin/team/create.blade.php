@@ -36,15 +36,6 @@
                             <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
                         @enderror
                     </div>
-                    <div>
-                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.bio') }} (English)</label>
-                        <textarea name="bio[en]" rows="4"
-                            placeholder="Brief biography..."
-                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('bio.en') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">{{ old('bio.en') }}</textarea>
-                        @error('bio.en')
-                            <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
-                        @enderror
-                    </div>
                 </div>
 
                 <!-- Arabic Content -->
@@ -67,15 +58,33 @@
                             <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
                         @enderror
                     </div>
-                    <div>
-                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.bio') }} (العربية)</label>
-                        <textarea name="bio[ar]" rows="4"
-                            placeholder="نبذة بسيطة..."
-                            class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('bio.ar') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-right">{{ old('bio.ar') }}</textarea>
-                        @error('bio.ar')
-                            <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
-                        @enderror
-                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm p-8 space-y-6">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white">{{ __('admin.social_professional') }}</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.facebook') }} URL</label>
+                    <input type="url" name="social_links[facebook]" value="{{ old('social_links.facebook') }}"
+                        placeholder="https://facebook.com/username"
+                        class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('social_links.facebook') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">
+                </div>
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.linkedin') }} URL</label>
+                    <input type="url" name="social_links[linkedin]" value="{{ old('social_links.linkedin') }}"
+                        placeholder="https://linkedin.com/in/username"
+                        class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('social_links.linkedin') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">
+                </div>
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.cv_link') }}</label>
+                    <input type="url" name="cv_link" value="{{ old('cv_link') }}"
+                        placeholder="https://drive.google.com/file/d/..."
+                        class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('cv_link') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white">
+                    @error('cv_link')
+                        <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
+                    @enderror
                 </div>
             </div>
         </div>

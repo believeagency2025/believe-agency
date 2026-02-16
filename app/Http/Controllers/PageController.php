@@ -10,7 +10,18 @@ class PageController extends Controller
     {
         $clients = \App\Models\Client::where('is_active', true)->orderBy('order')->limit(6)->get();
         $testimonials = \App\Models\Testimonial::where('is_active', true)->limit(3)->get();
-        return view('home', compact('clients', 'testimonials'));
+        $featuredProjects = \App\Models\Project::with('service')
+            ->where('status', 'active')
+            ->where('is_featured', true)
+            ->orderBy('order')
+            ->limit(6)
+            ->get();
+
+        $services = \App\Models\Service::where('is_active', true)
+            ->orderBy('order')
+            ->get();
+
+        return view('home', compact('clients', 'testimonials', 'featuredProjects', 'services'));
     }
 
     public function about()
@@ -26,19 +37,24 @@ class PageController extends Controller
 
     public function projects()
     {
-        return view('projects');
+        $projects = \App\Models\Project::where('status', 'active')
+            ->orderBy('order')
+            ->get();
+
+        $services = \App\Models\Service::where('is_active', true)
+            ->orderBy('order')
+            ->get();
+
+        return view('projects', compact('projects', 'services'));
     }
 
-    public function projectDetails(Request $request)
+    public function projectDetails($slug)
     {
-        $id = $request->query('id');
-        $projects = config('projects');
+        $project = \App\Models\Project::with(['service', 'images', 'features', 'techStack'])
+            ->where('slug', $slug)
+            ->where('status', 'active')
+            ->firstOrFail();
 
-        if (!$id || !isset($projects[$id])) {
-            return redirect()->route('projects');
-        }
-
-        $project = $projects[$id];
         return view('project-details', compact('project'));
     }
 
