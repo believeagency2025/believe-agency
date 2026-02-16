@@ -77,16 +77,22 @@
                 <h4 class="text-gray-900 dark:text-white font-bold mb-6">{{ __('site.footer.contact') }}</h4>
                 <ul class="space-y-4">
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-map-marker-alt mt-1 text-brand-500"></i>
-                        <span class="text-gray-600 dark:text-gray-400 text-sm">{{ $settings['contact_address'] ?? __('site.contact.location') }}</span>
+                        <div class="w-5 flex justify-center shrink-0 mt-1">
+                            <i class="fas fa-map-marker-alt text-brand-500"></i>
+                        </div>
+                        <span class="text-gray-600 dark:text-gray-400 text-sm leading-6">{{ $settings['contact_address'] ?? __('site.contact.location') }}</span>
                     </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-phone-alt text-brand-500"></i>
-                         <a href="tel:{{ $settings['contact_phone'] ?? '' }}" class="text-gray-600 dark:text-gray-400 text-sm hover:text-brand-600 transition-colors">{{ $settings['contact_phone'] ?? '' }}</a>
+                    <li class="flex items-start gap-3">
+                        <div class="w-5 flex justify-center shrink-0 mt-1">
+                            <i class="fas fa-phone-alt text-brand-500"></i>
+                        </div>
+                         <a href="tel:{{ $settings['contact_phone'] ?? '' }}" class="text-gray-600 dark:text-gray-400 text-sm hover:text-brand-600 transition-colors leading-6">{{ $settings['contact_phone'] ?? '' }}</a>
                     </li>
-                    <li class="flex items-center gap-3">
-                        <i class="fas fa-envelope text-brand-500"></i>
-                        <a href="mailto:{{ $settings['contact_email'] ?? 'info@believe-agency.net' }}" class="text-gray-600 dark:text-gray-400 text-sm hover:text-brand-600 transition-colors">{{ $settings['contact_email'] ?? 'info@believe-agency.net' }}</a>
+                    <li class="flex items-start gap-3">
+                        <div class="w-5 flex justify-center shrink-0 mt-1">
+                            <i class="fas fa-envelope text-brand-500"></i>
+                        </div>
+                        <a href="mailto:{{ $settings['contact_email'] ?? 'info@believe-agency.net' }}" class="text-gray-600 dark:text-gray-400 text-sm hover:text-brand-600 transition-colors leading-6">{{ $settings['contact_email'] ?? 'info@believe-agency.net' }}</a>
                     </li>
                 </ul>
             </div>
