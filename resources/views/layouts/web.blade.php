@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Believe Agency | @yield('title', 'Digital & Marketing Solutions')</title>
+    <title>{{ $settings['agency_name'] ?? 'Believe Agency' }} | @yield('title', 'Digital & Marketing Solutions')</title>
 
     <!-- Meta Tags -->
     <meta name="description" content="Believe Agency is a leading digital solutions and marketing agency. We specialize in web development, app development, branding, digital marketing, and e-commerce solutions to help your business grow.">
@@ -225,7 +225,7 @@
 
         <div class="text-center space-y-3 z-10">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white tracking-tight animate-fade-in-up">
-                Believe <span class="text-brand-500">Agency</span>
+                {{ $settings['agency_name'] ?? 'Believe Agency' }}
             </h2>
             <p class="text-gray-500 dark:text-gray-400 text-sm font-medium tracking-widest uppercase animate-pulse">
                 {{ __('site.loading', ['default' => 'Loading Experience']) }}
@@ -250,10 +250,12 @@
         </button>
 
         <!-- WhatsApp -->
-        <a href="https://wa.me/201505294544" target="_blank"
-            class="w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg shadow-green-500/30 flex items-center justify-center transform hover:-translate-y-1 transition-all duration-300 ltr:hover:-rotate-12 rtl:hover:rotate-12">
-            <i class="fab fa-whatsapp text-2xl"></i>
-        </a>
+        @if($settings['whatsapp'] ?? null)
+            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['whatsapp']) }}" target="_blank"
+                class="w-12 h-12 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-lg shadow-green-500/30 flex items-center justify-center transform hover:-translate-y-1 transition-all duration-300 ltr:hover:-rotate-12 rtl:hover:rotate-12">
+                <i class="fab fa-whatsapp text-2xl"></i>
+            </a>
+        @endif
     </div>
 
     <!-- Scripts -->

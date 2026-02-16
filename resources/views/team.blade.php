@@ -102,7 +102,7 @@
                             </div>
                         </div>
                         <div class="p-6 text-center bg-white dark:bg-white/5">
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1 group-hover:text-brand-600 transition-colors">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1 transition-colors">
                                 {{ $member->name }}
                             </h3>
                             <p class="text-brand-600 dark:text-brand-400 text-sm font-medium">

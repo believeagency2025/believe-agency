@@ -53,54 +53,62 @@
                 <!-- Address Card -->
                 <div class="glass-card p-8 rounded-3xl text-center hover:shadow-xl transition-shadow" data-aos="fade-up"
                     data-aos-delay="100">
-                    <a href="https://maps.google.com/?q=Tanta,+Egypt" target="_blank"
+                    <div
                         class="w-16 h-16 mx-auto bg-brand-100 dark:bg-brand-500/10 rounded-full flex items-center justify-center text-brand-600 dark:text-brand-400 text-2xl mb-4 hover:shadow-lg transition-all">
                         <i class="fas fa-map-marker-alt"></i>
-                    </a>
+                    </div>
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
                         {{ __('site.contact.address_title') }}</h3>
-                    <p class="text-gray-600 dark:text-gray-400">{{ __('site.contact.location') }}</p>
+                    <p class="text-gray-600 dark:text-gray-400">{{ $settings['contact_address'] ?? __('site.contact.location') }}</p>
                 </div>
 
                 <!-- Phone Card -->
                 <div class="glass-card p-8 rounded-3xl text-center hover:shadow-xl transition-shadow" data-aos="fade-up"
                     data-aos-delay="200">
-                    <a href="tel:+201505294544"
+                    <a href="tel:{{ $settings['contact_phone'] ?? '' }}"
                         class="w-16 h-16 mx-auto bg-green-100 dark:bg-green-500/10 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-2xl mb-4 hover:shadow-lg transition-all">
                         <i class="fas fa-phone-alt"></i>
                     </a>
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
                         {{ __('site.contact.phone_title') }}</h3>
-                    <a href="tel:+201505294544"
-                        class="text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors">+20
-                        15 0529 4544</a>
+                    <a href="tel:{{ $settings['contact_phone'] ?? '' }}"
+                        class="text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors">{{ $settings['contact_phone'] ?? '' }}</a>
                 </div>
 
                 <!-- Email Card -->
                 <div class="glass-card p-8 rounded-3xl text-center hover:shadow-xl transition-shadow" data-aos="fade-up"
                     data-aos-delay="300">
-                    <a href="mailto:info@believe-agency.net"
+                    <a href="mailto:{{ $settings['contact_email'] ?? 'info@believe-agency.net' }}"
                         class="w-16 h-16 mx-auto bg-blue-100 dark:bg-blue-500/10 rounded-full flex items-center justify-center text-blue-600 dark:text-blue-400 text-2xl mb-4 hover:shadow-lg transition-all">
                         <i class="fas fa-envelope"></i>
                     </a>
                     <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
                         {{ __('site.contact.email_title') }}</h3>
-                    <a href="mailto:info@believe-agency.net"
-                        class="text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors break-all">info@believe-agency.net</a>
+                    <a href="mailto:{{ $settings['contact_email'] ?? 'info@believe-agency.net' }}"
+                        class="text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors break-all">{{ $settings['contact_email'] ?? 'info@believe-agency.net' }}</a>
                 </div>
 
                 <!-- WhatsApp Card -->
                 <div class="glass-card p-8 rounded-3xl text-center hover:shadow-xl transition-shadow" data-aos="fade-up"
                     data-aos-delay="400">
-                    <a href="https://wa.me/201505294544" target="_blank"
-                        class="w-16 h-16 mx-auto bg-green-100 dark:bg-green-500/10 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-2xl mb-4 hover:shadow-lg transition-all">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
-                        {{ __('site.contact.whatsapp_title') }}</h3>
-                    <a href="https://wa.me/201505294544" target="_blank"
-                        class="text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors">+20
-                        15 0529 4544</a>
+                    @if($settings['whatsapp'] ?? null)
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['whatsapp']) }}" target="_blank"
+                            class="w-16 h-16 mx-auto bg-green-100 dark:bg-green-500/10 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-2xl mb-4 hover:shadow-lg transition-all">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                            {{ __('site.contact.whatsapp_title') }}</h3>
+                        <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['whatsapp']) }}" target="_blank"
+                            class="text-gray-600 dark:text-gray-400 hover:text-brand-600 dark:hover:text-brand-400 transition-colors">{{ $settings['whatsapp'] ?? '' }}</a>
+                    @else
+                        <div
+                            class="w-16 h-16 mx-auto bg-green-100 dark:bg-green-500/10 rounded-full flex items-center justify-center text-green-600 dark:text-green-400 text-2xl mb-4 opacity-50">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">
+                            {{ __('site.contact.whatsapp_title') }}</h3>
+                        <p class="text-gray-400">{{ __('site.no_data', ['default' => 'Not Available']) }}</p>
+                    @endif
                 </div>
             </div>
 
@@ -160,15 +168,24 @@
                                 class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all"></textarea>
                         </div>
 
-                         <!-- "I'm not a robot" Checkbox (Visual) -->
-                        <div
-                            class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-slate-800 border border-gray-200 dark:border-gray-600 rounded-xl w-fit">
-                            <input type="checkbox" id="robot_check_contact"
-                                class="w-6 h-6 text-brand-500 rounded border-gray-300 focus:ring-brand-500 cursor-pointer">
-                            <label for="robot_check_contact"
-                                class="text-sm text-gray-600 dark:text-gray-400 cursor-pointer select-none">{{ __('site.contact.not_robot', ['default' => 'I am not a robot']) }}</label>
-                            <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA"
-                                class="w-8 h-8 opacity-50 ml-2">
+                        <!-- Creative "I'm not a robot" Verification -->
+                        <div class="relative group">
+                            <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-900/50 border border-gray-200 dark:border-gray-700 rounded-2xl transition-all duration-300 group-hover:border-brand-500/50">
+                                <div class="flex items-center gap-4">
+                                    <div class="relative flex items-center justify-center">
+                                        <input type="checkbox" id="robot_check_home" required class="peer appearance-none w-10 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full checked:bg-brand-500 checked:border-brand-500 transition-all cursor-pointer">
+                                        <i class="fas fa-check absolute text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
+                                        <div class="absolute inset-0 rounded-full border-2 border-brand-500 scale-0 peer-checked:animate-ping opacity-0 peer-checked:opacity-20"></div>
+                                    </div>
+                                    <label for="robot_check_home" class="text-sm font-semibold text-gray-600 dark:text-gray-400 cursor-pointer select-none group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+                                        {{ __('site.contact.not_robot') }}
+                                    </label>
+                                </div>
+                                <div class="flex flex-col items-center opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
+                                    <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA" class="w-6 h-6 mb-1">
+                                    <span class="text-[8px] uppercase tracking-tighter">Privacy</span>
+                                </div>
+                            </div>
                         </div>
 
                         <button type="submit"

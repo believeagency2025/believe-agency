@@ -70,6 +70,7 @@ return [
     'linkedin' => 'لينكد إن',
     'tiktok' => 'تيك توك',
     'twitter' => 'إكس (تويتر)',
+    'whatsapp' => 'واتساب',
     'email_address' => 'البريد الإلكتروني',
     'phone_number' => 'رقم الهاتف',
     'office_address' => 'عنوان المكتب',
@@ -191,9 +192,6 @@ return [
     'description' => 'الوصف',
     'recommended' => 'موصف به',
     'service' => 'الخدمة',
-    'role' => 'الدور',
-    'name' => 'الاسم',
-    'duration' => 'المدة',
-    'featured_image' => 'الصورة الرئيسية',
-    'featured_project' => 'مشروع مميز',
+
+    'settings_updated_successfully' => 'تم تحديث الإعدادات بنجاح.',
 ];

@@ -6,25 +6,43 @@
                     <img src="{{ asset('img/dark.png') }}" alt="Believe Agency" class="h-16 md:h-20 w-auto transition-all duration-300 hover:scale-105 block dark:hidden">
                     <img src="{{ asset('img/light.png') }}" alt="Believe Agency" class="h-16 md:h-20 w-auto transition-all duration-300 hover:scale-105 hidden dark:block">
                 </div>
-                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
+                    {{ $settings['agency_name'] ?? 'Believe' }} <span class="text-brand-500">Agency</span>
+                </h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-6 font-medium">
                     {{ __('site.footer.desc') }}
                 </p>
                 <div class="flex gap-4 mt-6 flex-wrap">
-                    <a href="https://www.facebook.com/BelieveAgency2025" target="_blank"
-                        class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white transition-colors"><i
-                            class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.behance.net/believeagency" target="_blank"
-                        class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white transition-colors"><i
-                            class="fab fa-behance"></i></a>
-                    <a href="https://www.instagram.com/believe_agency_?igsh=MWhyaHQxNmg1Mm45Zg%3D%3D&utm_source=qr"
-                        class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white transition-colors"><i
-                            class="fab fa-instagram"></i></a>
-                     <a href="https://www.linkedin.com/company/believeagency2025/"
-                        class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white transition-colors"><i
-                            class="fab fa-linkedin-in"></i></a>
-                     <a href="https://www.tiktok.com/@believe.agency4?_r=1&_t=ZS-92W8PwecCMz"
-                        class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white transition-colors"><i
-                            class="fab fa-tiktok"></i></a>
+                    @if($settings['facebook'] ?? null)
+                        <a href="{{ $settings['facebook'] }}" target="_blank"
+                            class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-colors"><i
+                                class="fab fa-facebook-f"></i></a>
+                    @endif
+                    @if($settings['behance'] ?? null)
+                        <a href="{{ $settings['behance'] }}" target="_blank"
+                            class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-colors"><i
+                                class="fab fa-behance"></i></a>
+                    @endif
+                    @if($settings['instagram'] ?? null)
+                        <a href="{{ $settings['instagram'] }}" target="_blank"
+                            class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-colors"><i
+                                class="fab fa-instagram"></i></a>
+                    @endif
+                    @if($settings['linkedin'] ?? null)
+                         <a href="{{ $settings['linkedin'] }}" target="_blank"
+                            class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-colors"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    @endif
+                    @if($settings['tiktok'] ?? null)
+                         <a href="{{ $settings['tiktok'] }}" target="_blank"
+                            class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-colors"><i
+                                class="fab fa-tiktok"></i></a>
+                    @endif
+                    @if($settings['twitter'] ?? null)
+                         <a href="{{ $settings['twitter'] }}" target="_blank"
+                            class="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-colors"><i
+                                class="fab fa-x-twitter"></i></a>
+                    @endif
                 </div>
             </div>
 
@@ -57,18 +75,18 @@
 
             <div>
                 <h4 class="text-gray-900 dark:text-white font-bold mb-6">{{ __('site.footer.contact') }}</h4>
-                <ul class="space-y-3 text-gray-600 dark:text-gray-400 text-sm">
+                <ul class="space-y-4">
                     <li class="flex items-start gap-3">
-                        <i class="fas fa-map-marker-alt mt-1 text-brand-500 dark:text-brand-500"></i>
-                        <span>{{ __('site.contact.location') }}</span>
+                        <i class="fas fa-map-marker-alt mt-1 text-brand-500"></i>
+                        <span class="text-gray-600 dark:text-gray-400 text-sm">{{ $settings['contact_address'] ?? __('site.contact.location') }}</span>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <i class="fas fa-phone mt-1 text-brand-500 dark:text-brand-500"></i>
-                        <span>+20 15 0529 4544</span>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-phone-alt text-brand-500"></i>
+                         <a href="tel:{{ $settings['contact_phone'] ?? '' }}" class="text-gray-600 dark:text-gray-400 text-sm hover:text-brand-600 transition-colors">{{ $settings['contact_phone'] ?? '' }}</a>
                     </li>
-                    <li class="flex items-start gap-3">
-                        <i class="fas fa-envelope mt-1 text-brand-500 dark:text-brand-500"></i>
-                        <span>info@believe-agency.net</span>
+                    <li class="flex items-center gap-3">
+                        <i class="fas fa-envelope text-brand-500"></i>
+                        <a href="mailto:{{ $settings['contact_email'] ?? 'info@believe-agency.net' }}" class="text-gray-600 dark:text-gray-400 text-sm hover:text-brand-600 transition-colors">{{ $settings['contact_email'] ?? 'info@believe-agency.net' }}</a>
                     </li>
                 </ul>
             </div>

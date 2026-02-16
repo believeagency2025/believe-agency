@@ -3,12 +3,35 @@
 @section('title', 'Digital & Marketing Solutions')
 
 @push('styles')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <style>
         .text-gradient {
             color: #1792ad;
         }
         .dark .text-gradient {
             color: #5dc9e0;
+        }
+
+        /* Swiper Customization */
+        .swiper-testimonials {
+            width: 100%;
+            padding: 20px 0 60px 0 !important;
+        }
+
+        .swiper-testimonials .swiper-pagination-bullet {
+            background: #1792ad;
+            opacity: 0.3;
+        }
+
+        .swiper-testimonials .swiper-pagination-bullet-active {
+            opacity: 1;
+            background: #1792ad;
+            width: 25px;
+            border-radius: 5px;
+        }
+
+        .dark .swiper-testimonials .swiper-pagination-bullet-active {
+            background: #5dc9e0;
         }
 
         @keyframes blob {
@@ -357,27 +380,32 @@
                 <h2 class="text-3xl md:text-5xl font-bold mt-2 text-gray-900 dark:text-white">{!! __('site.testimonials.title') !!}</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach($testimonials as $index => $testimonial)
-                <div class="glass-card bg-white dark:bg-white/5 p-8 rounded-3xl relative border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none"
-                    data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
-                    <i class="fas fa-quote-right absolute top-8 right-8 text-4xl text-gray-200 dark:text-white/5"></i>
-                    <div class="flex text-yellow-500 text-sm mb-6">
-                        @for($j=0; $j < $testimonial->rating; $j++) <i class="fas fa-star"></i> @endfor
-                    </div>
-                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
-                        {{ $testimonial->content }}</p>
-                    <div class="flex items-center gap-4">
-                        <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->client_name }}"
-                            class="w-12 h-12 rounded-full object-cover ring-2 ring-brand-500/50">
-                        <div>
-                             <h4 class="font-bold text-gray-900 dark:text-white text-sm">
-                                {{ $testimonial->client_name }}</h4>
-                            <p class="text-xs text-brand-600 dark:text-brand-400">{{ $testimonial->client_role }}</p>
+            <div class="swiper swiper-testimonials" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    @foreach($testimonials as $index => $testimonial)
+                    <div class="swiper-slide h-auto">
+                        <div class="glass-card bg-white dark:bg-white/5 p-8 rounded-3xl relative border border-gray-200 dark:border-white/5 shadow-xl dark:shadow-none h-full transition-all duration-300 flex flex-col">
+                            <i class="fas fa-quote-right absolute top-8 right-8 mt-2 text-4xl text-gray-200 dark:text-white/5"></i>
+                            <div class="flex text-yellow-500 text-sm mb-8">
+                                @for($j=0; $j < $testimonial->rating; $j++) <i class="fas fa-star"></i> @endfor
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-6 line-clamp-4 cursor-help" title="{{ $testimonial->content }}">
+                                {{ $testimonial->content }}</p>
+                            <div class="flex items-center gap-4 mt-auto">
+                                <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->client_name }}"
+                                    class="w-12 h-12 rounded-full object-cover ring-2 ring-brand-500/50">
+                                <div>
+                                    <h4 class="font-bold text-gray-900 dark:text-white text-sm">
+                                        {{ $testimonial->client_name }}</h4>
+                                    <p class="text-xs text-brand-600 dark:text-brand-400">{{ $testimonial->client_role }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
-                @endforeach
+                <!-- Add Pagination -->
+                <div class="swiper-pagination bottom-0!"></div>
             </div>
         </div>
     </section>
@@ -431,7 +459,7 @@
                             </div>
                             <div>
                                 <h4 class="text-gray-900 dark:text-white font-bold text-lg mb-1">{{ __('site.contact.location_title') }}</h4>
-                                <p class="text-gray-600 dark:text-gray-400">{{ __('site.contact.location') }}</p>
+                                <p class="text-gray-600 dark:text-gray-400">{{ $settings['contact_address'] ?? __('site.contact.location') }}</p>
                             </div>
                         </div>
 
@@ -442,7 +470,7 @@
                             </div>
                             <div>
                                 <h4 class="text-gray-900 dark:text-white font-bold text-lg mb-1">{{ __('site.contact.email_title') }}</h4>
-                                <p class="text-gray-600 dark:text-gray-400">info@believe-agency.net</p>
+                                <a href="mailto:{{ $settings['contact_email'] ?? 'info@believe-agency.net' }}" class="text-gray-600 dark:text-gray-400 hover:text-brand-600 transition-colors">{{ $settings['contact_email'] ?? 'info@believe-agency.net' }}</a>
                             </div>
                         </div>
 
@@ -453,7 +481,7 @@
                             </div>
                             <div>
                                 <h4 class="text-gray-900 dark:text-white font-bold text-lg mb-1">{{ __('site.contact.phone_title') }}</h4>
-                                <p class="text-gray-600 dark:text-gray-400">+20 15 0529 4544</p>
+                                <a href="tel:{{ $settings['contact_phone'] ?? '' }}" class="text-gray-600 dark:text-gray-400 hover:text-brand-600 transition-colors">{{ $settings['contact_phone'] ?? '' }}</a>
                             </div>
                         </div>
                     </div>
@@ -489,11 +517,24 @@
                                     class="w-full bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors resize-none"></textarea>
                             </div>
 
-                            <!-- "I'm not a robot" Checkbox (Visual) -->
-                            <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-gray-700 rounded-xl w-fit">
-                                <input type="checkbox" id="robot_check_home" class="w-6 h-6 text-brand-500 rounded border-gray-300 focus:ring-brand-500 cursor-pointer">
-                                <label for="robot_check_home" class="text-sm text-gray-600 dark:text-gray-400 cursor-pointer select-none">{{ __('site.contact.not_robot') }}</label>
-                                <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA" class="w-8 h-8 opacity-50 ml-2">
+                            <!-- Creative "I'm not a robot" Verification -->
+                            <div class="relative group">
+                                <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-900/50 border border-gray-200 dark:border-gray-700 rounded-2xl transition-all duration-300 group-hover:border-brand-500/50">
+                                    <div class="flex items-center gap-4">
+                                        <div class="relative flex items-center justify-center">
+                                            <input type="checkbox" id="robot_check_home" class="peer appearance-none w-10 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full checked:bg-brand-500 checked:border-brand-500 transition-all cursor-pointer">
+                                            <i class="fas fa-check absolute text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
+                                            <div class="absolute inset-0 rounded-full border-2 border-brand-500 scale-0 peer-checked:animate-ping opacity-0 peer-checked:opacity-20"></div>
+                                        </div>
+                                        <label for="robot_check_home" class="text-sm font-semibold text-gray-600 dark:text-gray-400 cursor-pointer select-none group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+                                            {{ __('site.contact.not_robot') }}
+                                        </label>
+                                    </div>
+                                    <div class="flex flex-col items-center opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all">
+                                        <img src="https://www.gstatic.com/recaptcha/api2/logo_48.png" alt="reCAPTCHA" class="w-6 h-6 mb-1">
+                                        <span class="text-[8px] uppercase tracking-tighter">Privacy</span>
+                                    </div>
+                                </div>
                             </div>
 
                             <button type="submit"
@@ -516,6 +557,7 @@
         </div>
     </section>
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -642,6 +684,29 @@
                 });
             });
         }
+
+        // Initialize Testimonials Swiper
+        new Swiper(".swiper-testimonials", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
     });
 </script>
 @endpush

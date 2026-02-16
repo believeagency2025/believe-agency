@@ -88,6 +88,15 @@
                                 <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
                             @enderror
                         </div>
+                        <div>
+                            <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.whatsapp') }}</label>
+                            <input type="text" name="whatsapp" value="{{ \App\Models\Setting::get('whatsapp') }}"
+                                placeholder="201..."
+                                class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border @error('whatsapp') border-red-500 @else border-slate-200 dark:border-slate-700 @enderror rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-sm">
+                            @error('whatsapp')
+                                <p class="mt-1 text-xs text-red-500 font-bold flex items-center gap-1"><i class="fas fa-circle-exclamation"></i> {{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 

@@ -72,6 +72,7 @@ return [
     'linkedin' => 'LinkedIn',
     'tiktok' => 'TikTok',
     'twitter' => 'X (Twitter)',
+    'whatsapp' => 'WhatsApp',
     'email_address' => 'Email Address',
     'phone_number' => 'Phone Number',
     'office_address' => 'Office Address',
@@ -195,4 +196,5 @@ return [
     'description' => 'Description',
     'recommended' => 'recommended',
     'service' => 'Service',
+    'settings_updated_successfully' => 'Settings updated successfully.',
 ];
