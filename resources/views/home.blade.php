@@ -36,12 +36,12 @@
 
         @keyframes blob {
             0% { transform: translate(0px, 0px) scale(1); }
-            33% { transform: translate(30px, -50px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
+            33% { transform: translate(50px, -70px) scale(1.2); }
+            66% { transform: translate(-30px, 30px) scale(0.8); }
             100% { transform: translate(0px, 0px) scale(1); }
         }
         .animate-blob {
-            animation: blob 7s infinite;
+            animation: blob 25s infinite ease-in-out;
         }
         .animation-delay-2000 {
             animation-delay: 2s;
@@ -153,11 +153,11 @@
 
             <!-- Social Icons -->
             <div class="flex items-center justify-center gap-4 mb-8" data-aos="fade-up" data-aos-delay="300">
-                <a href="https://www.facebook.com/BelieveAgency2025" target="_blank" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-1"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.behance.net/believeagency" target="_blank" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-1"><i class="fab fa-behance"></i></a>
-                <a href="https://www.instagram.com/believe_agency_?igsh=MWhyaHQxNmg1Mm45Zg%3D%3D&utm_source=qr" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-1"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.linkedin.com/company/believeagency2025/" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-1"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://www.tiktok.com/@believe.agency4?_r=1&_t=ZS-92W8PwecCMz" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-1"><i class="fab fa-tiktok"></i></a>
+                <a href="{{ $settings['facebook'] ?? '#' }}" target="_blank" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-2"><i class="fab fa-facebook-f"></i></a>
+                <a href="{{ $settings['behance'] ?? '#' }}" target="_blank" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-2"><i class="fab fa-behance"></i></a>
+                <a href="{{ $settings['instagram'] ?? '#' }}" target="_blank" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-2"><i class="fab fa-instagram"></i></a>
+                <a href="{{ $settings['linkedin'] ?? '#' }}" target="_blank" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-2"><i class="fab fa-linkedin-in"></i></a>
+                <a href="{{ $settings['tiktok'] ?? '#' }}" target="_blank" class="w-10 h-10 rounded-full bg-white dark:bg-white/10 shadow-lg flex items-center justify-center text-brand-600 dark:text-white hover:bg-brand-600 hover:text-white dark:hover:bg-brand-600 transition-all transform hover:-translate-y-2"><i class="fab fa-tiktok"></i></a>
             </div>
 
             <!-- Buttons -->
@@ -420,12 +420,19 @@
                 </h2>
             </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center opacity-60 dark:opacity-40">
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center">
                 @foreach($clients as $index => $client)
-                <div class="flex justify-center p-4 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                @if($client->website_url)
+                <a href="{{ $client->website_url }}" target="_blank" class="flex justify-center items-center p-6 bg-gray-50 dark:bg-gray-50 rounded-2xl border border-gray-100 dark:border-white/5 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 shadow-sm hover:shadow-md h-24"
                     data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
-                    <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}" class="h-12 w-auto object-contain">
+                    <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}" class="h-10 md:h-12 w-auto object-contain transition-all duration-300">
+                </a>
+                @else
+                <div class="flex justify-center items-center p-6 bg-gray-50 dark:bg-gray-50 rounded-2xl border border-gray-100 dark:border-white/5 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 shadow-sm hover:shadow-md h-24"
+                    data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
+                    <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}" class="h-10 md:h-12 w-auto object-contain transition-all duration-300">
                 </div>
+                @endif
                 @endforeach
             </div>
 
