@@ -39,7 +39,7 @@ return [
         'team_title' => 'الفريق',
         'testimonials' => 'آراء العملاء',
         'testimonials_title' => 'آراء العملاء',
-        'message1' => 'العلامات الكبرى تبدأ <br> مع <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Believe</span>',
+        'message1' => 'العلامات <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">الكبرى </span> <br> تبدأ مع <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Believe</span>',
         'message2' => '<span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">حلول </span> رقمية <br> مبتكرة <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">وإبداعية</span>',
     ],
     'floater' => [
