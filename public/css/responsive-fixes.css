@@ -75,10 +75,10 @@ body {
 /* Grid improvements */
 @media (max-width: 640px) {
 
-    /* Stats grids */
-    .grid-cols-2 {
+    /* Stats grids are handled better by specific classes if needed */
+    /* .grid-cols-2 {
         grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
-    }
+    } */
 
     /* Better card spacing */
     .gap-8 {

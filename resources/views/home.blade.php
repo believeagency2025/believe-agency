@@ -313,10 +313,10 @@
                 </h2>
 
             <!-- Filters -->
-            <div class="flex flex-wrap justify-center gap-3 mb-12 mt-12" data-aos="fade-up" data-aos-delay="100">
+            <div class="grid grid-cols-2 lg:flex lg:flex-wrap justify-center gap-2 mb-12 mt-12" data-aos="fade-up" data-aos-delay="100">
                 @foreach($services as $service)
                 <button
-                    class="projects-filter-btn px-6 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20"
+                    class="projects-filter-btn w-full lg:w-auto px-2 lg:px-6 py-2.5 rounded-xl glass bg-white/50 dark:bg-white/5 hover:bg-brand-500 hover:text-white dark:hover:bg-brand-500 dark:hover:text-white text-gray-600 dark:text-gray-300 text-[10px] sm:text-xs lg:text-sm font-semibold transition-all shadow-sm hover:shadow-brand-500/20"
                     data-filter="{{ $service->slug }}">{{ $service->title }}</button>
                 @endforeach
             </div>
