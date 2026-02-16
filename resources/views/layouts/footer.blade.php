@@ -75,7 +75,7 @@
 
             <div>
                 <h4 class="text-gray-900 dark:text-white font-bold mb-6">{{ __('site.footer.contact') }}</h4>
-                <ul class="space-y-4">
+                <ul class="space-y-2">
                     <li class="flex items-start gap-3">
                         <div class="w-5 flex justify-center shrink-0 mt-1">
                             <i class="fas fa-map-marker-alt text-brand-500"></i>

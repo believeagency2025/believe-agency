@@ -20,29 +20,17 @@ trait ImageUploadTrait
         $filename = Str::random(20) . '.webp';
         $path = $folder . '/' . $filename;
 
-        $image = null;
-        $extension = strtolower($file->getClientOriginalExtension());
+        $image = @imagecreatefromstring($file->get());
 
-        switch ($extension) {
-            case 'jpg':
-            case 'jpeg':
-                $image = imagecreatefromjpeg($file->getRealPath());
-                break;
-            case 'png':
-                $image = imagecreatefrompng($file->getRealPath());
-                imagepalettetotruecolor($image);
-                imagealphablending($image, true);
-                imagesavealpha($image, true);
-                break;
-            case 'webp':
-                $image = imagecreatefromwebp($file->getRealPath());
-                break;
-            case 'gif':
-                $image = imagecreatefromgif($file->getRealPath());
-                break;
-            default:
-                return $file->store($folder, 'public');
+        if (!$image || (PHP_VERSION_ID >= 80000 && !($image instanceof \GdImage)) || (PHP_VERSION_ID < 80000 && !is_resource($image))) {
+            // Fallback to storing original file if GD cannot process it
+            return $file->store($folder, 'public');
         }
+
+        // Handle alpha transparency for PNGs we just converted from string
+        imagepalettetotruecolor($image);
+        imagealphablending($image, true);
+        imagesavealpha($image, true);
 
         if ($image) {
             ob_start();
