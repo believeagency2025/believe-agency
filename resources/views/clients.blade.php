@@ -43,18 +43,18 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-12 items-center">
                 @foreach($clients as $client)
                 @if($client->website_url)
-                <a href="{{ $client->website_url }}" target="_blank" class="group flex flex-col items-center justify-center p-8 bg-gray-50 dark:bg-gray-50 rounded-2xl border border-gray-100 dark:border-white/5 grayscale hover:grayscale-0 opacity-80 hover:opacity-100 transition-all duration-300 shadow-sm hover:shadow-md"
+                <a href="{{ $client->website_url }}" target="_blank" class="flex flex-col items-center justify-center p-8 bg-gray-50 dark:bg-gray-50 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm"
                     data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                     <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
-                        class="h-16 w-auto mb-4 transition-all duration-300">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200 transition-colors group-hover:text-brand-600">{{ $client->name }}</h3>
+                        class="h-16 w-auto mb-4">
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ $client->name }}</h3>
                 </a>
                 @else
-                <div class="group flex flex-col items-center justify-center p-8 bg-gray-50 dark:bg-gray-50 rounded-2xl border border-gray-100 dark:border-white/5 grayscale hover:grayscale-0 opacity-80 hover:opacity-100 transition-all duration-300 shadow-sm hover:shadow-md"
+                <div class="flex flex-col items-center justify-center p-8 bg-gray-50 dark:bg-gray-50 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm"
                     data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                     <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
-                        class="h-16 w-auto mb-4 transition-all duration-300">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200 transition-colors group-hover:text-brand-600">{{ $client->name }}</h3>
+                        class="h-16 w-auto mb-4">
+                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ $client->name }}</h3>
                 </div>
                 @endif
                 @endforeach

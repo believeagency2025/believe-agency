@@ -39,8 +39,8 @@ return [
         'team_title' => 'Team',
         'testimonials' => 'Testimonials',
         'testimonials_title' => 'Testimonials',
-        'message1' => '<span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Big</span> Brands Start <br><br> with <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Believe</span>',
-        'message2' => '<span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Creative</span> & Innovative <br><br> Digital <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Solutions</span>',
+        'message1' => '<span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Big</span> Brands Start <br> with <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Believe</span>',
+        'message2' => '<span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Creative</span> & Innovative <br> Digital <span class="text-brand-500 drop-shadow-[0_0_15px_rgba(23,146,173,0.5)]">Solutions</span>',
     ],
     'floater' => [
         'philosophy' => '"Every idea deserves the chance to grow, free from fear and uncertainty."',
