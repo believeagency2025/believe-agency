@@ -47,14 +47,14 @@
                     data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                     <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
                         class="h-16 w-auto mb-4">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ $client->name }}</h3>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-800">{{ $client->name }}</h3>
                 </a>
                 @else
                 <div class="flex flex-col items-center justify-center p-8 bg-gray-50 dark:bg-gray-50 rounded-2xl border border-gray-100 dark:border-white/5 shadow-sm"
                     data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
                     <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}"
                         class="h-16 w-auto mb-4">
-                    <h3 class="font-bold text-gray-800 dark:text-gray-200">{{ $client->name }}</h3>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-800">{{ $client->name }}</h3>
                 </div>
                 @endif
                 @endforeach
