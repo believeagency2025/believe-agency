@@ -137,7 +137,7 @@
             </div>
 
             <!-- Main Heading -->
-            <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-8 text-gray-900 dark:text-white tracking-tight min-h-[160px] md:min-h-[180px] flex items-center justify-center relative px-2">
+            <h1 class="text-5xl md:text-7xl font-bold mb-8 text-gray-900 dark:text-white tracking-tight min-h-[220px] md:min-h-[260px] flex items-center justify-center relative px-4" style="line-height: 1.3;">
                 <span class="hero-message absolute transition-all duration-1000 opacity-100 scale-100">
                     {!! __('site.hero.message1') !!}
                 </span>
