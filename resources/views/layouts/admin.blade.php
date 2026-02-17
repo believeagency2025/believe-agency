@@ -115,6 +115,11 @@
                     {{ __('admin.services') }}
                 </a>
 
+                <a href="{{ route('admin.blogs.index') }}" class="sidebar-link {{ request()->routeIs('admin.blogs.*') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
+                    <i class="fas fa-newspaper w-5"></i>
+                    {{ __('admin.blogs') ?? 'What is New' }}
+                </a>
+
 
                 <a href="{{ route('admin.projects.index') }}" class="sidebar-link {{ request()->routeIs('admin.projects.*') ? 'active' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700/50 hover:text-slate-900 dark:hover:text-white' }} flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium">
                     <i class="fas fa-briefcase w-5"></i>

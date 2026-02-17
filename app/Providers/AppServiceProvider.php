@@ -23,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        \Illuminate\Pagination\Paginator::useTailwind();
+
         View::composer('*', function ($view) {
             $view->with('services_nav', Service::where('is_active', true)->orderBy('order')->get());
             $view->with('newMessagesCount', ContactMessage::where('status', 'new')->count());

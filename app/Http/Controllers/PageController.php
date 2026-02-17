@@ -99,4 +99,17 @@ class PageController extends Controller
         $service = \App\Models\Service::where('slug', $slug)->where('is_active', true)->firstOrFail();
         return view('service-detail', compact('service'));
     }
+
+    public function blogs()
+    {
+        $blogs = \App\Models\Blog::where('is_active', true)->orderBy('order')->latest()->paginate(6);
+        return view('blogs.index', compact('blogs'));
+    }
+
+    public function blogDetail($slug)
+    {
+        $blog = \App\Models\Blog::where('slug', $slug)->where('is_active', true)->firstOrFail();
+        $recentBlogs = \App\Models\Blog::where('is_active', true)->where('id', '!=', $blog->id)->latest()->limit(5)->get();
+        return view('blogs.show', compact('blog', 'recentBlogs'));
+    }
 }

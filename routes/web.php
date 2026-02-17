@@ -24,6 +24,8 @@ Route::controller(PageController::class)->group(function () {
     // Services specific pages
     Route::get('/services/{slug}', 'serviceDetail')->name('service.detail');
     Route::get('/project/{slug}', 'projectDetails')->name('project-details');
+    Route::get('/blogs', 'blogs')->name('blogs');
+    Route::get('/blogs/{slug}', 'blogDetail')->name('blog.detail');
 });
 
 Route::post('/contact/submit', [\App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');

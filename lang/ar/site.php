@@ -6,7 +6,7 @@ return [
         'about' => 'من نحن',
         'services' => 'خدماتنا',
         'projects' => 'أعمالنا',
-        'blog' => 'المدونة',
+        'blogs' => 'ما الجديد',
         'contact' => 'تواصل معنا',
         'clients' => 'عملائنا',
         'language' => 'English',
@@ -748,5 +748,20 @@ return [
     'profile_gallery' => 'معرض الملف التعريفي',
     'profile_breadcrumb_title' => 'ملف الشركة',
 
+    // Blogs
+    'blogs_title' => 'ما الجديد - المدونة',
+    'blogs_subtitle' => 'ما الجديد',
+    'blogs_main_title' => 'آخر الأخبار <span class="text-brand-500">والمقالات</span>',
+    'blogs_description' => 'ابق على اطلاع دائم بآخر أنشطتنا وأخبارنا ورؤيتنا في العالم الرقمي.',
+    'read_more' => 'اقرأ المزيد',
+    'no_blogs' => 'لا توجد مقالات بعد.',
+    'check_back_later' => 'يرجى العودة لاحقاً لمتابعة التحديثات الجديدة.',
+    'share_article' => 'شارك هذا المقال:',
+    'recent_blogs' => 'أحدث الأخبار',
+    'have_project' => 'لديك مشروع خاص؟',
+    'cta_description' => 'دعنا نتعاون ونبني شيئاً استثنائياً معاً.',
+    'contact_us' => 'تواصل معنا',
+    'home' => 'الرئيسية',
+    'blogs' => 'ما الجديد',
     'no_data' => 'لا يوجد بيانات'
 ];

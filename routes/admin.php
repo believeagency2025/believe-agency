@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AuthController;
 
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\ContactMessageController;
+use App\Http\Controllers\Admin\BlogController;
 
 // Admin Routes
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -34,6 +35,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('clients', ClientController::class);
         Route::resource('team', TeamController::class);
         Route::resource('testimonials', TestimonialController::class);
+        Route::resource('blogs', BlogController::class);
         Route::resource('messages', ContactMessageController::class)->only(['index', 'show', 'destroy']);
 
         // Settings

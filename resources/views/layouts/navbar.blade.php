@@ -49,6 +49,7 @@
                         </div>
                     </div>
                     <a href="{{ route('projects') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.projects') }}</a>
+                    <a href="{{ route('blogs') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.blogs') ?? 'What is New' }}</a>
                     <a href="{{ route('clients') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.clients') }}</a>
                     <a href="{{ route('contact') }}" class="text-gray-700 hover:text-brand-600 dark:text-gray-300 dark:hover:text-brand-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">{{ __('site.nav.contact') }}</a>
                 </div>
@@ -123,6 +124,13 @@
                     <i class="fas fa-folder-open"></i>
                 </div>
                 <span>{{ __('site.nav.projects') }}</span>
+            </a>
+
+            <a href="{{ route('blogs') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">
+                <div class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-brand-600 dark:text-brand-400 transition-colors">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <span>{{ __('site.nav.blogs') ?? 'What is New' }}</span>
             </a>
 
             <a href="{{ route('clients') }}" class="flex items-center gap-4 text-gray-700 dark:text-gray-300 hover:text-brand-600 dark:hover:text-white px-4 py-3 rounded-2xl text-base font-semibold hover:bg-brand-50/50 dark:hover:bg-brand-900/20 transition-all duration-200">

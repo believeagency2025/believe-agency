@@ -6,7 +6,7 @@ return [
         'about' => 'About',
         'services' => 'Services',
         'projects' => 'Projects',
-        'blog' => 'Blog',
+        'blogs' => 'What is New',
         'contact' => 'Contact',
         'clients' => 'Clients',
         'language' => 'العربية',
@@ -743,4 +743,19 @@ return [
     'profile_gallery' => 'Company Profile Gallery',
     'profile_breadcrumb_title' => 'Company Profile',
 
+    // Blogs
+    'blogs_title' => 'What is New - Blog',
+    'blogs_subtitle' => 'What is New',
+    'blogs_main_title' => 'Latest News & <span class="text-brand-500">Insights</span>',
+    'blogs_description' => 'Stay updated with our latest activities, news, and insights into the digital world.',
+    'read_more' => 'Read More',
+    'no_blogs' => 'No blog posts yet.',
+    'check_back_later' => 'Please check back later for new updates.',
+    'share_article' => 'Share this article:',
+    'recent_blogs' => 'Recent News',
+    'have_project' => 'Have a special project?',
+    'cta_description' => 'Let\'s collaborate and build something extraordinary together.',
+    'contact_us' => 'Contact Us',
+    'home' => 'Home',
+    'blogs' => 'What is New',
 ];

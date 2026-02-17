@@ -67,6 +67,7 @@
                     <li><a href="{{ url('/team') }}" class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">{{ __('site.footer.links.team') }}</a></li>
                     <li><a href="{{ url('/projects') }}"
                             class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">{{ __('site.footer.links.projects') }}</a></li>
+                    <li><a href="{{ route('blogs') }}" class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">{{ __('site.nav.blogs') ?? 'What is New' }}</a></li>
                     <li><a href="{{ url('/clients') }}" class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">{{ __('site.nav.clients') }}</a></li>
                     <li><a href="{{ url('/contact') }}"
                             class="hover:text-brand-500 dark:hover:text-brand-400 transition-colors">{{ __('site.footer.links.contact') }}</a></li>

@@ -202,4 +202,9 @@ return [
     'privacy_policy_en' => 'Privacy Policy (English)',
     'terms_conditions_ar' => 'Terms & Conditions (Arabic)',
     'terms_conditions_en' => 'Terms & Conditions (English)',
+    'blogs' => 'Blogs',
+    'add_new_blog' => 'Add New Blog',
+    'create_blog' => 'Create Blog',
+    'edit_blog' => 'Edit Blog',
+    'blogs_subtitle'=>'Manage your blog posts and recent updates.'
 ];

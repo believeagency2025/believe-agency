@@ -199,4 +199,9 @@ return [
     'privacy_policy_en' => 'سياسة الخصوصية (إنجليزي)',
     'terms_conditions_ar' => 'الشروط والأحكام (عربي)',
     'terms_conditions_en' => 'الشروط والأحكام (إنجليزي)',
+    'blogs' => 'المدونة',
+    'add_new_blog' => 'إضافة خبر جديد',
+    'create_blog' => 'إنشاء مدونة',
+    'edit_blog' => 'تعديل المدونة',
+    'blogs_subtitle'=> 'إدارة منشورات المدونة والتحديثات الأخيرة.',
 ];
