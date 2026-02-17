@@ -82,7 +82,7 @@
                         </div>
                         <span class="text-gray-600 dark:text-gray-400 text-sm leading-6">{{ $settings['contact_address'] ?? __('site.contact.location') }}</span>
                     </li>
-                    <li class="flex items-start gap-3">
+                    <li class="flex items-start gap-3" style="height: 20px !important;">
                         <div class="w-5 flex justify-center shrink-0 mt-1">
                             <i class="fas fa-phone-alt text-brand-500"></i>
                         </div>
