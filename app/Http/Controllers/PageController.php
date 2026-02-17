@@ -66,7 +66,10 @@ class PageController extends Controller
 
     public function contact()
     {
-        return view('contact');
+        $services = \App\Models\Service::where('is_active', true)
+            ->orderBy('order')
+            ->get();
+        return view('contact', compact('services'));
     }
 
     public function team()

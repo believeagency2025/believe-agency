@@ -151,12 +151,9 @@
                             <select id="service" name="service"
                                 class="w-full px-4 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
                                 <option value="" disabled selected>{{ __('site.contact.select_service') }}</option>
-                                <option value="web-design">{{ __('site.nav.web_design') }}</option>
-                                <option value="app-development">{{ __('site.nav.apps_development') }}</option>
-                                <option value="branding">{{ __('site.nav.branding') }}</option>
-                                <option value="marketing">{{ __('site.nav.digital_marketing') }}</option>
-                                <option value="ecommerce">{{ __('site.nav.ecommerce') }}</option>
-                                <option value="software">{{ __('site.nav.software_tools') }}</option>
+                               @foreach ($services as $service)
+                               <option value="{{ $service->title }}">{{ $service->title }}</option>
+                               @endforeach
                             </select>
                         </div>
 

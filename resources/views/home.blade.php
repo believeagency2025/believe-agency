@@ -423,12 +423,12 @@
             <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 items-center">
                 @foreach($clients as $index => $client)
                 @if($client->website_url)
-                <a href="{{ $client->website_url }}" target="_blank" class="flex justify-center items-center p-6 bg-gray-50 dark:bg-gray-50 rounded-2xl border border-gray-100 dark:border-white/5 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 shadow-sm hover:shadow-md h-24"
+                <a href="{{ $client->website_url }}" target="_blank" class="flex justify-center items-center p-6 bg-gray-50 dark:bg-gray-50 rounded-2xl border border-gray-100 dark:border-white/5 hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 shadow-sm hover:shadow-md h-24"
                     data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                     <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}" class="h-10 md:h-12 w-auto object-contain transition-all duration-300">
                 </a>
                 @else
-                <div class="flex justify-center items-center p-6 bg-gray-50 dark:bg-gray-50 rounded-2xl border border-gray-100 dark:border-white/5 grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 shadow-sm hover:shadow-md h-24"
+                <div class="flex justify-center items-center p-6 bg-gray-50 dark:bg-gray-50 rounded-2xl border border-gray-100 dark:border-white/5 hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300 shadow-sm hover:shadow-md h-24"
                     data-aos="fade-up" data-aos-delay="{{ ($index + 1) * 100 }}">
                     <img src="{{ asset('storage/' . $client->logo) }}" alt="{{ $client->name }}" class="h-10 md:h-12 w-auto object-contain transition-all duration-300">
                 </div>
