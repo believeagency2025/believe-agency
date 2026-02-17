@@ -19,6 +19,8 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/clients', 'clients')->name('clients');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/team', 'team')->name('team');
+    Route::get('/privacy-policy', 'privacyPolicy')->name('privacy-policy');
+    Route::get('/terms', 'terms')->name('terms');
     // Services specific pages
     Route::get('/services/{slug}', 'serviceDetail')->name('service.detail');
     Route::get('/project/{slug}', 'projectDetails')->name('project-details');

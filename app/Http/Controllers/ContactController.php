@@ -20,7 +20,7 @@ class ContactController extends Controller
             'name'    => 'required|string|max:255',
             'email'   => 'nullable|email|max:255',
             'phone'   => 'required|string|max:20',
-            'subject' => 'nullable|string|max:255',
+            'service' => 'nullable|string|max:255',
             'message' => 'nullable|string',
         ]);
 
@@ -34,10 +34,10 @@ class ContactController extends Controller
         try {
             ContactMessage::create([
                 'name'    => $request->name,
-                'email'   => $request->email,
+                'email'   => $request->email ?? '',
                 'phone'   => $request->phone,
-                'subject' => $request->subject ?? 'New Inquiry',
-                'message' => $request->message,
+                'subject' => $request->service ?? 'General Inquiry',
+                'message' => $request->message ?? '',
                 'status'  => 'new',
             ]);
 

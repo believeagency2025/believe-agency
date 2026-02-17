@@ -249,6 +249,8 @@ return [
         'subtitle' => 'OUR PARTNERS',
         'title' => 'Trusted by Industry Leaders',
         'view_all' => 'View All Clients',
+        'page_title' => 'Our Clients',
+        'breadcrumb' => 'Clients',
     ],
     'projects' => [
         'subtitle' => 'PORTFOLIO',
@@ -514,6 +516,7 @@ return [
         ],
     ],
     'terms' => [
+        'chip' => 'Legal',
         'title' => 'Terms of <span class="text-brand-500">Service</span>',
         'last_updated' => 'Last updated:',
         'agreement' => [
@@ -740,11 +743,4 @@ return [
     'profile_gallery' => 'Company Profile Gallery',
     'profile_breadcrumb_title' => 'Company Profile',
 
-    'clients' => [
-        'page_title' => 'Our Clients',
-        'title' => 'Our Clients',
-        'subtitle' => 'Trusted by companies across the region for our digital expertise',
-        'breadcrumb' => 'Clients',
-        'view_all' => 'View All Clients',
-    ],
 ];

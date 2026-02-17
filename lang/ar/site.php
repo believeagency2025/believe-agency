@@ -254,6 +254,8 @@ return [
         'subtitle' => 'شركاء النجاح',
         'title' => 'محل ثقة رواد الصناعة',
         'view_all' => 'مشاهدة جميع العملاء',
+        'page_title' => 'عملاؤنا',
+        'breadcrumb' => 'العملاء',
     ],
     'projects' => [
         'subtitle' => 'معرض الأعمال',
@@ -519,6 +521,7 @@ return [
         ],
     ],
     'terms' => [
+        'chip' => 'قانوني',
         'title' => 'شروط <span class="text-brand-500">الخدمة</span>',
         'last_updated' => 'آخر تحديث:',
         'agreement' => [
@@ -745,11 +748,5 @@ return [
     'profile_gallery' => 'معرض الملف التعريفي',
     'profile_breadcrumb_title' => 'ملف الشركة',
 
-    'clients' => [
-        'page_title' => 'عملاؤنا',
-        'title' => 'عملاؤنا',
-        'subtitle' => 'نحظى بثقة الشركات في جميع أنحاء المنطقة بفضل خبرتنا الرقمية',
-        'breadcrumb' => 'العملاء',
-        'view_all' => 'عرض جميع العملاء',
-    ],
+    'no_data' => 'لا يوجد بيانات'
 ];

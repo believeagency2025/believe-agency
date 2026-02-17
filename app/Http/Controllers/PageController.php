@@ -82,12 +82,16 @@ class PageController extends Controller
 
     public function privacyPolicy()
     {
-        return view('privacy-policy');
+        $locale = app()->getLocale();
+        $content = \App\Models\Setting::get("privacy_policy_{$locale}");
+        return view('privacy-policy', compact('content'));
     }
 
     public function terms()
     {
-        return view('terms');
+        $locale = app()->getLocale();
+        $content = \App\Models\Setting::get("terms_conditions_{$locale}");
+        return view('terms', compact('content'));
     }
 
     public function serviceDetail($slug)

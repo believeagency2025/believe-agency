@@ -14,6 +14,7 @@
                 <button type="button" onclick="switchTab('general')" id="tab-btn-general" class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-brand-500 text-white shadow-lg shadow-brand-500/20 whitespace-nowrap">{{ __('admin.general') }}</button>
                 <button type="button" onclick="switchTab('social')" id="tab-btn-social" class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 whitespace-nowrap">{{ __('admin.social_links') }}</button>
                 <button type="button" onclick="switchTab('contact')" id="tab-btn-contact" class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 whitespace-nowrap">{{ __('admin.contact_info') }}</button>
+                <button type="button" onclick="switchTab('policies')" id="tab-btn-policies" class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 whitespace-nowrap">{{ __('admin.policies') }}</button>
             </div>
 
             <div class="p-8">
@@ -130,6 +131,38 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Policies & Privacy -->
+                <div id="tab-policies" class="space-y-6 hidden">
+                    <input type="hidden" name="group" value="policies">
+                    <div class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.privacy_policy_ar') }}</label>
+                                <textarea name="privacy_policy_ar" rows="6"
+                                    class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-sm">{{ \App\Models\Setting::get('privacy_policy_ar') }}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.privacy_policy_en') }}</label>
+                                <textarea name="privacy_policy_en" rows="6"
+                                    class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-sm">{{ \App\Models\Setting::get('privacy_policy_en') }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.terms_conditions_ar') }}</label>
+                                <textarea name="terms_conditions_ar" rows="6"
+                                    class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-sm">{{ \App\Models\Setting::get('terms_conditions_ar') }}</textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">{{ __('admin.terms_conditions_en') }}</label>
+                                <textarea name="terms_conditions_en" rows="6"
+                                    class="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white text-sm">{{ \App\Models\Setting::get('terms_conditions_en') }}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -146,7 +179,7 @@
 <script>
     function switchTab(tabId) {
         // Hide all tabs
-        ['general', 'social', 'contact'].forEach(id => {
+        ['general', 'social', 'contact', 'policies'].forEach(id => {
             document.getElementById('tab-' + id).classList.add('hidden');
             document.getElementById('tab-btn-' + id).classList.remove('bg-brand-500', 'text-white', 'shadow-lg', 'shadow-brand-500/20');
             document.getElementById('tab-btn-' + id).classList.add('text-slate-600', 'dark:text-slate-400', 'hover:bg-slate-100', 'dark:hover:bg-slate-700');

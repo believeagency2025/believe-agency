@@ -170,11 +170,11 @@
                             <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-900/50 border border-gray-200 dark:border-gray-700 rounded-2xl transition-all duration-300 group-hover:border-brand-500/50">
                                 <div class="flex items-center gap-4">
                                     <div class="relative flex items-center justify-center">
-                                        <input type="checkbox" id="robot_check_home" required class="peer appearance-none w-10 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full checked:bg-brand-500 checked:border-brand-500 transition-all cursor-pointer">
+                                        <input type="checkbox" id="robot_check_contact" required class="peer appearance-none w-10 h-10 border-2 border-gray-300 dark:border-gray-600 rounded-full checked:bg-brand-500 checked:border-brand-500 transition-all cursor-pointer">
                                         <i class="fas fa-check absolute text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none"></i>
                                         <div class="absolute inset-0 rounded-full border-2 border-brand-500 scale-0 peer-checked:animate-ping opacity-0 peer-checked:opacity-20"></div>
                                     </div>
-                                    <label for="robot_check_home" class="text-sm font-semibold text-gray-600 dark:text-gray-400 cursor-pointer select-none group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
+                                    <label for="robot_check_contact" class="text-sm font-semibold text-gray-600 dark:text-gray-400 cursor-pointer select-none group-hover:text-brand-600 dark:group-hover:text-brand-400 transition-colors">
                                         {{ __('site.contact.not_robot') }}
                                     </label>
                                 </div>
@@ -208,70 +208,75 @@
 @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        // Contact Form Handler
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.addEventListener('DOMContentLoaded', function() {
+            // Contact Form Handler
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
 
-            // Check robot verification
-            const robotCheck = document.getElementById('robot_check_contact');
-            if (!robotCheck.checked) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: '{{ __('site.contact.robot_check_required', ['default' => 'Please verify you are not a robot']) }}',
-                    confirmButtonColor: '#6366f1'
-                });
-                return;
-            }
+                    // Check robot verification
+                    const robotCheck = document.getElementById('robot_check_contact');
+                    if (!robotCheck.checked) {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: '{{ __('site.contact.robot_check_required', ['default' => 'Please verify you are not a robot']) }}',
+                            confirmButtonColor: '#6366f1'
+                        });
+                        return;
+                    }
 
-            const form = this;
-            const submitButton = form.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.innerHTML;
+                    const form = this;
+                    const submitButton = form.querySelector('button[type="submit"]');
+                    const originalButtonText = submitButton.innerHTML;
 
-            // Disable button and show loading state
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> {{ __('site.contact.sending', ['default' => 'Sending...']) }}';
+                    // Disable button and show loading state
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> {{ __('site.contact.sending', ['default' => 'Sending...']) }}';
 
-            // Prepare form data
-            const formData = new FormData(form);
+                    // Prepare form data
+                    const formData = new FormData(form);
 
-            // Submit via AJAX
-            fetch('{{ route('contact.submit') }}', {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Accept': 'application/json',
-                },
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '{{ __('site.contact.success_title', ['default' => 'Message Sent!']) }}',
-                        text: data.message,
-                        confirmButtonColor: '#6366f1'
+                    // Submit via AJAX
+                    fetch('{{ route('contact.submit') }}', {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json',
+                        },
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: '{{ __('site.contact.success_title', ['default' => 'Message Sent!']) }}',
+                                text: data.message,
+                                confirmButtonColor: '#6366f1'
+                            });
+                            form.reset();
+                            robotCheck.checked = false;
+                        } else {
+                            throw new Error(data.message || 'An error occurred');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: '{{ __('site.contact.error_title', ['default' => 'Error']) }}',
+                            text: '{{ __('site.contact.error_message', ['default' => 'Failed to send message. Please try again.']) }}',
+                            confirmButtonColor: '#6366f1'
+                        });
+                    })
+                    .finally(() => {
+                        // Re-enable button
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalButtonText;
                     });
-                    form.reset();
-                    robotCheck.checked = false;
-                } else {
-                    throw new Error(data.message || 'An error occurred');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: '{{ __('site.contact.error_title', ['default' => 'Error']) }}',
-                    text: '{{ __('site.contact.error_message', ['default' => 'Failed to send message. Please try again.']) }}',
-                    confirmButtonColor: '#6366f1'
                 });
-            })
-            .finally(() => {
-                // Re-enable button
-                submitButton.disabled = false;
-                submitButton.innerHTML = originalButtonText;
-            });
+            }
         });
     </script>
 @endpush

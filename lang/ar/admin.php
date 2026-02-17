@@ -194,4 +194,9 @@ return [
     'service' => 'الخدمة',
 
     'settings_updated_successfully' => 'تم تحديث الإعدادات بنجاح.',
+    'policies' => 'السياسات والخصوصية',
+    'privacy_policy_ar' => 'سياسة الخصوصية (عربي)',
+    'privacy_policy_en' => 'سياسة الخصوصية (إنجليزي)',
+    'terms_conditions_ar' => 'الشروط والأحكام (عربي)',
+    'terms_conditions_en' => 'الشروط والأحكام (إنجليزي)',
 ];

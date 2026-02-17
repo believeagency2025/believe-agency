@@ -197,4 +197,9 @@ return [
     'recommended' => 'recommended',
     'service' => 'Service',
     'settings_updated_successfully' => 'Settings updated successfully.',
+    'policies' => 'Policies & Privacy',
+    'privacy_policy_ar' => 'Privacy Policy (Arabic)',
+    'privacy_policy_en' => 'Privacy Policy (English)',
+    'terms_conditions_ar' => 'Terms & Conditions (Arabic)',
+    'terms_conditions_en' => 'Terms & Conditions (English)',
 ];
