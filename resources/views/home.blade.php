@@ -513,6 +513,17 @@
                             </div>
 
                             <div class="space-y-2">
+                                <label class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ __('site.contact.form_service') }} <span class="text-red-500">*</span></label>
+                                <select name="service" required
+                                    class="w-full bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">
+                                    <option value="" disabled selected>{{ __('site.contact.select_service') }}</option>
+                                    @foreach ($services as $service)
+                                        <option value="{{ $service->title }}">{{ $service->title }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="space-y-2">
                                 <label class="text-sm font-medium text-gray-600 dark:text-gray-400">{{ __('site.contact.form_email') }}</label>
                                 <input type="email" name="email" placeholder="{{ __('site.contact.form_email_placeholder') }}"
                                     class="w-full bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-gray-700 rounded-xl px-4 py-3 text-gray-900 dark:text-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition-colors">

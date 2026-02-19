@@ -9,7 +9,7 @@ class PageController extends Controller
     public function index()
     {
         $clients = \App\Models\Client::where('is_active', true)->orderBy('order')->limit(6)->get();
-        $testimonials = \App\Models\Testimonial::where('is_active', true)->limit(3)->get();
+        $testimonials = \App\Models\Testimonial::where('is_active', true)->get();
         $featuredProjects = \App\Models\Project::with('service')
             ->where('status', 'active')
             ->where('is_featured', true)
